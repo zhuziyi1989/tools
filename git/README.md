@@ -13,6 +13,7 @@ git log  查看日志
 `git clone /path/to/repository`
 * 如果是远端服务器上的仓库，你的命令会是这个样子：
 `git clone username@host:/path/to/repository`
+
 > 比如克隆github远程仓库
 > `git clone git@github.com:{username}/{远程项目路径、名称}.git`
 
