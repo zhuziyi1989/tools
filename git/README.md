@@ -1,15 +1,20 @@
 ### git基础命令（烂笔头记录）
+
 git init 创建仓库
 
-git add file  新增文件到版本库
+git add file  新增文件file到版本库
+
+git rm file   从版本库里删除file，本地文件不受影响
 
 git commit -m "代码提交信息/修改注释"  提交修改到版本可以
 
-git status 查看状态
+git s(status) 查看状态
+
+git log  查看日志
 
 git reflog 查看详细命令日志
 
-git log  查看日志
+git checkout -- test.txt   恢复误删本地文件test.txt（区别于版本库里的文件！）
 
 > 每次修改后记得 add + commit
 
@@ -47,6 +52,8 @@ id_rsa.pub：公有钥匙 （在github上点`Add SSH Key`，然后填写标题�
 
 `git push -u tools master`   （tools：远程仓库名称；master：主分支）
 
+假设有其他人修改了远程主分支，我需要先 `git pull` 拉取远程更，再把本地更新`git push`到远程服务器
+
 ### git bash 出现vim的时候怎么退出?
 
 如果是输出状态，首先Esc退出输入状态，然后Shift+;，再输入q!或wq!（不保存改动，wq!是保存文件的写入修改）退出
@@ -54,4 +61,4 @@ id_rsa.pub：公有钥匙 （在github上点`Add SSH Key`，然后填写标题�
 <<<<<<< HEAD
 
 =======
->>>>>>> [git简明教程](http://www.bootcss.com/p/git-guide/)
+>>>>>>> [git经典教程](https://lvwzhen.gitbooks.io/git-tutorial/content/)
