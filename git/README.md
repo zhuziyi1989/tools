@@ -29,6 +29,7 @@ git checkout -- test.txt   恢复误删本地文件test.txt（区别于版本库
 
 > 比如克隆github远程仓库
 > `git clone git@github.com:{username}/{远程项目路径、名称}.git`
+
 > git clone -b <branch> <remote_repo>   branch:分支名 remote_repo:远程地址
 
 ### HEAD^
