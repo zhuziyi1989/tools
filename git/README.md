@@ -30,7 +30,7 @@ git checkout -- test.txt   恢复误删本地文件test.txt（区别于版本库
 > 比如克隆github远程仓库
 > `git clone git@github.com:{username}/{远程项目路径、名称}.git`
 
-> git clone -b <branch> <remote_repo>   branch:分支名 remote_repo:远程地址
+* 默认情况是克隆主分支，若要克隆其它分支：git clone -b {分支名} {仓库地址}   
 
 ### HEAD^
 git reset --hard HEAD^  回到上一个版本
