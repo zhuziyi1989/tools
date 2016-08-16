@@ -38,7 +38,8 @@ git reset --hard HEAD^  回到上一个版本
 git reset --hard 3628164   回到commit id是"3628164"的版本
 
 ### 远程操作
-创建SHH Key 钥匙：
+
+#### 创建SHH Key 钥匙：
 
 `ssh-keygen -t rsa -C "user@gmail.com"`
 
@@ -46,7 +47,9 @@ id_rsa：私密钥匙
 
 id_rsa.pub：公有钥匙 （在github上点`Add SSH Key`，然后填写标题，并粘贴公有钥匙到Key里。）
 
-多账户需要产生不同钥匙，且需要配置config文件，配置例子：
+#### 多仓库单用户配置
+
+多仓库需要产生不同钥匙，且需要配置config文件，配置例子：
 
 ```
 #公司需要设置 User
@@ -61,10 +64,11 @@ Host github.com
  User git
  IdentityFile ~/.ssh/id_rsa.github
  ```
-
-!!!!先在远程仓库创建一个名叫`tools`的仓库，所有改动需要本地仓库提交完之后才能对同步远程仓库。
+同远程仓库，多个账号设置，自行 Google
 
 #### 本地仓库与远程库关联：
+
+!!!!先在远程仓库创建一个名叫`tools`的仓库，所有改动需要本地仓库提交完之后才能对同步远程仓库。
 
 `git remote add tools git@github.com:zhuziyi1989/tools.git  `（tools：远程仓库名称；zhuziyi1989：github账户名）
 
