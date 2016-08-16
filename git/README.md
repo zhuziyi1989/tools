@@ -39,12 +39,16 @@ git reset --hard 3628164   回到commit id是"3628164"的版本
 
 ### 远程操作
 
-#### 创建SHH Key 钥匙：
+#### SSH Key 钥匙：
 
-`ssh-keygen -t rsa -C "user@gmail.com"`
+* 1、创建：`ssh-keygen -t rsa -C "user@gmail.com"`
+不同仓库可以自定义`id_rsa`名称
+* 2、复制公有钥匙内的文本：`pbcopy < ~/.ssh/id_rsa.pub`
+* 3、到远程仓库，粘贴到该网站对应的设置中。
+* 4、多仓库需要配置config文件，看下一条笔记。
+* 5、检测是否配置好，如：`ssh -vT github.com`
 
 id_rsa：私密钥匙
-
 id_rsa.pub：公有钥匙 （在github上点`Add SSH Key`，然后填写标题，并粘贴公有钥匙到Key里。）
 
 #### 多仓库单用户配置
