@@ -47,7 +47,9 @@ id_rsa：私密钥匙
 id_rsa.pub：公有钥匙 （在github上点`Add SSH Key`，然后填写标题，并粘贴公有钥匙到Key里。）
 
 多账户需要产生不同钥匙，且需要配置config文件,如下：
-`Host gitlab.cbpmgt.com
+
+```
+Host gitlab.cbpmgt.com
  HostName gitlab.cbpmgt.com
  User zhuziyi
  IdentityFile ~/.ssh/id_rsa.gitlab
@@ -56,7 +58,7 @@ Host github.com
  HostName github.com
  User git
  IdentityFile ~/.ssh/id_rsa.github
- `
+ ```
 
 !!!!先在远程仓库创建一个名叫`tools`的仓库，所有改动需要本地仓库提交完之后才能对同步远程仓库。
 
