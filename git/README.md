@@ -46,14 +46,16 @@ id_rsa：私密钥匙
 
 id_rsa.pub：公有钥匙 （在github上点`Add SSH Key`，然后填写标题，并粘贴公有钥匙到Key里。）
 
-多账户需要产生不同钥匙，且需要配置config文件,如下：
+多账户需要产生不同钥匙，且需要配置config文件，配置例子：
 
 ```
-Host gitlab.cbpmgt.com
- HostName gitlab.cbpmgt.com
- User zhuziyi
+#公司需要设置 User
+Host gitlab.jd.com
+ HostName gitlab.jd.com
+ User {用户名}
  IdentityFile ~/.ssh/id_rsa.gitlab
 
+#github不需要设置 User ，统一用 git 代替
 Host github.com
  HostName github.com
  User git
