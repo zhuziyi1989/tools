@@ -7,7 +7,7 @@ Linux tools: [http://linuxtools-rst.readthedocs.io/zh_CN/latest/](http://linuxto
 
 .tar.gz格式（.tar是打包! .gz是压缩！）
 解压：[＊＊＊＊＊＊＊]$ tar zxvf FileName.tar.gz
-压缩：[＊＊＊＊＊＊＊]$ tar zcvf FileName.tar.gz DirName
+压缩：[＊＊＊＊＊＊＊]$ tar zcvf FileName.tar.gz DirName   （要打包成的文件名：FileName  需要打包的文件夹：DirName）
 
 
 远程拷贝到本地：scp root@vps.jandou.com:../home/wwwroot/ss.jandou.com.tar.gz ~/Desktop
