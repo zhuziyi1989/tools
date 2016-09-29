@@ -1,22 +1,14 @@
-# git烂笔头记录
-
 #### git基础命令
 
 git init 创建仓库
-
 git add file  新增文件file到版本库
-
 git rm file   从版本库里删除file，本地文件不受影响
-
 git commit -m "代码提交信息/修改注释"  提交修改到版本可以
-
 git s(status) 查看状态
-
 git log  查看日志
-
 git reflog 查看详细命令日志
-
 git checkout -- test.txt   恢复误删本地文件test.txt（区别于版本库里的文件！）
+git reset --hard HEAD  放弃本地所有的改动（谨慎操作！请先提交存档本地改动！）
 
 > 每次修改后记得 add + commit 提交到仓库
 
@@ -33,8 +25,7 @@ git checkout -- test.txt   恢复误删本地文件test.txt（区别于版本库
 * 默认情况是克隆主分支，若要克隆其它分支：git clone -b {分支名} {仓库地址}   
 
 ### HEAD^
-git reset --hard HEAD^  回到上一个版本
-
+git reset --hard HEAD^  回到上一个版本 （谨慎操作！请先将本地改动Commit存档！）
 git reset --hard 3628164   回到commit id是"3628164"的版本
 
 ### 远程操作
@@ -86,7 +77,4 @@ Host github.com
 
 如果是输出状态，首先Esc退出输入状态，然后Shift+;，再输入q!或wq!（不保存改动，wq!是保存文件的写入修改）退出
 
-<<<<<<< HEAD
-
-=======
->>>>>>> [git经典教程](https://lvwzhen.gitbooks.io/git-tutorial/content/)
+> [Git经典教程>>>>](https://lvwzhen.gitbooks.io/git-tutorial/content/)
