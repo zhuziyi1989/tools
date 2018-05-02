@@ -1,14 +1,19 @@
-#### git基础命令
+## git基础命令
 
 git init 创建仓库
 git add file  新增文件file到版本库
 git rm file   从版本库里删除file，本地文件不受影响
 git commit -m "代码提交信息/修改注释"  提交修改到版本可以
-git s(status) 查看状态
+git status 查看状态
 git log  查看日志
 git reflog 查看详细命令日志
-git checkout -- test.txt   恢复误删本地文件test.txt（区别于版本库里的文件！）
-git reset --hard HEAD  放弃本地所有的改动（谨慎操作！请先提交存档本地改动！）
+
+### checkout
+1. git checkout -- test.txt   恢复误删本地文件test.txt（区别于版本库里的文件！）
+
+### Reset
+1. git reset --mixed HEAD  将你当前的改动从缓存区中移除，但是这些改动还留在工作目录中
+2. git reset --hard HEAD  放弃本地所有的改动（谨慎操作！请先提交存档本地改动！）
 
 > 每次修改后记得 add + commit 提交到仓库
 
