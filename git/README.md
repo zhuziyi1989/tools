@@ -84,3 +84,33 @@ Host github.com
 如果是输出状态，首先Esc退出输入状态，然后Shift+;，再输入q!或wq!（不保存改动，wq!是保存文件的写入修改）退出
 
 > [Git经典教程>>>>](https://lvwzhen.gitbooks.io/git-tutorial/content/)
+
+### 使用 git 命令，如果文件名包含中文，终端显示却是被转成八进制编码的字符
+
+有时候会出现以下情况：
+
+```bsah
+11:07:29 › git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	deleted:    "../git/git \345\221\275\344\273\244\345\244\247\345\205\250.txt"
+	# 这里实际上是 => deleted:    ../git/git 命令大全.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	git.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+解决方案：
+```
+git config --global core.quotepath false
+git config core.quotepath false
+```

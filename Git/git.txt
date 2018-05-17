@@ -1,17 +1,24 @@
 ### git命令大全
 
+参考：https://git-scm.com/book/zh/v2/
+
 git init                                                  # 初始化本地git仓库（创建新仓库）
 git config --global user.name "xxx"                       # 配置用户名
 git config --global user.email "xxx@xxx.com"              # 配置邮件
+
 git config --global color.ui true                         # git status等命令自动着色
 git config --global color.status auto
 git config --global color.diff auto
 git config --global color.branch auto
 git config --global color.interactive auto
-git config --global --unset http.proxy                    # remove  proxy configuration on git
+
+git config --global alias.s status			  #将别名’git s’分配给’git status’
+git config --global --unset http.proxy                    # remove  proxy configuration on 
+git config --global core.quotepath false		  # 避免中文字符以八进制编码显示
+
 git clone git+ssh://git@192.168.53.168/VT.git             # clone远程仓库
 git status                                                # 查看当前版本状态（是否修改）
-git add xyz                                               # 添加xyz文件至index
+git add xxx                                               # 添加xxx文件至index
 git add .                                                 # 增加当前子目录下所有更改过的文件至index
 git commit -m 'xxx'                                       # 提交
 git commit --amend -m 'xxx'                               # 合并上一次提交（用于反复修改）
@@ -19,8 +26,7 @@ git commit -am 'xxx'                                      # 将add和commit合�
 git rm xxx                                                # 删除index中的文件
 git rm -r *                                               # 递归删除
 git log                                                   # 显示提交日志
-git log -1                                                # 显示1行日志 -n为n行
-git log -5
+git log -1                                                # 显示 1 行日志 -n 为 n 行
 git log --stat                                            # 显示提交日志及相关变动文件
 git log -p -m
 git show dfb02e6e4f2f7b573337763e5c0013802e392818         # 显示某个提交的详细内容
@@ -38,6 +44,7 @@ git diff HEAD -- ./lib                                    # 比较与HEAD版本l
 git diff origin/master..master                            # 比较远程分支master上有本地分支master上没有的
 git diff origin/master..master --stat                     # 只显示差异的文件，不显示具体内容
 git remote add origin git+ssh://git@192.168.53.168/VT.git # 增加远程定义（用于push/pull/fetch）
+
 git branch                                                # 显示本地分支
 git branch --contains 50089                               # 显示包含提交50089的分支
 git branch -a                                             # 显示所有分支
@@ -45,13 +52,15 @@ git branch -r                                             # 显示所有原创�
 git branch --merged                                       # 显示所有已合并到当前分支的分支
 git branch --no-merged                                    # 显示所有未合并到当前分支的分支
 git branch -m master master_copy                          # 本地分支改名
-git checkout -b master_copy                               # 从当前分支创建新分支master_copy并检出
+
+git checkout -b master_copy                               # 从当前分支创建新分支master_copy并检出( -b 参数即branch，表示创建并切换)
 git checkout -b master master_copy                        # 上面的完整版
 git checkout features/performance                         # 检出已存在的features/performance分支
 git checkout --track hotfixes/BJVEP933                    # 检出远程分支hotfixes/BJVEP933并创建本地跟踪分支
 git checkout v2.0                                         # 检出版本v2.0
 git checkout -b devel origin/develop                      # 从远程分支develop创建新本地分支devel并检出
 git checkout -- README                                    # 检出head版本的README文件（可用于修改错误回退）
+
 git merge origin/master                                   # 合并远程master分支至当前分支
 git cherry-pick ff44785404a8e                             # 合并提交ff44785404a8e的修改
 git push origin master                                    # 将当前分支push到远程master分支
@@ -78,11 +87,14 @@ git show master@{yesterday}                               # 显示master分支�
 git log --pretty=format:'%h %s' --graph                   # 图示提交日志
 git show HEAD~3
 git show -s --pretty=raw 2be7fcb476
+
+# 储藏（Stashing）方便地切换到其他分支工作
 git stash                                                 # 暂存当前修改，将所有至为HEAD状态
 git stash list                                            # 查看所有暂存
 git stash show -p stash@{0}                               # 参考第一次暂存
 git stash apply stash@{0}                                 # 应用第一次暂存
+
 git grep "delete from"                                    # 文件中搜索文本“delete from”
 git grep -e '#define' --and -e SORT_DIRENT
-git gc
+git gc							  # ☠ 维护及数据恢复
 git fsck
