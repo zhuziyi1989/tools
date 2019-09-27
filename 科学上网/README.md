@@ -9,6 +9,7 @@
 - Shadowsocks-nightly-2.7.7(Android).apk
 - ShadowsocksX-NG-R8-1.4.4-R8 (1).zip  （MacOS）
 - ShadowsocksX-NG.app.1.9.2.zip （MacOS）
+- V2RayX-1.5.1 (1278).zip（MacOS）
 
 
 ## 轻松科学上网，保护个人隐私[立即注册](#)
@@ -19,9 +20,13 @@
 
 
 ---
-2019.09.27 update 
+2019.09.27 update
+ 
+# MacOS V2RayX
 
-# MacOS 推荐 ShadowsocksX-NG-R8
+V2Ray 为目前最佳推荐方案。
+
+# MacOS ShadowsocksX-NG-R8
 
 ShadowsocksX-NG-R8 是ShadowsocksX-NG 的变种，但在2018年10月已停止更新
 
