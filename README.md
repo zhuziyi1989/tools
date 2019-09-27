@@ -3,12 +3,14 @@
 
 | file/folder|Destination Address|
 |:---:|:---:|
-|       Shadowsocks      |         ss客户端       |
+|  /一些值得收藏的网页归档	|   一些值得收藏的网页归档      |
+|      /科学上网     | 各系统科学上网客户端的备份 |
 |   uninstall_node.sh    |   一键完美卸载node.js   |
-|    switch_network.sh   |      一键切换网络       |
-|       /git             |      git相关笔记        |
-| /Wechat-deleted-friends|检测是否被微信好友删除的脚本|
-|    /Alfred-workflow    |  分享个人常用alfred工作流|
+|   switch_network.sh    |      一键切换网络       |
+|       /GitHelp         |      git相关笔记        |
+| /Wechat-deleted-friends|检测是否被微信好友删除的脚本（不更新）|
+|    /Alfred-workflow    |  分享个人常用alfred工作流（不更新）|
+|       /Router          |      路由器相关资料      |
 |       /React           |      react相关资料      |
 |       /iTerm2			|      iTerm2 配置	   |
 |       /Linux			|      Linux 修改命令	   |
