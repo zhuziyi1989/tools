@@ -1,7 +1,7 @@
 # iTerm2 Help
 
 
-##标签
+## 标签
 * 新建标签：command + t
 * 关闭标签：command + w
 * 切换标签：command + 数字    command + 左右方向键
@@ -9,6 +9,8 @@
 ## 切换全屏：command + enter
 
 ## 查找：command + f
+
+## 搜索命令历史：ctrl + r
 
 ## 分屏
 
@@ -19,6 +21,7 @@
 ## 自动完成：command + ;
 输入打头几个字母，然后输入`command + ; `
 iterm2 将自动列出之前输入过的类似命令。
+
 ## 历史剪切板：command + shift + h
 
 iterm2 将自动列出剪切板的历史记录。如果需要将剪切板的历史记录保存到磁盘，在Preferences > General > Save copy/paste history to disk.中设置。
