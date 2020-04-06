@@ -3,22 +3,19 @@
 
 | file/folder|Destination Address|
 |:---:|:---:|
-|  /一些值得收藏的网页归档	|   一些值得收藏的网页归档      |
-|      /科学上网     | 各系统科学上网客户端的备份 |
-|   uninstall_node.sh    |   一键完美卸载node.js   |
-|   switch_network.sh    |      一键切换网络       |
-|       /GitHelp         |      git相关笔记        |
-| /Wechat-deleted-friends|检测是否被微信好友删除的脚本（不更新）|
-|    /Alfred-workflow    |  分享个人常用alfred工作流（不更新）|
-|       /Router          |      路由器相关资料      |
-|       /React           |      react相关资料      |
-|       /iTerm2			|      iTerm2 配置	   |
-|       /Linux			|      Linux 修改命令	   |
-|       /Mac OS			|      Mac OS 使用笔记	   |
-|       /AppleDNS	    |      AppleDNS 	配置	   |
-|       /Shell			|      Shell 命令使用     |
-
-
+|  /战略防备     |   战略防备  |
+|       /router          |      路由器相关      |
+|       /react           |      react相关      |
+|       /iTerm2			|      iTerm2 相关      |
+|       /shell			|      shell 相关     |
+|       /git-help         |      git 相关      |
+|       /Linux			|      Linux 使用笔记	   |
+|       /macOS			|      macOS 使用笔记	   |
+|  /scientific-internet  | 各系统科学上网客户端的备份 |
+|   /other/uninstall_node.sh    |   一键完美卸载node.js   |
+|   /other/switch_network.sh    |      一键切换网络       |
+| /wechat-deleted-friends|检测是否被微信好友删除的脚本（不更新）|
+|    /alfred-workflow    |  分享个人常用alfred工作流（不更新）|
 
 
 做了一年的笔记，突然某一天消失了，由此放弃中国版 Evernote。
