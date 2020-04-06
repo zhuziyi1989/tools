@@ -1,7 +1,8 @@
 # 客户端关键词
 
 ~~下载说明，在以上列表中找到您的设备所对应的客户端，并点击进入页面，然后点击`View Raw`即可下载。~~ 
-（部分已不提供下，请关键字自行搜索）
+
+**部分已不提供下，请关键字自行搜索**
 
 - GoAgentX-v2.3.7(OS X).dmg  
 - Shadowsocks-3.0(Windows XP & 7).zip
@@ -24,4 +25,4 @@ ShadowsocksX-NG 最新下载地址：[https://github.com/shadowsocks/Shadowsocks
 
 ## 个人维护的 gfwlist 列表
 
-> https://raw.githubusercontent.com/zhuziyi1989/tools/master/Scientific-Internet/gfwlist.txt
+> https://raw.githubusercontent.com/zhuziyi1989/tools/master/scientific-internet/gfwlist.txt
