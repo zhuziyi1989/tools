@@ -1303,6 +1303,7 @@ blogspot.com
 .google.ca
 .google.cd
 .google.ci
+google.com.hk
 .google.co.id
 .google.co.jp
 .google.co.kr
