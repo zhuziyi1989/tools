@@ -218,8 +218,6 @@ scp -r public(本地) root@jandou.com:../home/wwwroot/note.jandou.com
 
 # LNMP 相关软件安装目录
 
-使用命令 ```which nginx``` 可返回Nginx所在目录。
-
 ```wiki
 Nginx 目录: /usr/local/nginx/
 MySQL 目录 : /usr/local/mysql/
@@ -229,6 +227,7 @@ MariaDB数据库所在目录：/usr/local/mariadb/var/
 PHP目录 : /usr/local/php/
 ```
 
+可使用命令 ```which nginx``` 可返回Nginx所在目录。
 
 ## 本文相关资料
 
