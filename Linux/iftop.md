@@ -1,11 +1,6 @@
 # iftop 基本操作命令详解
 
-title: iftop 基本操作命令详解
-comment: false
 date: 2020-04-26 14:34:38
-categories:
-
-- note
 
 最近发现服务器大量不明上传流量，为了探个究竟，就开始研究了网络相关工具。
 
@@ -15,7 +10,7 @@ categories:
 
 > 
 
- # `iftop`简介
+ ## iftop 简介
 
 `iftop`是一个命令行系统监控工具用来显示网络连接。默认按照带宽使用排序连接，并且最大带宽消耗排最上方。`iftop`在命名的网络接口上监听网络流量并显示按照主机对显示当前流量带宽。
 
@@ -23,7 +18,7 @@ categories:
 
 默认`iftop`将解析地址对应的主机名并计算所有通过过滤器的IP地址。主机名查询会增加网络流量而显示在网络流量展示中。
 
-# `iftop`交互界面操作
+## iftop 交互界面操作
 
 ![iftop](https://tva1.sinaimg.cn/large/007S8ZIlgy1ge798omc5uj31580qudlm.jpg)
 
@@ -38,7 +33,7 @@ categories:
 *   `j/k` - 滚动显示
 *   `?` - 帮助
 
-# `iftop`启动参数解析
+## iftop 启动参数解析
 
 
 启动参数实际就是交互中的模式
