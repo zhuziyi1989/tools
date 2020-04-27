@@ -3,10 +3,10 @@
 | file/folder|Destination Address|
 |:---:|:---:|
 | [/战略防备](./战略防备)<br />-[战略防备/防疫/](./战略防备/防疫/) |   战略防备  |
-|     [/router](./router) |      路由器相关      |
+|   [/router](./router) |      路由器相关      |
 |       [/react](./react) |      react相关      |
 | [/iTerm2](./iTerm2)			|      iTerm2 相关      |
-| [/shell](./shell)			|      shell 相关     |
+| [/hell](./Shell)		|      shell 相关     |
 |  [/git-help](./git-help) |      git 相关      |
 | [/Linux](./Linux)			|      Linux 使用笔记	   |
 | [/macOS](./macOS)			|      macOS 使用笔记	   |
