@@ -1,14 +1,5 @@
 # Linux 基本操作命令
 
----
-title: Linux 基本操作命令
-comment: false
-date: 2016-08-16 11:34:38
-categories:
-- note
----
-
-
 # 打包、压缩、解压
 .tar.gz格式（.tar是打包! .gz是压缩！打包后的文件名：FileName；需要打包的文件夹：DirName）
 * 压缩：```tar zcvf FileName.tar.gz DirName```
