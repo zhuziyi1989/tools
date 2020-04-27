@@ -1,7 +1,10 @@
+# iftop 基本操作命令详解
+
 title: iftop 基本操作命令详解
 comment: false
 date: 2020-04-26 14:34:38
 categories:
+
 - note
 
 最近发现服务器大量不明上传流量，为了探个究竟，就开始研究了网络相关工具。
