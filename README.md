@@ -1,6 +1,5 @@
 # 文件/文件夹内容说明
 
-
 | file/folder|Destination Address|
 |:---:|:---:|
 | [/战略防备](./战略防备)<br />-[战略防备/防疫/](./战略防备/防疫/) |   战略防备  |
@@ -17,8 +16,6 @@
 | [/wechat-deleted-friends](./wechat-deleted-friends) |检测是否被微信好友删除的脚本（不更新）|
 |    [/alfred-workflow](./alfred-workflow)    |  分享个人常用alfred工作流（不更新）|
 
-
 做了一年的笔记，突然某一天消失了，由此放弃中国版 Evernote。
 
 这是一些笔记的备份。
-
