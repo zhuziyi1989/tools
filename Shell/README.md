@@ -1,12 +1,8 @@
----
-title: Shell脚本编程30分钟入门
-comment: false
+# Shell脚本编程30分钟入门
+
 date: 2017-06-06 11:34:38
----
 
 
-Shell脚本编程30分钟入门
-====================
 ## 什么是Shell脚本
 ### 示例
 看个例子吧：
@@ -190,7 +186,7 @@ shell只定义了一个非常简单的编程语言，所以，如果你的脚本
 	
 	your_name="alibaba"
 	echo $your_name
-	
+
 这样写是合法的，但注意，第二次赋值的时候不能写$your_name="alibaba"，使用变量的时候才加美元符。
 
 ## 注释
@@ -227,7 +223,7 @@ sh里没有多行注释，只能每一行加一个#号。就像这样：
 
 - 单引号里的任何字符都会原样输出，单引号字符串中的变量是无效的
 - 单引号字串中不能出现单引号（对单引号使用转义符后也不行）
- 
+
 ### 双引号
 
 	your_name='qinjx'
@@ -238,7 +234,7 @@ sh里没有多行注释，只能每一行加一个#号。就像这样：
 
 ### 字符串操作
 #### 拼接字符串
-	
+
 	your_name="qinjx"
 	greeting="hello, "$your_name" !"
 	greeting_1="hello, ${your_name} !"
@@ -303,7 +299,7 @@ sh里没有多行注释，只能每一行加一个#号。就像这样：
 写成一行（适用于终端命令提示符）：
 
 	if `ps -ef | grep ssh`;  then echo hello; fi
-	
+
 末尾的fi就是if倒过来拼写，后面还会遇到类似的
 
 #### if else
@@ -358,7 +354,7 @@ sh里没有多行注释，只能每一行加一个#号。就像这样：
 	do
 		command
 	done
-	
+
 #### 无限循环
 
 	while :
@@ -391,26 +387,26 @@ sh里没有多行注释，只能每一行加一个#号。就像这样：
 			install_master $1
 			exit
 		;;
-
+	
 		"Install-Puppet-Client" )
 			install_client $1
 			exit
 		;;
-
+	
 		"Config-Puppet-Server" )
 			config_puppet_master
 			exit
 		;;
-
+	
 		"Config-Puppet-Client" )
 			config_puppet_client
 			exit
 		;;
-
+	
 		"Exit" )
 			exit
 		;;
-
+	
 		* ) echo "Bad option, please choose again"
 	esac
 

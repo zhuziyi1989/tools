@@ -1,12 +1,8 @@
----
-title: Mac 软件操作笔记
-comment: false
-date: 2016-09-17 11:34:38
-categories:
-- note
----
+# Mac 软件操作笔记
 
-### Mac 基础快捷键
+date: 2016-09-17 11:34:38
+
+## Mac 基础快捷键
 * ctrl+shift+△  关闭显示器
 * command+option+△  睡眠
 * command+control+△ 关闭所有的应用程序并重启
@@ -16,14 +12,14 @@ categories:
 
 **super按键就是 command ！！**
 
-### Sublime Text 基础命令
+## Sublime Text 基础命令
 
 * 光标先选中每一行
 * Ctrl+L全选
 * Ctrl+Alt+Enter每一行包裹标签，修改标签名字。
 * Ctrl+Shift+K   删除行
 
-### Node.js 入门操作
+## Node.js 入门操作
 $ nmp init  自动生成package.json
 
 有package.json文件之后，直接使用npm install命令，就会在当前目录中安装所需要的模块。
