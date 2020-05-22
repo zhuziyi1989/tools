@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Shadowsocks账号信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+    body{
+        font-size:14px;
+    }
+    .am-panel-bd{
+        font-size:12px;
+    }
+    table {
+        margin: 20px 0;
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 1px solid #ddd;
+        font-size: 14px;
+    }
+    table>tbody>tr:nth-of-type(odd) {
+        background-color: #f9f9f9;
+    }
+
+    table>tbody>tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    caption,th,td {
+        padding: 8px;
+        text-align: left;
+        vertical-align: middle;
+        font-weight: normal;
+}
+    </style>
+
+</head>
+
+<body>
+    <div class="am-panel am-panel-default">
+        <div class="am-panel-hd">
+            <h3 class="am-panel-title">Shadowsocks账号信息 | XX提供</h3>
+        </div>
+        <div class="am-panel-bd">
+            <p>加密方式：aes-256-cfb</p>
+            <p>本地端口：1080</p>
+        </div>
+        <table class="am-table">
+            <tr>
+                <th>节点名</th>
+                <th>节点IP</th>
+                <th>远程端口</th>
+                <th>密码（每日更新）</th>
+            </tr>
+            <tr>
+                <td style="vertical-align: inherit">洛杉矶1</td>
+                <td style="vertical-align: inherit">104.129.0.236</td>
+                <td>
+                    <iframe src="http://openet.xyz/port.html" height="25" frameborder="0" scrolling="no" width="60"></iframe>
+                </td>
+                <td>
+                    <iframe src="http://openet.xyz/password.html" height="27" frameborder="0" scrolling="no" width="120"></iframe>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p>扫描二维码快速配置</p>
+    <img class="am-thumbnail" src="http://openet.xyz/free-ss.png" alt="洛杉矶1" width="180px" />
+</body>
+
+</html>

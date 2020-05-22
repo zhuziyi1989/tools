@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jdPay APP HTML5 SDK</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <style>
+    *{margin:0;padding:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+    li{border-bottom:1px solid #ddd;width:50%;float:left;list-style:none;line-height:40px;text-indent:1em;color:#444;font-weight:bold;font-size:14px;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+    ul{margin-bottom:200px;overflow:hidden;-webkit-tap-highlight-color:rgba(255,0,0,0);}
+    </style>
+    <script src="js/jdp-sdk.js?v=2"></script>
+</head>
+
+<body>
+    <ul>
+        <br>
+        <li data-type="0">获取用户信息</li>
+        <li data-type="1">设置标题</li>
+        <li data-type="2">alert弹出</li>
+        <li data-type="3">confirm弹出</li>
+        <li data-type="4">关闭webview</li>
+        <li data-type="5">检查网络</li>
+        <li data-type="6">添加缓存</li>
+        <li data-type="7">获取缓存</li>
+        <li data-type="8">移除缓存</li>
+        <li data-type="9">清空缓存数据</li>
+        <li data-type="10">打开模块（首页）</li>
+        <li data-type="11">打开模块（小金库）</li>
+        <li data-type="12">打开模块（实名认证）</li>
+        <li data-type="13">打开模块（白条）</li>
+        <li data-type="14">打开模块（手机充值）</li>
+        <li data-type="15">打开模块（注册）</li>
+        <li data-type="16">打开模块（扫一扫）</li>
+        <li data-type="17">打开模块（抢吧）</li>
+        <li data-type="18">打开模块（基金）</li>
+        <li data-type="19">分享文案</li>
+        <li data-type="20">分享图片</li>
+        <li data-type="21">分享url</li>
+        <li data-type="22">返回监听</li>
+        <li data-type="23">小金库购买 </li>
+        <li data-type="24">众筹入口 </li>
+        <li data-type="25"><a href="http://10.45.243.8/">测试入口</a></li>
+        <li data-type="26">设置标题显示隐藏 </li>
+        <li data-type="27">设置标题菜单 </li>
+        <li data-type="28">打开模块(拍立返) </li>
+        <li data-type="29"><a href="wangyin://wallet/start?module=NJRS">启动拍立返</a></li>
+        <li data-type="30">打开保险理财</li>
+        <li data-type="31">支付接口</li>
+        <li data-type="32">打开模块（旺财）</li>
+        <li data-type="33">多渠道旺财</li>
+        <li data-type="34">打开模块（股神）</li>
+        <li data-type="35">打开模块（定期理财 ）</li>
+        <li data-type="36">打开付款码</li>
+        <li><a href="js/jdp-sdk.js">SDK源码查看（v3.0.1）</a></li>
+    </ul>
+    <br>
+    <script>
+        window.onload = function() {
+
+                var aLi = document.querySelectorAll('li'),
+                    ua = navigator.userAgent,
+                    android = ua.match(/(Android)\s+([\d.]+)/),
+                    ios = ua.match(/(iPhone\sOS)\s([\d_]+)/);
+                    aLi[36].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'PAYMENTCODE',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[35].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'INSURANCE',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[34].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'STOCK',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+
+                aLi[33].onclick = function() {
+                    if (Util.inApp() && !Util.inWx) {
+                        jdp.getInfo(function(json) {
+                            var json = JSON.parse(json);
+
+                            if (json.auth) {
+                                location.href = "http://regular.jdpay.com/finance/productindex?auth=" + json.auth;
+                            } else {
+                                jdp.alert('请先登录');
+                            }
+                        })
+                    } else {
+                        // 1.注意 多渠道包对应名称 reffer=wangcai1必须放前面，， 
+
+                        // 2.这个长连接拿去生成短连
+
+                        location.href = "http://sale.jd.com/app/act/t3v8zA1gjMwBnYP.html?reffer=wangcai1&url=http://static.jdpay.com/activity/html/auth.html?callback=http://regular.jdpay.com:80/finance/productindex&nologin=http://sale.jd.com/app/act/eMirlsyAcbJ8P.html#ACTIVITY";
+                    }
+                }
+
+                aLi[32].onclick = function() {
+                    if (Util.inApp() && !Util.inWx) {
+                        jdp.getInfo(function(json) {
+                            var json = JSON.parse(json);
+
+                            if (json.auth) {
+                                location.href = "http://regular.jdpay.com/finance/productindex?auth=" + json.auth;
+                            } else {
+                                jdp.alert('请先登录');
+                            }
+                        })
+                    } else {
+                        location.href = "http://sale.jd.com/app/act/KBuoE641DZmxgYf.html?url=http://static.jdpay.com/activity/html/auth.html?callback=http://regular.jdpay.com:80/finance/productindex&nologin=http://sale.jd.com/app/act/eMirlsyAcbJ8P.html#ACTIVITY";
+                    }
+                };
+
+                aLi[31].onclick = function() {
+                    jdp.getInfo(function(json) {
+
+                            var json = JSON.parse(json);
+
+                            var data = {
+                                "merchantToken": "",
+                                "merchantJdPin": "360000000000063501",
+                                "merchantOuterOrderNum": "t1444703790",
+                                "merchantUserId": 376880,
+                                "merchantMobile": "",
+                                "merchantNum": "23228887",
+                                "merchantRemark": "",
+                                "merchantTradeNum": "qrt1444703790",
+                                "merchantTradeName": "TEST",
+                                "merchantTradeDescription": "\u63cf\u8ff0",
+                                "merchantTradeTime": "2015-10-13 10:36:30 286",
+                                "merchantTradeAmount": "1",
+                                "merchantCurrency": "CNY",
+                                "merchantNotifyUrl": "http:\/\/monk.dev.uboxol.com\/jingdongtrade\/qrpayback",
+                                "merchantSign": "mMMCYyV5mrLVL3j8VFsFohajUwRMiK9v44jrYluuWyo6pwTNxJjR4\/36s3l12Che0V6dWKzfGxnJyVaowmD1AV90cD78u3kX3WmZqPp+Y6ahSc2+sms5uAvoBgJbupyyWh5LQlvbjw1bBpCLpDpLl3wwkv7dUtEkZo3kVdUIdZk=",
+                                "data": "",
+                                "cpTradeNum": "2015101310001000017030514"
+                            };
+
+                            if (json.auth) {
+                                jdp.pay({
+                                    params: data,
+                                    callback: function(data) {
+                                        jdp.alert('3333');
+                                    }
+                                })
+                            } else {
+                                jdp.alert('请先登录');
+                            }
+                        })
+                    };
+
+                    aLi[30].onclick = function() {
+                        var name = ios ? 'INSURANCE' : 'INSURANCEPLUGIN';
+                        jdp.openAppModel({
+                            name: name,
+                            params: {},
+                            callback: function() {}
+                        })
+                    };
+
+                    aLi[28].onclick = function() {
+                        var name = android ? 'NJRS' : 'PAILIFAN'
+                        jdp.openAppModel({
+                            name: name,
+                            params: {
+                                fileurl: 'http://file.wangyin.com/img/M00/00/05/rBcwKFVsbwSAeUmIABE62XlRUe0379.apk',
+                                filemac: 'b09bfd6e541ab36b23cbdfb382023c5a',
+                                version: '3.2.0'
+                            },
+                            callback: function() {}
+                        })
+                    };
+                    aLi[27].onclick = function() {
+                        jdp.setMenu(
+                            [{
+                                "menuTitle": "扫一扫",
+                                "menuImage": "http://pux.wangyin.com/kwx/share@2x.png",
+                                "menuDesc": "分享给好友",
+                                "menuAction": "scanCallback"
+                            }, {
+                                "menuTitle": "分享啊啊啊",
+                                "menuImage": "http://pux.wangyin.com/kwx/share@2x.png",
+                                "menuDesc": "分享给好友",
+                                "menuAction": "shareCallback"
+                            }]
+                        )
+                    };
+
+                    jdp.setTitle('标题');
+
+                      if (jdp.android) {
+                            jdp.setMenu(
+                                [{
+                                    "menuTitle": "分享",
+                                    "menuAction": "shareCallback"
+                                }]
+                            )
+                        }
+                        if (jdp.ios) {
+                            var timer = setInterval(function() {
+                                if (window.WebViewJavascriptBridge) {
+                                    jdp.setMenu(
+                                        [{
+                                            "menuTitle": "分享",
+                                            "menuAction": "shareCallback"
+                                        }]
+                                    )
+                                    clearInterval(timer);
+                                }
+                            }, 100)
+                        }
+
+                    window.scanCallback = function() {
+                        jdp.openAppModel({
+                            name: 'SCAN',
+                            params: {},
+                            callback: function() {}
+                        })
+                    };
+                    window.shareCallback = function() {
+                        jdp.shareUrl({
+                            url: 'http://www.jd.com',
+                            title: '分享titile',
+                            desc: '描述',
+                            channel: 'WX|QQ|WB',
+                            callback: function(str) {
+                                jdp.alert(str);
+                            }
+                        })
+                    };
+
+                    aLi[24].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'ACTIVITY',
+                            params: {
+                                url: 'https://m.wangyin.com/user/beforeZC'
+                            },
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[23].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'JRB',
+                            params: {
+                                forceLogin: 'JRB',
+                                action: 'purchaseSign',
+                                channel: 'web'
+                            }, ///不需要登录的话传空值
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+
+                    // jdp.goBackListener(function() { // return 0; // })
+
+                    aLi[22].onclick = function() {};
+                    aLi[21].onclick = function() {
+                        jdp.shareUrl({
+                            url: 'http://www.jd.com',
+                            title: '分享titile',
+                            desc: '描述',
+                            channel: 'WX|QQ|WB',
+                            callback: function(str) {
+                                jdp.alert(str);
+                            }
+                        })
+                    };
+                    aLi[20].onclick = function() {
+                        jdp.shareImage({
+                            startY: 0.2,
+                            endY: 0.8,
+                            channel: 'WX|QQ',
+                            callback: function(str) {
+                                jdp.alert(str);
+                            }
+                        })
+                    };
+                    aLi[19].onclick = function() {
+                        jdp.shareText({
+                            text: '分享文案aaaaaaaaaaaa',
+                            channel: 'WX|QQ|WB',
+                            callback: function(str) {
+                                jdp.alert(str);
+                            }
+                        })
+                    };
+                    aLi[18].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'FUND',
+                            params: {
+                                code: '110018'
+                            },
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[17].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'ACTIVITY',
+                            params: {
+                                url: 'http://qiang.wangyin.com'
+                            },
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[16].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'SCAN',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[15].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'LOGIN',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[14].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'PHONE_RECHARGE',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[13].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'BILL',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[12].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'REALNAME',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[11].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'JRB',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[10].onclick = function() {
+                        jdp.openAppModel({
+                            name: 'home',
+                            params: {},
+                            callback: function() {
+                                jdp.alert('success');
+                            }
+                        })
+                    };
+                    aLi[0].onclick = function() {
+                        jdp.getInfo(function(json) {
+                            var str = JSON.stringify(json);
+                            jdp.alert(str);
+                        })
+                    };
+                    aLi[1].onclick = function() {
+                        jdp.setTitle('标题变化。。');
+                    };
+
+                    aLi[2].onclick = function() {
+                        jdp.alert('alert弹出文案');
+                    };
+                    aLi[3].onclick = function() {
+                        jdp.confirm({
+                            text: '啊啊啊啊啊啊',
+                            sure: '确认',
+                            cancel: '取消',
+                            callback: function(num) {
+                                jdp.alert(num);
+                            }
+                        });
+                    };
+                    aLi[4].onclick = function() {
+                        jdp.close();
+                    };
+                    aLi[5].onclick = function() {
+                        jdp.checkNetwork(function(str) {
+                            jdp.alert(str);
+                        })
+                    };
+                    aLi[6].onclick = function() {
+                        jdp.addCache({
+                            key: 'cache1',
+                            value: 'value1'
+                        })
+                    };
+                    aLi[7].onclick = function() {
+                        jdp.getCache({
+                            key: 'cache1',
+                            callback: function(result) {
+                                jdp.alert(result);
+                            }
+                        })
+                    };
+                    aLi[8].onclick = function() {
+                        jdp.removeCache({
+                            key: 'cache1'
+                        })
+                    };
+                    aLi[9].onclick = function() {
+                        jdp.removeAllCache();
+                    };
+                };
+    </script>
+</body>
+
+</html>

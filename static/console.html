@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <title>手机端调试工具</title>
+        <link rel="stylesheet" href="styles/solarized_light.min.css">
+        <style>
+            input::selection {background:#2AA8B6; color:#fff;}
+            input::-moz-selection {background:#2AA8B6; color:#fff;}
+            input::-webkit-selection {background:#2AA8B6; color:#fff;}
+            details summary { font-size: 16px; text-align: left; height: 30px; line-height: 30px; margin-top: 6px;color: #19AC7B;outline: none;cursor: pointer;}
+            body,html{padding:0;margin:0;height:100%}html{background:#f8f9fa}body{max-width:800px;background:#fff;margin:0 auto}.header{background:#eda29b;position:relative;margin:0;padding:30px 0 40px;color:#fff}#c,.header img{position:absolute;top:0;height:100%}#c{left:0;width:100%}.header img{right:0}#triangle{width:100%;position:relative;top:-50px;margin-bottom:-25px}.github-link{font-size:14px;color:#555;margin-top:0}.github-link,.hint,.subtitle,.title{font-family:'Avenir Next',Avenir,'Helvetica Neue',Helvetica,'Franklin Gothic Medium','Franklin Gothic','ITC Franklin Gothic',Arial,sans-serif;text-align:center}.subtitle,.title{text-align:left;z-index:10;padding-left:15px;position:relative}.title{font-size:36px;margin-bottom:10px}.hint,.subtitle{margin-bottom:50px}.subtitle{font-size:12px;text-decoration:underline}.github-link a{color:#76a2ee;font-size:18px}.hint{color:#555}.buttons{padding:0;margin:0;list-style:none}.buttons li{color:#fff;padding:20px;font-size:20px;font-weight:700;box-shadow:0 2px 2px 0 rgba(0,0,0,.05),0 1px 4px 0 rgba(0,0,0,.2),0 3px 1px -2px rgba(0,0,0,.1);position:relative;text-align:center;transition:background .3s,color .3s;cursor:pointer}.buttons li.yellow{background:#f2d367;color:#e07556}.buttons li.yellow:active{background:#bca351}.buttons li.orange{background:#e17555;color:#9c3c53}.buttons li.orange:active{background:#bc5f45}.buttons li.purple{background:#9d3b53;color:#513056}.buttons li.purple:active{background:#843245}
+        </style>
+        <script type="text/javascript" src="js/highlight.min.js"></script>
+        <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+        <script>
+            (function () {
+                var src = 'js/eruda.min.js';
+                if (!/eruda=true/.test(window.location) && localStorage.getItem('active-eruda') != 'true') return;
+                document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+                document.write('<scr' + 'ipt>eruda.init();</scr' + 'ipt>');
+            })();
+        </script>
+        <script src="js/vConsole.min.js"></script>
+    </head>
+    <body>
+        <header class="header">
+            <h1 class="title">Eruda</h1>
+            <h2 class="subtitle">Console for Mobile Browsers</h2>
+        </header>
+        <svg id="triangle" width="800" height="50" viewBox="0,0,80,5" preserveAspectRatio="none">
+            <polygon points="0,0 80,0 80,5" style="fill:#eda29b"/>
+        </svg>
+        <p class="github-link">View it on <a href="https://github.com/liriliri/eruda">GitHub</a></p>
+        <p class="hint">Click the right bottom button to give it a try!</p>
+        <ul class="buttons">
+            <li id="error-btn" class="yellow" style="z-index: 100;" ontouchstart>Trigger Error</li>
+            <li id="ajax-btn" class="orange" style="z-index: 90;" ontouchstart>Send Ajax Request</li>
+            <li id="info-btn" class="yellow" style="z-index: 100;" ontouchstart>Get Browser Info</li>
+        </ul>
+
+<details class="dd-code" open>
+<summary>添加以下代码</summary>
+<pre>
+<code class="html">&lt;script&gt;
+    (function () {
+        var src = 'https://m.jandou.com/tool/js/eruda.min.js';
+        if (!/eruda=true/.test(window.location) &amp;&amp; localStorage.getItem('active-eruda') != 'true') return;
+        document.write('&lt;scr' + 'ipt src=&quot;' + src + '&quot;&gt;&lt;/scr' + 'ipt&gt;');
+        document.write('&lt;scr' + 'ipt&gt;eruda.init();&lt;/scr' + 'ipt&gt;');
+    })();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://m.jandou.com/tool/js/vConsole.min.js&quot;&gt;&lt;/script&gt;
+</code>
+</pre>
+</details>
+        <script>
+            function addClickEvent(id, listener)
+            {
+                document.getElementById(id).addEventListener('click', listener, false);
+            }
+            addClickEvent('error-btn', function ()
+            {
+                TriggerError();
+            });
+            addClickEvent('ajax-btn', function ()
+            {
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', 'test.json');
+                xhr.send();
+            });
+            /*浏览器信息*/
+            addClickEvent('info-btn', function ()
+            {
+                for(var key in navigator){
+                    console.log(key+':'+navigator[key])
+                }
+            });
+
+        </script>
+    </body>
+</html>

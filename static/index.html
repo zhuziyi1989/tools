@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的前端工具箱</title>
+    <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <!-- <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi"> -->
+    <link rel="shortcut icon" href="img/favicon.ico?version=1.0.1" />
+    <!--移动端版本兼容 -->
+<!--     <script type="text/javascript">
+        var phoneWidth = parseInt(window.screen.width);
+        var phoneScale = phoneWidth / 640;
+        var ua = navigator.userAgent;
+        if (/Android (\d+\.\d+)/.test(ua)) {
+            var version = parseFloat(RegExp.$1);
+            if (version > 2.3) {
+                document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+            } else {
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        } else {
+            document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+        }
+    </script> -->
+    <!--移动端版本兼容 end -->
+    <link rel="stylesheet" href="styles/solarized_light.min.css">
+    <script type="text/javascript" src="js/highlight.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" src="//cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+    <style type="text/css">
+    * { margin: 0; padding: 0; }
+    ::-webkit-scrollbar{width:10px;height:10px;background:white}
+    ::-webkit-scrollbar-thumb{background-color:rgba(188,193,196,0.8);background-clip:padding-box;min-height:28px}
+    ::-webkit-scrollbar-track-piece{background-color:whiteSmoke}
+    .warp { width: 980px; margin: 0 auto; font-family: "Yahei Consolas Hybrid","Microsoft Yahei",sans-serif, serif; font-size: 16px; }
+    @media (max-device-width: 640px) {
+      .warp {
+            max-width: 640px;
+            font-size: 20px
+        }
+    }
+    .qrcode{ position: relative; }
+    .in-01,.in-02 {color: #0086BB; }
+    .in-01 { padding-left: 1em;box-sizing: border-box;min-height: 50px; line-height: 50px; background-color: #FBFBFB;    margin-top: 15px; }
+    #qrcode { display: none;width: 256px;height: 256px;position: absolute;top: 100%;left: 50%;margin-left: -123px; padding: 30px;background: rgba(251,251,251,0.5);box-shadow: 0 0 2em rgba(101,115,126,0.5); }
+    #qrcode:before{content: "×";position: absolute; top: 0; right: 0;display: inline-block;width: 24px;font-size:20px;font-weight:700;line-height:24px;color:#000;text-shadow:0 1px 0 #fff;opacity:.2;-webkit-transition:all .3s;transition:all .3s; }
+    #qrcode:focus, #qrcode:hover {cursor:pointer;opacity:.8;outline:0; }
+    #btn,#btnX,#btnS { width: 100px; height: 34px; line-height: 34px; color: #fff; background: hsla(160, 100%, 32%, 0.9); display: inline-block; text-align: center; cursor: pointer; font-size: 16px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05); color: #ffffff; }
+    #btn { background-color: hsla(0, 80%, 60%, 0.9); }
+    #btnS { background-color: hsla(197, 100%, 37%, 0.9); }
+    #url { width: 300px; height: 30px; line-height: 30px; border: 1px solid #ddd; }
+    .red-placeholder::-webkit-input-placeholder{
+        color: hsla(0, 80%, 60%, 0.9);
+    }
+    .result { text-align: left; width: 100%; height: 30px; line-height: 30px; font-size: 12px;color: #0086BB; background-color: #FBFBFB; text-indent: 2em; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+    .qrcode_url{display: inline-block; width: 100%; height: 30px; line-height: 30px; text-align: left; color: #2AA8B6;box-sizing: border-box;background-color: #FBFBFB; }
+    .tool-link { text-align: left; width: auto; height: 48px; border: 1px solid #f5f5f5; line-height: 50px; color: #0086BB; background-color: #FBFBFB; margin-bottom: 5px; padding-left: 2em; }
+    .tool-link a { font-family: inherit; font-size: 14px; text-decoration: none; display: inline-block; color: #0086BB; width: auto; height: 18px; line-height: 18px; padding: 3px; }
+    .tool-link a:visited { color: inherit; }
+    .tool-link a:hover { color: inherit; border-bottom: 2px solid #ED5959; }
+    .config {width: 100%;padding-left: 2em;box-sizing: border-box;background-color: #FBFBFB;}
+    .config span{ display: inline-block; width: 20%; color: #2AA8B6;}
+    .config input{display: inline-block; width: 80%; height: 30px; padding: 20px 5px; font-size: 14px; line-height: 30px; text-align: left; color: #2AA8B6;box-sizing: border-box;background-color: #FBFBFB; }
+    input::selection {background:#2AA8B6; color:#fff;}
+    input::-moz-selection {background:#2AA8B6; color:#fff;}
+    input::-webkit-selection {background:#2AA8B6; color:#fff;}
+    details summary { font-size: 16px; text-align: left; height: 30px; line-height: 30px; margin-top: 6px;color: #19AC7B;outline: none;cursor: pointer;}
+    /*.zhitu, .uploadImages, .fileManage{ padding: 20px 0; }*/
+    .zhitu iframe{width:100%;height:100%;min-height:960px;border:none;}
+    .uploadImages iframe{width:100%;height:100%;min-height:600px;border:none;}
+    .fileManage iframe{width:100%;height:100%;min-height:900px;border:none;}
+    .footer { font-family: monospace; width: 100%;padding-bottom: 10px; font-size: 14px; line-height: 20px; text-align: center; color: #BCC1C4; }
+    .container { max-width: 800px; width: 80%; margin: auto; padding: 0 10px; }
+    .footer-entry>a { color: #939ba0; text-decoration: none; transition: color 0.15s linear; outline: none; }
+    .bg-logo{display: block;width: 60px;height: 30px;padding: 5px 0;margin:0 auto;background: url(img/logo-2.png) 50% 50% no-repeat;background-size: 60%}
+    input { border: 0; outline: none; padding-left: 5px; font-family: inherit; }
+    pre code{font-size: 12px;font-family: "Source Code Pro";}
+    </style>
+</head>
+<body>
+    <div class="warp">
+        <details class="qrcode" open>
+            <summary>二维码生成：</summary>
+            <div class="in-01">
+                <span>URL或SKU → </span>
+                <input type="text" id="url" class="" placeholder="URL需包含传输协议，如：http://">
+                <span id="btn" value="生成普通二维码">普通二维码</span>
+                <span id="btnS" value="生成短址二维码">短址二维码</span>
+                <span id="btnX" value="用于生成京粉专链">京粉专链</span>
+            </div>
+            <div class="in-02">
+                <div id="qrcode" title="关闭二维码">
+                    <canvas width="256" height="256"></canvas>
+                </div>
+                <div class="result"><span>原始地址：</span><input type="text" class="qrcode_url" id="qrcode_url" placeholder="光标移动自动选中，可直接拷贝粘贴，点击二维码关闭！" /></div>
+                <div class="result"><span>新浪短址：</span><input type="text" class="qrcode_url" id="qrcode_url_shorten" placeholder="" /></div>
+            </div>
+        </details>
+
+        <details class="tools" open>
+            <summary>一些工具：</summary>
+            <div class="tool-link">
+                <a href="console.html?eruda=true" target="_blank">移动端调试</a>
+                <a href="sdk.html" target="_blank">接口测试</a>
+                <a href="../demo/slider.html" target="_blank">滑动切屏例</a>
+                <a href="../demo/fund.html" target="_blank">M端案例</a>
+                <a href="../demo/download_page.html" target="_blank">下载渠道包</a>
+                <a href="/pux/kwx/activity.html" target="_blank">M端工具</a>
+                <a href="../demo/fund/index.html" target="_blank">基金工具</a>
+            </div>
+            <div class="tool-link">
+                <a href="fund.html" target="_blank">基金模板</a>
+                <a href="fund-preview.html" target="_blank">基金模板预览</a>
+                <a href="http://www.freeformatter.com/html-escape.html" target="_blank">HTML转码</a>
+                <a href="http://www.css-js.com/" target="_blank">压缩美化</a>
+                <a href="http://tool.lu/" target="_blank">在线工具</a>
+                <a href="http://tool.chinaz.com/" target="_blank">站长工具</a>
+                <a href="javascript:;" id="uploadImages">压缩工具</a>
+                <a href="#y" id="fileManage">图片管理</a>
+                <a href="#z" id="zhitu">加载智图</a>
+                <a href="http://staticfile.org/" target="_blank">七牛CDN</a>
+            </div>
+            <div class="tool-link">
+                <a href="up_oa.html" target="_blank">上线说明</a>
+                <a href="time.html" target="_blank">时间啊</a>
+                <a href="http://kaoqin.jd.com/" target="_blank">打卡机</a>
+                <a href="http://timline.jd.com/index.action" target="_blank">TimLine</a>
+                <a href="javascript:void(function(u,s){s=document.body.appendChild(document.createElement('script'));s.src=u+'?ts='+Date.now();s.charset='UTF-8'}('http://zythum.sinaapp.com/mama2/dest/index.js'))" target="_blank">MAMA2</a>
+                <a href="linux.html" target="_blank">linux命令查询</a>
+                <a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/base/index.html" target="_blank">linux学习</a>
+            </div>
+        </details>
+
+        <details class="tools" open>
+        <summary>常用的链接：</summary>
+            <div class="config">
+                <span>pac</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/config/proxy.pac" />
+                <span>Proxy</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/config/OmegaOptions.bak" />
+                <span>jdPay SDK</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/tool/js/jdp-sdk.js" />
+                <span>下载和统计</span><input type="text" value="http://sale.jd.com/app/act/KBuoE641DZmxgYf.html?reffer={渠道包}#{跳转模块名}" />
+                <span>日志打印</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/tool/js/vConsole.min.js" />
+            </div>
+        </details>
+        <div class="uploadImages"></div>
+        <div class="fileManage" id="y"></div>
+
+<details class="dd-code" close>
+<summary>常用 PC 端代码块：</summary>
+<pre>
+<code class="javascript">/**
+ * 代码块：
+ */
+var timeTask=setInterval(function(){
+        var date=new Date();
+        var h=date.getHours();
+        var m=date.getMinutes();
+        var s=date.getSeconds();
+        if(h==8&&m==46&&s==36){
+             callFunction();
+        }
+    },1000);
+function callFunction(){
+    $("#clockIn").click();
+}
+
+/**
+ * 去除jshop集成条幅：
+ */
+$(document).ready(function(){
+    $('[report-eventid="MDownLoadFloat_OpenNow"]').parents("div").hide();//京东下载条幅
+    $('#m_common_header').hide();//菜单导航
+    $("#mob_adv_1003").next().hide()//底部缓存提示文字
+});
+</code>
+</pre>
+</details>
+
+<details class="dd-code" close>
+<summary>常用移动端代码块：</summary>
+<pre>
+<code class="txt">/**
+ * 普通模块名 （模块名询问：XXX）
+ */
+&#39318;&#39029;&#65306; HOME
+&#23450;&#26399;&#29702;&#36130;&#65306; INSURANCE
+&#26106;&#36130;&#65306;WANGCAI
+&#32929;&#31070;&#65306; STOCK
+&#25293;&#31435;&#36820;&#65306; NJRS (iOS)/ PAILIFAN (Android)
+&#30333;&#26465;&#65306; BILL
+&#23567;&#37329;&#24211;&#65306; JRB
+&#23454;&#21517;&#35748;&#35777;&#65306; REALNAME
+&#20449;&#29992;&#21345;&#36824;&#27454;&#65306; CCR
+&#25163;&#26426;&#20805;&#20540;&#65306; PHONE_RECHARGE
+&#27880;&#20876;&#65306; LOGIN
+&#25195;&#19968;&#25195;&#65306; SCAN
+&#20140;&#19996;&#30333;&#25343;&#65306; JINGDONGBAINA
+&#29983;&#27963;&#24212;&#29992;&#65306; LIFEPAY
+/**
+ * 常用模块激活（注意依赖）
+ */
+&#25171;&#24320;&#23567;&#37329;&#24211;&#20805;&#20540;&#65306;App.open('JRB','purchaseSign');
+&#25171;&#24320;URL(&#25250;&#21543;)&#65306; App.open('activity','http://qiang.wangyin.com');
+&#25250;&#21543;&#65306;
+jdp.openAppModel({
+    name: &quot;ACTIVITY&quot;,
+    params: {url: 'http://qiang.wangyin.com'},
+    callback: function() {}
+})
+&#22522;&#37329;&#65306;
+jdp.openAppModel({
+    name: &quot;FUND&quot;,
+    params: {code: '110018'},
+    callback: function() {}
+})
+卡券主页：
+  生产地址: https://m.jdpay.com/user/myCoupon
+  闭环地址: https://172.24.4.61:8101/user/myCoupon
+  功能地址: https://172.24.5.4:8101/user/myCoupon
+卡券现金红包页面：
+  生产地址: https://m.jdpay.com/user/myPackHome
+</code>
+<code class="javascript">/**
+ * Node
+ */
+
+gulp browser-sync
+
+/**
+ * 移动终端类型
+ */
+var u = navigator.userAgent,
+    isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //Android 终端
+    isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //iOS 终端（第 1 种方法）
+    isiOSx = u.indexOf('iPhone') > -1 || u.indexOf('iPad') > -1；//iOS 终端（第 2 种方法）
+    alert('是否是Android：'+isAndroid);
+    alert('是否是iOS：'+isiOS);
+    alert('是否是iOS：'+isiOSx);
+
+/**
+ * 拍立返接口
+ */
+function() {
+    var name = isiOS ? 'NJRS' : 'PAILIFAN';//Android和iOS端模块名不一致
+        App.open(name);
+ };
+
+/**
+ * 老版旺财接口
+ */
+function() {
+    if (!Util.inApp() || Util.inWx) {
+        location.href = "http://sale.jd.com/app/act/KBuoE641DZmxgYf.html?url=http://static.jdpay.com/activity/html/auth.html?callback=http://regular.jdpay.com:80/finance/productindex&nologin=http://sale.jd.com/app/act/eMirlsyAcbJ8PNaNhtml#ACTIVITY"; //非京东钱包APP跳转旺财
+    } else {
+        jdp.getInfo(function(json) {
+            json = JSON.parse(json);
+            if (json.auth) {
+                location.href = "http://regular.jdpay.com/finance/productindex?auth=" + json.auth; //京东钱包APP内跳转旺财
+            } else {
+                jdp.alert("请先登录");
+            }
+        })
+    }
+}
+
+/**
+ * 新版旺财 详情页接口
+ */
+jdp.openAppModel({
+    name: 'WANGCAI',
+    params: {
+        wangcai: 'wangcaiDetail',  //Android
+         targetPage: "WangCaiDetailViewController",  //iOS
+         productId: '3'//活动号
+    },
+    callback: function() {
+        jdp.alert('success');
+    }
+})
+
+</code>
+<code class="css">/*Popup css*/
+.cd-popup { left: 0; top: 0; height: 100%; width: 100%; background-color: rgba(0, 0, 0, 0.8);opacity: 0; visibility: hidden; overflow: auto; -webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s; -moz-transition: opacity 0.3s 0s, visibility 0s 0.3s; transition: opacity 0.3s 0s, visibility 0s 0.3s; z-index: 999 }
+.cd-popup.is-visible { opacity: 1; visibility: visible; -webkit-transition: opacity 0.3s 0s, visibility 0s 0s; -moz-transition: opacity 0.3s 0s, visibility 0s 0s; transition: opacity 0.3s 0s, visibility 0s 0s }
+.cd-popup-container { position: relative; width: 90%; margin: 5em auto; border-radius: .25em .25em .4em .4em; text-align: center; -webkit-transform: translateY(-100%); -moz-transform: translateY(-100%); -ms-transform: translateY(-100%); -o-transform: translateY(-100%); transform: translateY(-100%); -webkit-backface-visibility: hidden; -webkit-transition-property: -webkit-transform; -moz-transition-property: -moz-transform; transition-property: transform; -webkit-transition-duration: 0.3s; -moz-transition-duration: 0.3s; transition-duration: 0.3s }
+.cd-popup-container h1 { font-size: 18px; padding-top: 10px; height: 23px;line-height: 23px; color: #7d7d7d; background: #F8F9FB url(//img10.360buyimg.com/cms/jfs/t2410/330/420705444/2533/40332d9d/560a0a0dN022d44fb.png) 50% 50% no-repeat; text-indent: -999em; background-size: 50%; -webkit-border-radius: 5px 5px 0 0; border-radius: 5px 5px 0 0;overflow: hidden;}
+.cd-popup-cover { max-height: 320px; overflow: scroll; -webkit-overflow-scrolling: touch; margin: 0.5em 0.5em;padding:0.5em; background-color: #fff; -webkit-border-radius: 0 0 5px 5px; border-radius: 8px; }
+.cd-popup-cover img { width: 100%; }
+.cd-popup-cover p { font-size: 12px; line-height: 22px; color: #7d7d7d; text-align: left; }
+.img-replace { display: inline-block; overflow: hidden; text-indent: 100%; color: transparent; white-space: nowrap; }
+.cd-popup .cd-popup-close { position: absolute; top: -11px; right: -8px; width: 26.5px; height: 28.5px; background: url(//img10.360buyimg.com/cms/jfs/t994/128/563766866/2678/b7859c84/552e3989Nb9f099b9.png) 0 0 no-repeat; -webkit-background-size: 100%; background-size: 100%; }
+.is-visible .cd-popup-container { -webkit-transform: translateY(0); -moz-transform: translateY(0); -ms-transform: translateY(0); -o-transform: translateY(0); transform: translateY(0);padding-bottom: 15px;background: #F8F9FB; }
+
+/*去除jshop集成条幅*/
+.jshop-sku-price-hint,.tryme,#m_common_header,.download-jrApp{
+   display: none!important;
+}
+
+/*Orientation css*/
+@media screen and (orientation:landscape) {
+.orientation_set{display:block;position:fixed;top:0;left:0;color:#fff;width:100%;height:100%;background:#397ddb;text-align:center;display:-webkit-box;-weibit-box-pack:center;-webkit-box-align:center;font-size:14px;line-height:2em;font-family:"Microsoft YaHei";z-index:9999;}
+.orientation_set img{display:inline-block;-webkit-animation:zhuan 1.5s .3s infinite;}
+.orientation_set > div{width:100%;}
+.loading,.nav-top,.control,.content,.footer{display: none;}
+}
+@-webkit-keyframes zhuan {
+    0% {
+        -webkit-transform: rotate(0deg);
+        opacity: 1;
+    }
+    50% {
+        -webkit-transform: rotate(-90deg);
+        opacity: 1;
+    }
+    100% {
+        -webkit-transform: rotate(0deg);
+        opacity: 1;
+    }
+}
+@-webkit-keyframes cycleLink {
+    from {
+        -webkit-transform: scale(1);
+    }
+    to {
+        -webkit-transform: scale(1.03);
+    }
+}
+</code>
+</pre>
+
+<pre>
+<code class="html">&lt;!-- Popup dom --&gt;
+&lt;div class=&quot;content&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;http://img14.360buyimg.com/cms/jfs/t2206/231/1011598291/246978/534c8a24/5665635bN02a78b13.jpg&quot; /&gt;
+    &lt;a href=&quot;javascript:;&quot; class=&quot;cd-popup-btn&quot;&gt;&lt;/a&gt;
+    &lt;a href=&quot;javascript:;&quot; class=&quot;page-down J_confirm&quot;&gt;&lt;/a&gt;
+&lt;/div&gt;&lt;!-- &#22810;&#35268;&#21017;&#24377;&#23618;&#65292;&#19981;&#29992;&#35831;&#21024;&#38500; --&gt;
+&lt;div class=&quot;cd-popup-wrap&quot;&gt;
+    &lt;div class=&quot;cd-popup&quot;&gt;
+        &lt;div class=&quot;cd-popup-container&quot;&gt;
+                &lt;h1&gt;&#27963;&#21160;&#35268;&#21017;&lt;/h1&gt;
+            &lt;div class=&quot;cd-popup-cover&quot;&gt;
+                &lt;p&gt;&#27963;&#21160;&#26102;&#38388;&#65306;&#21363;&#26085;&#36215;&#33267;2015&#24180;12&#26376;31&#26085;&#65288;&#26242;&#23450;&#65289;&lt;/p&gt;
+                &lt;p&gt;&#21806;&#21334;&#28192;&#36947;&#65306;&#20140;&#19996;&#21830;&#22478;&#21644;&#37096;&#20998;&#32447;&#19979;&#21830;&#36229;&#26377;&#21806;&#65292;&#25968;&#37327;&#26377;&#38480;&#65292;&#20808;&#20080;&#20808;&#24471;&#12290;&lt;/p&gt;
+                &lt;p&gt;&#27963;&#21160;&#20869;&#23481;&#65306;&#27963;&#21160;&#26399;&#38388;&#65292;&#29992;&#25143;&#36141;&#20080;&#26377;&#20140;&#19996;&#38065;&#21253;&#21152;&#22810;&#23453;&#29305;&#20379;&#35013;&#65288;&#25972;&#31665;&#35013;&#65289;&#65292;&#23558;&#33719;&#24471;10&#20803;&#32418;&#21253;&#12290;&lt;/p&gt;
+                &lt;p&gt;&#27963;&#21160;&#26399;&#38388;&#65292;&#29992;&#25143;&#36141;&#20080;&#20140;&#19996;&#38065;&#21253;&#21152;&#22810;&#23453;&#29305;&#20379;&#35013;&#65292;&#20351;&#29992;&#20140;&#19996;&#38065;&#21253;&#25195;&#19968;&#25195;&#25110;&#24494;&#20449;&#25195;&#25551;&#31665;&#20869;&#25237;&#21345;&#19978;&#30340;&#20108;&#32500;&#30721;&#65292;&#21487;&#33719;&#24471;10&#20803;&#32418;&#21253;&#22870;&#21169;&#65307;&lt;/p&gt;
+                &lt;p&gt;&#24744;&#36890;&#36807;&#24494;&#20449;&#25195;&#19968;&#25195;&#25195;&#25551;&#20108;&#32500;&#30721;&#30340;&#65292;&#39035;&#22312;&#27963;&#21160;&#39029;&#38754;&#36755;&#20837;&#25163;&#26426;&#21495;&#30721;&#21644;&#39564;&#35777;&#30721;&#65292;&#39046;&#21462;&#30340;&#32418;&#21253;&#23558;&#21457;&#25918;&#33267;&#24744;&#21442;&#19982;&#27963;&#21160;&#36755;&#20837;&#25163;&#26426;&#21495;&#32465;&#23450;&#30340;&#20140;&#19996;&#38065;&#21253;&#36134;&#25143;&#20013;, &#35831;&#36827;&#20837;&#20140;&#19996;&#38065;&#21253;-&#25105;&#30340;-&#32418;&#21253;&#20013;&#26597;&#30475;&#65292;&#24744;&#39035;&#22312;&#39046;&#21462;&#32418;&#21253;&#21518;3&#20010;&#33258;&#28982;&#26085;&#20869;&#19979;&#36733;&#20140;&#19996;&#38065;&#21253;&#24182;&#23436;&#25104;&#23454;&#21517;&#35748;&#35777;&#65292;&#21542;&#21017;&#35270;&#20026;&#25918;&#24323;&#20013;&#22870;&#65307;&#36890;&#36807;&#20140;&#19996;&#38065;&#21253;&#25195;&#19968;&#25195;&#25195;&#25551;&#20108;&#32500;&#30721;&#24182;&#23436;&#25104;&#23454;&#21517;&#30340;&#65292;&#32418;&#21253;&#23558;&#21457;&#25918;&#33267;&#24744;&#25195;&#30721;&#26102;&#20351;&#29992;&#30340;&#20140;&#19996;&#38065;&#21253;&#36134;&#25143;&#20313;&#39069;&#20013;&#12290;&lt;/p&gt;
+                &lt;p&gt;&#20108;&#32500;&#30721;&#20026;&ldquo;&#19968;&#31665;&#19968;&#30721;&rdquo;&#24418;&#24335;&#65292;&#29992;&#25143;&#23436;&#25104;&#20817;&#25442;&#21363;&#22833;&#25928;&#65307;&lt;/p&gt;
+                &lt;p&gt;&#21516;&#19968;&#29992;&#25143;&#20165;&#33021;&#33719;&#24471;&#19968;&#27425;&#32418;&#21253;&#65292;&#21516;&#19968;&#20140;&#19996;&#38065;&#21253;&#36134;&#25143;&#12289;&#20140;&#19996;&#38065;&#21253;&#32465;&#23450;&#25163;&#26426;&#21495;&#12289;&#36523;&#20221;&#35777;&#21495;&#12289;&#24494;&#20449;&#36134;&#25143;&#12289;&#38134;&#34892;&#21345;&#21495;&#65292;&#28385;&#36275;&#20219;&#19968;&#26465;&#20214;&#22343;&#35270;&#20026;&#21516;&#19968;&#29992;&#25143;&#65307;&lt;/p&gt;
+                &lt;p&gt;9&#12289;&nbsp;&#22312;&#26412;&#27963;&#21160;&#26399;&#38388;&#65292;&#22914;&#23384;&#22312;&#36829;&#35268;&#34892;&#20026;&#65288;&#21253;&#25324;&#20294;&#19981;&#38480;&#20110;&#24694;&#24847;&#22871;&#21462;&#36164;&#37329;&#12289;&#26426;&#22120;&#20316;&#24330;&#12289;&#34394;&#20551;&#20132;&#26131;&#31561;&#36829;&#21453;&#35802;&#23454;&#20449;&#29992;&#21407;&#21017;&#34892;&#20026;&#65289;&#65292;&#20027;&#21150;&#26041;&#23558;&#21462;&#28040;&#24744;&#30340;&#20013;&#22870;&#36164;&#26684;&#65292;&#24182;&#26377;&#26435;&#25764;&#38144;&#30456;&#20851;&#36829;&#35268;&#20132;&#26131;&#65292;&#24517;&#35201;&#26102;&#36861;&#31350;&#27861;&#24459;&#36131;&#20219;&#65307;&lt;/p&gt;
+                &lt;p&gt;10&#12289;&nbsp;&#26412;&#27963;&#21160;&#35268;&#21017;&#21450;&#20854;&#26410;&#23613;&#20107;&#23452;&#21516;&#26102;&#21463;&#12298;&#20140;&#19996;&#38065;&#21253;&#26381;&#21153;&#21327;&#35758;&#12299;&#21450;&#30456;&#20851;&#20844;&#21578;&#12289;&#35268;&#21017;&#32422;&#26463;&#65307;&lt;/p&gt;
+                &lt;p&gt;11&#12289;&#22312;&#27861;&#24459;&#20801;&#35768;&#30340;&#33539;&#22260;&#20869;&#65292;&#26412;&#20844;&#21496;&#23545;&#26412;&#27425;&#27963;&#21160;&#26377;&#35299;&#37322;&#26435;&#65307;&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;a class=&quot;cd-popup-close img-replace&quot; href=&quot;javascript:;&quot;&gt;&lt;/a&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- &#35831;&#23558;&#23631;&#24149;&#31446;&#21521;&#27983;&#35272;&#65306;start --&gt;
+&lt;div class=&quot;orientation_set&quot;&gt;
+    &lt;div&gt;&lt;img src=&quot;orientation.png&quot; width=&quot;50&quot; alt=&quot;&quot; class='translate'&gt;
+        &lt;br&gt;&#35831;&#23558;&#23631;&#24149;&#31446;&#21521;&#27983;&#35272;&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- &#35831;&#23558;&#23631;&#24149;&#31446;&#21521;&#27983;&#35272;&#65306;end --&gt;
+</code>
+<code>//Popup JavaScript
+~function popup(){
+    var __ = function(str){
+        return document.querySelectorAll(str)
+    };
+
+    var i = 0,
+        aClose = __('.cd-popup-close'),
+        aBtn = __('.cd-popup-btn'),
+        aCon = __('.cd-popup');
+    if (!aBtn.length) return;
+
+    for(i = 0; i < aBtn.length; i++){
+        (function(n){
+            aCon[n].style.position = 'fi'+'xed';
+
+            aBtn[n].addEventListener('click', function(){
+                _('.is-visible') && _('.is-visible').classList.remove('.is-visible');
+                aCon[n].classList.add('is-visible');
+            }, false);
+
+            aCon[n].addEventListener('touchmove', function(ev){
+                if(ev.target.classList.contains('cd-popup-cover')){
+                    ev.stopPropagation();
+                }
+            }, false)
+
+            aClose[n].addEventListener('click', function(){
+                aCon[n].classList.remove('is-visible');
+            }, false);
+        })(i);
+    }
+}();
+</code>
+</pre>
+</details>
+
+<details class="dd-code" close>
+<summary>不常用的代码块：</summary>
+<pre>
+<code class="html">/**
+ * HTML ISO-8859-1 参考手册
+ */
+
+&quot;  quotation               &amp;quot;
+'   apostrophe              &amp;apos;
+&amp;   ampersand               &amp;amp;
+&lt;    less-than               &amp;lt;
+&gt;    greater-than                &amp;gt;
+&reg;   registered                 &amp;reg;
+&copy;  copyright       &amp;copy;
+&#31354;&#26684;     space          &amp;nbsp;
+
+/*html中的hack代码*/
+
+&lt;!--[if !IE]&gt;&lt;!--&gt; &#38500;IE&#22806;&#37117;&#21487;&#35782;&#21035; &lt;!--&lt;![endif]--&gt;
+&lt;!--[if IE]&gt; &#25152;&#26377;&#30340;IE&#21487;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if IE 5.0]&gt; &#21482;&#26377;IE5.0&#21487;&#20197;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if IE 5]&gt; &#20165;IE5.0&#19982;IE5.5&#21487;&#20197;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if gt IE 5.0]&gt; IE5.0&#20197;&#21450;IE5.0&#20197;&#19978;&#29256;&#26412;&#37117;&#21487;&#20197;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if IE 6]&gt; &#20165;IE6&#21487;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if lt IE 6]&gt; IE6&#20197;&#21450;IE6&#20197;&#19979;&#29256;&#26412;&#21487;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if gte IE 6]&gt; IE6&#20197;&#21450;IE6&#20197;&#19978;&#29256;&#26412;&#21487;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if IE 7]&gt; &#20165;IE7&#21487;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if lt IE 7]&gt; IE7&#20197;&#21450;IE7&#20197;&#19979;&#29256;&#26412;&#21487;&#35782;&#21035; &lt;![endif]--&gt;
+&lt;!--[if gte IE 7]&gt; IE7&#20197;&#21450;IE7&#20197;&#19978;&#29256;&#26412;&#21487;&#35782;&#21035; &lt;![endif]--&gt;
+</code>
+</pre>
+<pre>
+<code class="css">/**
+ * PC端初始化样式
+ */
+
+@charset "utf-8";
+/* 初始化样式 */
+* {
+    padding: 0;
+    margin: 0;
+    word-wrap:break-word;
+    word-break:break-all;/*强制英文单词断行*/
+    }
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,
+form,fieldset,input,textarea,p,blockquote,th,td {
+    padding: 0;
+    margin: 0;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    }
+table {
+    border-collapse: collapse;/*将表格的边框合并为一个单一的边框*/
+    border-spacing:0;
+    }
+fieldset,img {
+    border: 0;
+    }
+img ,input{
+    vertical-align: middle;/*垂直居中*/
+    }
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-weight: normal;
+    font-style: normal;
+    }
+ol,ul,li {
+    list-style: none;
+    }
+caption,th {
+    text-align: left;
+    }
+h1,h2,h3,h4,h5,h6 {
+    font-weight: normal;
+    font-size: 100%;
+    }
+q:before,q:after {
+    content:'';
+    }
+abbr,acronym {
+    border: 0;
+    }
+a {
+    text-decoration:none;
+    cursor:pointer;
+    }
+a:focus,input,textarea {
+    outline-style:none;
+    }
+a:hover {
+    text-decoration:underline;
+    }
+
+/*模块化 清除浮动*/
+.clear {
+    clear:both;
+    }
+.clearfix {
+    zoom:1;/*触发IE6/7的layer*/
+    }
+.clearfix:after {
+    content:"";
+    display:block;
+    clear:both;
+    }
+
+</code>
+</pre>
+</details>
+<details class="dd-code" close>
+<summary>闲碎 CSS 代码块：</summary>
+<pre>
+<code class="css">/**
+ * 常用的且不太熟悉的样式
+ */
+
+.mobile{
+    -webkit-tap-highlight-color:rgba(0,0,0,0);/*修改和去除移动端点击事件出现的背景（框）*/
+}
+
+.Class{
+    cursor: pointer;/*鼠标指针*/
+    cursor: default;
+    text-indent: -999em;/*隐藏文字*/
+
+    overflow: hidden;/*超出隐藏*/
+    text-overflow : ellipsis; /*超出显示省略号*/
+
+    white-space: nowrap;/*强制在同一行内显示所有文本*/
+    word-break:break-all; /*强制英文单词断行*/
+
+    /*以下两行代码自动换行*/
+    word-wrap: break-word;
+    word-break: normal;
+
+    word-spacing:2px;   /*定义了各个单词之间的间距*/
+    letter-spacing:2px;    /*定义了每个字母之间的间距*/
+
+    text-indent: 1em; /*段落首行文本缩进(值为附负数，可形成悬挂缩进，同时设定一个内或外边距)*/
+    text-decoration: line-through; /*横线穿越文本*/
+
+    /*两端对齐*/
+    text-align: justify;
+    text-justify: distribute-all-lines;/*ie6-8*/
+    text-align-last: justify;/* ie9*/
+
+    _display: inline;
+    display:inline-block; /* 现代浏览器 + IE6、7 inline 元素 */
+    *display:inline; /* IE6、7 block 元素 */
+    *zoom:1;/*激活属性*/
+
+    outline: none;   /*去掉轮廓*/
+
+    background: #fff url(images/bg.jpg) center 0 no-repeat; /*背景居中显示*/
+    font-family: simsun;/*宋体*/
+    font: 700 italic small-caps bold 18px/2 Simsun,arial,sans-serif "Microsoft Yahei";/*400相当于normal 700相当于bold*/
+    background: url(../images/dot-red.png) center center no-repeat;
+
+    /*透明效果*/
+    filter:alpha(opacity=50);       /* IE 半透明效果 */
+    -moz-opacity:0.5;              /* 老版Mozilla */
+    -khtml-opacity:0.5;              /* 老版Safari */
+    opacity: 0.5;           /* 支持opacity的浏览器*/
+
+    /*滚动条*/
+    overflow: scroll;
+
+    /*边框*/
+    dotted： 点状轮廓。IE6下显示为dashed效果
+    dashed： 虚线轮廓。
+    solid： 实线轮廓
+}
+
+/*居中显示核心代码*/
+.login_dl {
+    width: 530px;
+    height: 320px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -160px 0 0 -265px;
+    display: inline;
+    background: url(../images/login-plane.png)  center 0 no-repeat;
+}
+
+/*hack代码*/
+.hack {
+    background-color:red\0; /* ie 8/9*/
+    background-color: blue\9\0; /* ie 9*/
+    background-color: #405bff \9; /* ie 6、7、8*/
+    +background-color:#CDCDCD; /* ie 6、7*/
+    *background-color:#dddd00; /* ie 7*/
+    _background-color:#CDCDCD; /* ie 6*/
+}
+
+/*整张网页程显灰色*/
+html {
+   filter: grayscale(100%);//IE浏览器
+  -webkit-filter: grayscale(100%);//谷歌浏览器
+  -moz-filter: grayscale(100%);//火狐
+  -ms-filter: grayscale(100%);
+  -o-filter: grayscale(100%);
+  filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+  -webkit-filter: grayscale(1);//谷歌浏览器
+}
+
+/* create an arrow that points up 绘制三角箭头 */
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;  /* left arrow slant */
+    border-right: 5px solid transparent; /* right arrow slant */
+    border-bottom: 5px solid #2f2f2f; /* bottom, add background color here */
+    font-size: 0;
+    line-height: 0;
+}
+
+/*一些CSS3选择器*/
+ul~li{
+    /*兄弟*/
+}
+ul>li{
+    /*子代 只选择子元素，而不能选中子孙辈，比后代选择器更为精准  仅IE6不支持*/
+}
+ul li{
+    /*后代*/
+}
+ul+li{
+    /*邻居*/
+}
+ul[title]{
+    /*属性*/
+}
+ul[href="xxxx"]{
+    /*属性值*/
+}
+ul[href*="xxxx"]{
+    /*凡事含有xxxx的*/
+}
+ul[href^="xxxx"]{
+    /*凡事以xxxx开头的*/
+}
+ul[href$="xxxx"]{
+    /*凡事以xxxx结束的*/
+}
+
+</code>
+</pre>
+</details>
+<div class="zhitu" id="z"></div>
+<div class="footer">
+    <div class="container">
+        <p class="footer-entry">This page is only the latest version of Chrome</p>
+        <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p>
+        <p class="footer-entry">Syntax highlighting for the Web <a href="//highlightjs.org/" target="_blank">highlightjs</a></p>
+        <p class="footer-entry">Original Base16 color scheme by <a href="http://chriskempson.github.io/base16/#ocean">Base16 Builder</a>, Style by <a href="https://github.com/idleberg/base16-highlight.js">Base16 for highlight.js</a></p>
+        <p class="footer-entry">&copy; 2015-2016 <a href="//tech.jandou.com/" target="_blank">ZHUZIYI</a>.</p>
+        <span class="bg-logo"></span>
+    </div>
+</div>
+    </div>
+    <script type="text/javascript">
+    //锚点滑动
+    $(document).ready(function() {
+        $("#zhitu,#fileManage").click(function() {
+            $("html, body").animate({
+                scrollTop: $($(this).attr("href")).offset().top + "px"
+            }, {
+                duration: 300,
+                easing: "swing"
+            });
+            return false;
+        });
+    });
+     //鼠标滑过文本框自动选中
+    function selectInputContent(e){
+        var pac = document.querySelectorAll(e),
+                leng = pac.length;
+        for(i=0;i<leng;i++){
+            pac[i].onmouseover = function(){this.focus();this.select();};
+            pac[i].onmouseout = function(){this.blur();};
+        };
+    };
+    selectInputContent('.config input');
+    selectInputContent('.qrcode_url');
+    // selectInputContent('#url');
+
+    window.onload = function(){
+        var firstInput = document.querySelector('.in-01 input');
+        firstInput.select();//选取文本域中的内容
+    }
+
+     ~function(){
+         var zhitu = document.getElementById("zhitu"),
+                 zhituDiv = document.querySelector(".zhitu");
+         var uploadImages = document.getElementById("uploadImages"),
+                 uploadImagesDiv = document.querySelector(".uploadImages");
+         var fileManage = document.getElementById("fileManage"),
+                 fileManageDiv = document.querySelector(".fileManage");
+
+
+         zhitu.onclick = function(){
+             if(!document.querySelector('.zhitu iframe')){
+                 var lDom = document.createElement('iframe');
+                 lDom.src = 'https://zhitu.isux.us';
+                 lDom.scrolling = 'auto';
+                 zhituDiv.appendChild(lDom);
+             };
+         };
+         uploadImages.onclick = function(){
+             if(!document.querySelector('.uploadImages iframe')){
+                 var lDom = document.createElement('iframe');
+                 lDom.src = 'http://www.css-js.com/';
+                 lDom.scrolling = 'auto';
+                 uploadImagesDiv.appendChild(lDom);
+             };
+         };
+         fileManage.onclick = function(){
+             if(!document.querySelector('.fileManage iframe')){
+                 var lDom = document.createElement('iframe');
+                 lDom.src = 'http://jshop.jd.com/file/manage.html';
+                 lDom.scrolling = 'auto';
+                 fileManageDiv.appendChild(lDom);
+             };
+         };
+     }();
+
+
+    // jquery-qrcode是采用charCodeAt()方式进行编码转换的。而这个方法默认会获取它的Unicode编码，如果有中文内容，在生成二维码前就要把字符串转换成UTF-8，然后再生成二维码。
+    function toUtf8(str) {
+        var out, i, len, c;
+        out = "";
+        len = str.length;
+        for(i = 0; i < len; i++) {
+            c = str.charCodeAt(i);
+            if ((c >= 0x0001) && (c <= 0x007F)) {
+                out += str.charAt(i);
+            } else if (c > 0x07FF) {
+                out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+                out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+            } else {
+                out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
+                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
+            }
+        }
+        return out;
+    }
+    function getPar(par) {
+        //获取当前URL
+        var local_url = document.location.href;
+        //获取要取得的get参数位置
+        var get = local_url.indexOf(par + "=");
+
+        if (get == -1) {
+            return false;
+        }
+        //截取字符串
+        var get_par = local_url.slice(par.length + get + 1);
+        //判断截取后的字符串是否还有其他get参数
+        var nextPar = get_par.indexOf("&");
+
+        if (nextPar != -1) {
+            get_par = get_par.slice(0, nextPar);
+        }
+        return get_par;
+    };
+
+    $('#btn').on('click', function() {
+        var val = $('#url').val(),
+            str = toUtf8(val);
+        getShort(val, str, val)
+    });
+
+    $('#btnS').on('click', function() {
+        var val = $('#url').val(),
+            str = toUtf8(val);
+        getShort(val, str, val, 1)
+    });
+
+    $('#btnX').on('click', function() {
+        var val = $('#url').val(),
+            str = toUtf8(val),
+            pre = 'https://wqitem.jd.com/item/view?sku=',
+            suffix = '&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1000164560_',//京粉后缀
+            newurl =  pre + val + suffix ,
+            newurlStr = pre + str + suffix ;
+            getShort(newurl, newurlStr,val, 1);
+    });
+    
+    // 短网址获取
+    function getShort(newurl,newurlStr,val,isShort){
+        var apiUrl = "https://laoxianghuijia.cn:6688/other/shorten"; //Node封装  Nginx的6688端口为https，同事转发到node的6699端口
+        if( val === ""){
+            $('#tips').html("请输入URL！！");
+            $("#url").attr('class', 'red-placeholder');
+            $('#url').attr("placeholder",'请输入您的 URL ！')
+            return false;
+        }
+        if( isShort === undefined){
+            $('#qrcode').html('');
+            $('#qrcode').qrcode(newurlStr);
+            $('#qrcode_url').val(newurl);
+            $('#qrcode').fadeIn('400'); 
+            return false;
+        }
+        var request = $.ajax({
+            url: apiUrl,
+            type: "GET",
+            timeout : 1000,
+            data: {
+                source: 31641035,// appkey
+                url_long: newurlStr, // 需要压缩的原始网址
+            },
+            dataType: "json",
+            cache: false,
+        });
+        request.done(function(data) {
+            console.log(data);
+            var url_short = data[0].url_short;
+            $('#qrcode').html('');
+            $('#qrcode').qrcode(url_short);
+            $('#qrcode_url').val(newurl);
+            $('#qrcode_url_shorten').val(url_short);
+            $('#qrcode').fadeIn('400');
+        });
+        request.fail(function(jqXHR, textStatus) {
+            console.log(textStatus);
+            $('#qrcode').html('');
+            $('#qrcode').qrcode(newurlStr);
+            $('#qrcode_url').val(newurl);
+            $('#qrcode_url_shorten').val("压缩失败！");
+            $('#qrcode').fadeIn('400'); 
+        });
+    }
+
+    $('#qrcode').on('click', function() {
+        $(this).fadeOut('400')
+    })
+
+    var url = getPar('url');
+    if (url) {
+        $('#url').val(url);
+        $('#btn').trigger('click');
+    };
+
+    </script>
+</body>
+
+</html>

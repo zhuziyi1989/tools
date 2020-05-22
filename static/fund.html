@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Fund Source Code</title>
+    <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
+    <link rel="shortcut icon" href="img/favicon.ico?v=1" />
+    <!--移动端版本兼容 -->
+    <script type="text/javascript">
+        var phoneWidth = parseInt(window.screen.width);
+        var phoneScale = phoneWidth / 640;
+        var ua = navigator.userAgent;
+        if (/Android (\d+\.\d+)/.test(ua)) {
+            var version = parseFloat(RegExp.$1);
+            if (version > 2.3) {
+                document.write('<meta name="viewport" content="width=640, minimum-scale = ' + phoneScale + ', maximum-scale = ' + phoneScale + ', target-densitydpi=device-dpi">');
+            } else {
+                document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+            }
+        } else {
+            document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+        }
+    </script>
+    <!--移动端版本兼容 end -->
+    <link rel="stylesheet" href="styles/solarized_light.min.css">
+    <script type="text/javascript" src="js/highlight.min.js"></script>
+    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+    <style type="text/css">
+    * { margin: 0; padding: 0; }
+    ::-webkit-scrollbar{width:10px;height:10px;background:white}
+    ::-webkit-scrollbar-thumb{background-color:rgba(188,193,196,0.8);background-clip:padding-box;min-height:28px}
+    ::-webkit-scrollbar-track-piece{background-color:whiteSmoke}
+    .warp { width: 980px; margin: 0 auto; font-family: "Yahei Consolas Hybrid",sans-serif, serif; font-size: 16px; }
+    @media (max-device-width: 640px) {
+      .warp {
+            max-width: 640px;
+            font-size: 20px
+        }
+    }
+
+    .tool-link { text-align: left; width: auto; height: 48px; border: 1px solid #f5f5f5; line-height: 50px; color: #0086BB; background-color: #FBFBFB; margin-bottom: 5px; padding-left: 2em; }
+    .tool-link a { font-family: inherit; font-size: 14px; text-decoration: none; display: inline-block; color: #0086BB; width: auto; height: 18px; line-height: 18px; padding: 3px; }
+    .tool-link a:visited { color: inherit; }
+    .tool-link a:hover { color: inherit; border-bottom: 2px solid #ED5959; }
+    .config {width: 100%;padding-left: 2em;box-sizing: border-box;background-color: #FBFBFB;}
+    .config span{ display: inline-block; width: 20%; color: #2AA8B6;}
+    .config input{display: inline-block; width: 80%; height: 30px; padding: 20px 5px; font-size: 14px; line-height: 30px; text-align: left; color: #2AA8B6;box-sizing: border-box;background-color: #FBFBFB; }
+    input::selection {background:#2AA8B6; color:#fff;}
+    input::-moz-selection {background:#2AA8B6; color:#fff;}
+    input::-webkit-selection {background:#2AA8B6; color:#fff;}
+    details summary { font-size: 16px; text-align: left; height: 30px; line-height: 30px; margin-top: 6px;color: #19AC7B;outline: none;cursor: pointer;}
+    .footer { width: 100%;padding-bottom: 30px; font-size: 14px; line-height: 20px; text-align: center; color: #BCC1C4; }
+    .container { max-width: 800px; width: 80%; margin: auto; padding: 0 10px; }
+    .footer-entry>a { color: #939ba0; text-decoration: none; transition: color 0.15s linear; outline: none; }
+    .bg-logo{display: block;width: 60px;height: 30px;margin:0 auto;background: url(img/logo-2.png) 50% 50% no-repeat;background-size: 60%}
+    input { border: 0; outline: none; padding-left: 5px; font-family: inherit; }
+    pre code{font-size: 12px;font-family: "Source Code Pro";}
+    </style>
+</head>
+<body>
+    <div class="warp">
+
+<details class="dd-code" open>
+<summary>基金模板代码（线上）:</summary>
+<pre>
+<code class="html">=====说明=====
+
+1、搜索一下关键字，进行修改：
+    1).分享链接
+    2).分享标题
+    3).分享描述
+2、data-code 对应基金代码
+3、data-name 对应模块名称
+4、常用模块名列表：
+首页： HOME
+定期理财： INSURANCE
+旺财：WANGCAI
+股神： STOCK
+拍立返： NJRS (iOS)/ PAILIFAN (Android)
+白条： BILL
+小金库： JRB
+实名认证： REALNAME
+信用卡还款： CCR
+手机充值： PHONE_RECHARGE
+注册： LOGIN
+扫一扫： SCAN
+京东白拿： JINGDONGBAINA
+生活应用： LIFEPAY
+
+5、更新日志：
+
+2016年04月12日  去掉边框，UI优化
+2016年03月23日  去掉京东客户端下载横幅；去掉M端头部菜单横幅
+2016年07月08日  移植适配 qianbao.jd.com 
+2016年07月18日  修复图片之间的白线
+2016年07月28日  修复分享若干问题
+</code>
+<code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+
+&lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0&quot; /&gt;
+    &lt;title&gt;&#22522;&#37329;&#26631;&#39064;&lt;/title&gt;
+    &lt;style&gt;
+    /*Common css*/
+    *{margin:0;padding:0}html,body{height:100%;width:100%}li{list-style:none}html b,html strong{font-weight:bold}iframe{display:none}.fix-bottom{position:fixed;box-sizing:border-box;left:0;bottom:0;width:100%;padding:15px 10px;overflow:hidden;line-height:1;background-color:rgba(0,0,0,0.7);z-index:999}.fb-logo{color:#fff;font-size:14px}.fb-logo-img{width:40px;height:40px;background:url(//img10.360buyimg.com/cms/jfs/t1183/186/686337570/3864/1bbe3315/553dce10Nf1d299e5.png) no-repeat;background-size:100% 100%;float:left;width:40px;margin-right:10px;vertical-align:bottom}.fb-logo p{font-size:18px;margin-bottom:8px;color:#fff}.fb-logo span{color:#fff}.fb-download{float:right;border-radius:4px;width:80px;padding:0 15px;text-align:center;line-height:40px;font-size:18px;color:#fff;background:#d7454e}#con{position:relative;width:100%;box-sizing:border-box;background:#efeff4 url(//img10.360buyimg.com/cms/jfs/t1966/159/1635909723/22730/385bf5a/56cfc109N201d34cf.png) 0 0 no-repeat;background-size:100% auto}#con .helve{font-family:'HelveticaNeue'}#con .fz30{font-size:30px}#con .fz40{font-size:40px}#con .red{color:#d9434b}#imgcon img{width:100%;display:block}#textcon{padding:15px}.bgsize{background-size:100% auto;background-repeat:no-repeat;background-position:0 0}.top{background:rgba(255,255,255,1)}.top div{height:auto;background:#fff;font-size:12px}.top h2{font-size:13px;font-weight:500;line-height:26px;color:#464646}.top p{margin-bottom:10px;line-height:20px;color:#888}.separate-dashed{width:100%;height:0;border-bottom:1px dashed #ddd}.con-ul li{margin:5px 0}.list{position:relative;background:rgba(255,255,255,1);padding:5px}.list-con{background:#fff;border-radius:2px;padding:10px 5px}.list-con div:nth-child(1) p{color:#333;font-size:16px;padding:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.list-con div:nth-child(1) span{display:inline-block;margin:5px 0 5px 5px;padding:2px 6px;font-size:9px;color:#8a8a8a;border:1px solid #ddd;border-radius:2px}.list-title{text-align:center}.list-info{margin:10px 0 10px 0;overflow:hidden;text-align:center;padding:0 0 10px 0;border-bottom:1px solid #ddd}.list-infoX{font-size:12px;margin:0 0 10px 0;overflow:hidden;text-align:center;padding:0 0 10px 0;border-bottom:1px solid #ddd}.bgcolor-01{color:#8a8a8a;font-weight:500}.bgcolor-02{color:#e0495a;font-weight:800}.list-info p{float:left;box-sizing:border-box;margin-top:10px;font-size:12px;color:#8a8a8a;line-height:1}.list-info p:nth-child(1){width:36.429%}.list-info p:nth-child(2){width:30%}.list-info p:nth-child(3){width:27.857%}.list-info span{display:inline-block;padding-bottom:6px;color:#333;font-size:20px;font-family:'HelveticaNeue'}.list-info-center{padding:0 5px;margin:0 2px;border-left:1px solid #e7e7e7;border-right:1px solid #e7e7e7}.list-con a{text-decoration:none;color:#fff;background:#D8656C;display:block;width:96%;line-height:40px;margin:0 auto;text-align:center;border-radius:3px;-webkit-tap-highlight-color:rgba(255,255,255,0)}.footer p{margin-top:20px;height:64px;color:#E0495A;font-size:12px;line-height:24px;text-align:center;overflow:hidden}
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;!-- My dom --&gt;
+    &lt;div id=&quot;con&quot;&gt;
+        &lt;!-- &#25991;&#23383;&#25551;&#36848;&#12289;&#22270;&#29255;&#25551;&#36848;&#21306;&#22495;  &#35201;&#21253;&#35065;&#22312;top&#26631;&#31614;&#37324; --&gt;
+        &lt;div class=&quot;top&quot;&gt;
+            &lt;!-- imgcon &#26159;&#22270;&#29255;&#21306;&#22495; --&gt;
+            &lt;div id=&quot;imgcon&quot;&gt;
+                &lt;img src=&quot;//img12.360buyimg.com/jrpmobile/jfs/t2290/184/2331021634/110481/9e3dc89f/56fe3538Nd8c8ca00.jpg&quot;&gt;
+            &lt;/div&gt;
+            &lt;!-- textcon &#26159;&#25991;&#23383;&#21306;&#22495; --&gt;
+            &lt;div id=&quot;textcon&quot; class=&quot;ng-binding&quot;&gt;
+                &lt;h2&gt;&#39118;&#38505;&#25910;&#30410;&#29305;&#24449;&lt;/h2&gt;
+                &lt;p&gt;&#26412;&#22522;&#37329;&#20026;&#20538;&#21048;&#22411;&#22522;&#37329;&#65292;&#39044;&#26399;&#25910;&#30410;&#21644;&#39118;&#38505;&#39640;&#20110;&#36135;&#24065;&#24066;&#22330;&#22522;&#37329;&#65292;&#20302;&#20110;&#28151;&#21512;&#22411;&#22522;&#37329;&#12289;&#32929; &#31080;&#22411;&#22522;&#37329;&#65292;&#23646;&#20110;&#20013;&#20302;&#39118;&#38505; /&#25910;&#30410;&#30340;&#20135;&#21697;&#12290;&lt;/p&gt;
+                &lt;p class=&quot;separate-dashed&quot;&gt;&lt;/p&gt;
+                &lt;h2&gt;&#39118;&#38505;&#25910;&#30410;&#29305;&#24449;&lt;/h2&gt;
+                &lt;p&gt;&#26412;&#22522;&#37329;&#20026;&#20538;&#21048;&#22411;&#22522;&#37329;&#65292;&#39044;&#26399;&#25910;&#30410;&#21644;&#39118;&#38505;&#39640;&#20110;&#36135;&#24065;&#24066;&#22330;&#22522;&#37329;&#65292;&#20302;&#20110;&#28151;&#21512;&#22411;&#22522;&#37329;&#12289;&#32929; &#31080;&#22411;&#22522;&#37329;&#65292;&#23646;&#20110;&#20013;&#20302;&#39118;&#38505; /&#25910;&#30410;&#30340;&#20135;&#21697;&#12290;&#26412;&#22522;&#37329;&#20026;&#20538;&#21048;&#22411;&#22522;&#37329;&#65292;&#39044;&#26399;&#25910;&#30410;&#21644;&#39118;&#38505;&#39640;&#20110;&#36135;&#24065;&#24066;&#22330;&#22522;&#37329;&#65292;&#20302;&#20110;&#28151;&#21512;&#22411;&#22522;&#37329;&#12289;&#32929; &#31080;&#22411;&#22522;&#37329;&#65292;&#23646;&#20110;&#20013;&#20302;&#39118;&#38505; /&#25910;&#30410;&#30340;&#20135;&#21697;&#12290;&#26412;&#22522;&#37329;&#20026;&#20538;&#21048;&#22411;&#22522;&#37329;&#65292;&#39044;&#26399;&#25910;&#30410;&#21644;&#39118;&#38505;&#39640;&#20110;&#36135;&#24065;&#24066;&#22330;&#22522;&#37329;&#65292;&#20302;&#20110;&#28151;&#21512;&#22411;&#22522;&#37329;&#12289;&#32929; &#31080;&#22411;&#22522;&#37329;&#65292;&#23646;&#20110;&#20013;&#20302;&#39118;&#38505; /&#25910;&#30410;&#30340;&#20135;&#21697;&#12290;&#26412;&#22522;&#37329;&#20026;&#20538;&#21048;&#22411;&#22522;&#37329;&#65292;&#39044;&#26399;&#25910;&#30410;&#21644;&#39118;&#38505;&#39640;&#20110;&#36135;&#24065;&#24066;&#22330;&#22522;&#37329;&#65292;&#20302;&#20110;&#28151;&#21512;&#22411;&#22522;&#37329;&#12289;&#32929; &#31080;&#22411;&#22522;&#37329;&#65292;&#23646;&#20110;&#20013;&#20302;&#39118;&#38505; /&#25910;&#30410;&#30340;&#20135;&#21697;&#12290;&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div id=&quot;imgcon&quot;&gt;
+                &lt;img src=&quot;//img10.360buyimg.com/cms/jfs/t1846/152/2305898830/31724/f100c932/56cfe319N4e07eab4.png&quot;&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;!-- &#22522;&#37329; 1 --&gt;
+        &lt;ul class=&quot;con-ul&quot;&gt;
+            &lt;li&gt;
+                &lt;div class=&quot;list&quot;&gt;
+                    &lt;div class=&quot;list-con&quot;&gt;
+                        &lt;div class=&quot;list-title&quot;&gt;
+                            &lt;p&gt;&#24314;&#20449;&#25913;&#38761;&#32418;&#21033;(000592)&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;list-infoX&quot;&gt;
+                            &lt;p class=&quot;list-infoX-big bgcolor-01&quot;&gt;
+                                &lt;span class=&quot;fz40 bgcolor-02 helve&quot;&gt;136.58%&lt;/span&gt;
+                                &lt;br&gt;&#36817;&#19968;&#24180;&#28072;&#24133;
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;a href=&quot;javascript:;&quot; class=&quot;openBtn&quot; data-code=&quot;000592&quot;&gt;&#31435;&#21363;&#36141;&#20080;&lt;/a&gt;
+                        &lt;!-- data-code &#23545;&#24212;&#30456;&#24212;&#27169;&#22359;&#21517; --&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;!-- &#22522;&#37329; 1 &#32467;&#26463;--&gt;
+        &lt;!-- &#22522;&#37329; 2 --&gt;
+        &lt;ul class=&quot;con-ul&quot;&gt;
+            &lt;li&gt;
+                &lt;div class=&quot;list&quot;&gt;
+                    &lt;div class=&quot;list-con&quot;&gt;
+                        &lt;div class=&quot;list-title&quot;&gt;
+                            &lt;p&gt;&#24314;&#20449;&#25913;&#38761;&#32418;&#21033;(000592)&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;list-infoX&quot;&gt;
+                            &lt;p class=&quot;list-infoX-big bgcolor-01&quot;&gt;
+                                &lt;span class=&quot;fz40 bgcolor-02 helve&quot;&gt;&#26032;&#22522;&#37329;&lt;/span&gt;
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;a href=&quot;javascript:;&quot; class=&quot;openBtn&quot; data-code=&quot;000592&quot;&gt;&#31435;&#21363;&#36141;&#20080;&lt;/a&gt;
+                        &lt;!-- data-code &#23545;&#24212;&#30456;&#24212;&#27169;&#22359;&#21517; --&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;!-- &#22522;&#37329; 2 &#32467;&#26463;--&gt;
+        &lt;!-- &#22810;&#20449;&#24687;&#22522;&#37329;&#27169;&#22359; --&gt;
+        &lt;ul class=&quot;con-ul&quot;&gt;
+            &lt;li&gt;
+                &lt;div class=&quot;list&quot;&gt;
+                    &lt;div class=&quot;list-con&quot;&gt;
+                        &lt;div class=&quot;list-title&quot;&gt;
+                            &lt;p&gt;&#24314;&#20449;&#25913;&#38761;&#32418;&#21033;(000592)&lt;/p&gt;&lt;span&gt;100&#20803;&#36215;&#36141;&lt;/span&gt;&lt;span&gt;&#20302;&#39118;&#38505;&lt;/span&gt;&lt;span&gt;&#38646;&#36153;&#29575;&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;list-info&quot;&gt;
+                            &lt;p&gt;&lt;span class=&quot;helve red&quot;&gt;4.67&lt;/span&gt;
+                                &lt;br&gt;&#19971;&#26085;&#24180;&#21270;&#25910;&#30410;&#29575;(%)&lt;/p&gt;
+                            &lt;p class=&quot;list-info-center&quot;&gt;&lt;span&gt;1.1910&lt;/span&gt;
+                                &lt;br&gt;&#21333;&#20301;&#20928;&#20540;&lt;/p&gt;
+                            &lt;p&gt;&lt;span&gt;679&lt;/span&gt;
+                                &lt;br&gt;&#30003;&#36141;&#20154;&#25968; (&#20154;)&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;a href=&quot;javascript:;&quot; class=&quot;openBtn&quot; data-code=&quot;000592&quot;&gt;&#31435;&#21363;&#36141;&#20080;&lt;/a&gt;
+                        &lt;!-- data-code &#23545;&#24212;&#30456;&#24212;&#30340;&#22522;&#37329;&#20195;&#30721; --&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;!-- &#22810;&#20449;&#24687;&#22522;&#37329;&#27169;&#22359; &#32467;&#26463;--&gt;
+        &lt;!-- &#23567;&#37329;&#24211; --&gt;
+        &lt;ul class=&quot;con-ul&quot;&gt;
+            &lt;li&gt;
+                &lt;div class=&quot;list&quot;&gt;
+                    &lt;div class=&quot;list-con&quot;&gt;
+                        &lt;div class=&quot;list-title&quot;&gt;
+                            &lt;p&gt;&#20140;&#19996;&#23567;&#37329;&#24211;&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;list-infoX&quot;&gt;
+                            &lt;p class=&quot;list-infoX-big bgcolor-01&quot;&gt;
+                                &lt;span class=&quot;fz40 bgcolor-02 helve&quot;&gt;3.75%&lt;/span&gt;
+                                &lt;br&gt;7&#26085;&#24180;&#21270;&#25910;&#30410;&#29575;
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;a href=&quot;javascript:;&quot; class=&quot;openBtn&quot; data-name=&quot;JRB&quot;&gt;&#31435;&#21363;&#36141;&#20080;&lt;/a&gt;
+                        &lt;!-- data-name &#23545;&#24212;&#30456;&#24212;&#27169;&#22359;&#21517; --&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;!-- &#23567;&#37329;&#24211; &#32467;&#26463;--&gt;
+        &lt;!-- &#26106;&#36130; --&gt;
+        &lt;ul class=&quot;con-ul&quot;&gt;
+            &lt;li&gt;
+                &lt;div class=&quot;list&quot;&gt;
+                    &lt;div class=&quot;list-con&quot;&gt;
+                        &lt;div class=&quot;list-title&quot;&gt;
+                            &lt;p&gt;&#20140;&#19996;&#26106;&#36130;&lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;div class=&quot;list-infoX&quot;&gt;
+                            &lt;p class=&quot;list-infoX-big bgcolor-01&quot;&gt;
+                                &lt;span class=&quot;fz40 bgcolor-02 helve&quot;&gt;3.75%&lt;/span&gt;
+                                &lt;br&gt;7&#26085;&#24180;&#21270;&#25910;&#30410;&#29575;
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                        &lt;a href=&quot;javascript:;&quot; class=&quot;openBtn&quot; data-name=&quot;WANGCAi&quot;&gt;&#31435;&#21363;&#36141;&#20080;&lt;/a&gt;
+                        &lt;!-- data-code &#23545;&#24212;&#30456;&#24212;&#27169;&#22359;&#21517; --&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;!-- &#26106;&#36130; &#32467;&#26463;--&gt;
+        &lt;div class=&quot;footer&quot;&gt;
+            &lt;p class=&quot;ng-binding&quot;&gt;
+                &#20197;&#19978;&#25968;&#25454;&#25130;&#33267;
+                &lt;br&gt;*&#22522;&#37329;&#36807;&#24448;&#25910;&#30410;&#19981;&#20195;&#34920;&#26410;&#26469;&#65292;&#25237;&#36164;&#38656;&#35880;&#24910;&#12290;
+            &lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- Common dom --&gt;
+    &lt;div class=&quot;fix-bottom J_openBtn&quot; style=&quot;display: none;&quot;&gt;
+        &lt;div class=&quot;fb-download J_confirm&quot;&gt;&#31435;&#21363;&#25171;&#24320;&lt;/div&gt;
+        &lt;div class=&quot;fb-logo&quot;&gt;
+            &lt;div class=&quot;fb-logo-img&quot;&gt;&lt;/div&gt;
+            &lt;p&gt;&#20140;&#19996;&#38065;&#21253;&#23458;&#25143;&#31471;&lt;/p&gt;
+            &lt;span&gt;&#29702;&#36130;&#19987;&#23478; &#29983;&#27963;&#21161;&#25163;&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;!-- JavaScript --&gt;
+    &lt;script&gt;
+    //SDK Dependent libraries
+    window.dataForWeixin = {
+        appId: &quot;&quot;,
+        MsgImg: &quot;https://img13.360buyimg.com/cms/jfs/t790/61/1403238732/5911/2dcd4cf2/559f6b56Na06dce77.png&quot;,
+        TLImg: &quot;https://img13.360buyimg.com/cms/jfs/t790/61/1403238732/5911/2dcd4cf2/559f6b56Na06dce77.png&quot;,
+        url: location.href,
+        docTitle:'&#23545;&#24212;&#19978;&#38754;&#30340;&#22522;&#37329;&#26631;&#39064;',
+        title: &quot;&#20998;&#20139;&#26631;&#39064;&quot;,
+        desc: &quot;&#20998;&#20139;&#25551;&#36848;&quot;,
+        fakeid: &quot;&quot;,
+        callback: function() {}
+    };
+    &lt;/script&gt;
+    &lt;script&gt;
+    function connectWebViewJavascriptBridge(a){window.WebViewJavascriptBridge?a(WebViewJavascriptBridge):document.addEventListener(&quot;WebViewJavascriptBridgeReady&quot;,function(){a(WebViewJavascriptBridge)},!1)}function JDP(){this.ua=navigator.userAgent,this.android=this.ua.match(/(Android)\s+([\d.]+)/),this.ios=this.ua.match(/(iPhone\sOS)\s([\d_]+)/)}var jdp,_qs,_qsa;JDP.prototype={constructor:JDP,getInfo:function(a){var b=(&quot;globalCallback&quot;+Math.random()).replace(/\./,&quot;&quot;);this.fnCallback(b,a),this.android?android.getInfo(b):this.openIframe(&quot;native://getInfo?callback=&quot;+b)},setTitle:function(a){this.android?android.setTitleName(a):this.openIframe(&quot;native://setTitleName?titleName=&quot;+a)},shareText:function(a){var b=(&quot;globalCallback&quot;+Math.random()).replace(/\./,&quot;&quot;),c=a.channel||&quot;&quot;;this.fnCallback(b,a.callback),this.android?android.shareText(a.text,c,b):this.openIframe(&quot;native://shareText?text=&quot;+a.text+&quot;&amp;jsonChannel=&quot;+c+&quot;&amp;callback=&quot;+b)},shareImage:function(a){var b=(&quot;globalCallback&quot;+Math.random()).replace(/\./,&quot;&quot;);a.channel||&quot;&quot;,this.fnCallback(b,a.callback),this.android?android.shareImage(a.startY,a.endY,a.channel,b):this.openIframe(&quot;native://shareImage?startY=&quot;+a.startY+&quot;&amp;endY=&quot;+a.endY+&quot;&amp;jsonChannel=&quot;+a.channel+&quot;&amp;callback=&quot;+b)},shareUrl:function(a){var b=(&quot;globalCallback&quot;+Math.random()).replace(/\./,&quot;&quot;),c=a.channel||&quot;&quot;;this.fnCallback(b,a.callback),this.android?android.shareWebPage(a.url,a.title,a.desc,c,b):this.openIframe(&quot;native://shareWebPage?url=&quot;+a.url+&quot;&amp;webTitle=&quot;+a.title+&quot;&amp;webDesc=&quot;+a.desc+&quot;&amp;jsonChannel=&quot;+c+&quot;&amp;callback=&quot;+b)},json2str:function(a){var c,b=&quot;&quot;;for(c in a)b+=&quot;&amp;&quot;+c+&quot;=&quot;+a[c];return b},openIframe:function(a){var b=document.createElement(&quot;iframe&quot;);b.src=a,document.body.appendChild(b),setTimeout(function(){document.body.removeChild(b)},2e3)},fnCallback:function(a,b){window[a]=function(c){b&amp;&amp;b(c),delete window[a]}},setMenu:function(a){var b={};str=&quot;[&quot;,a.forEach(function(a,c){b[&quot;item&quot;+c]=a,str+=JSON.stringify(a)+&quot;,&quot;}),str=str.substring(0,str.length-1),str+=&quot;]&quot;,this.android?android.setTitleMenu(str):WebViewJavascriptBridge.callHandler(&quot;setMenu&quot;,b)}},window.JDP=JDP,jdp=new JDP,_qs=function(a){return document.querySelector(a)},_qsa=function(a){return document.querySelectorAll(a)},function(a,b){function f(a){var c,b=&quot;&quot;;for(c in a)b+=&quot;&amp;&quot;+c+&quot;=&quot;+a[c];return b}function h(){var b,a=e.inIos?e.iosDownload:e.androidDownload;document.querySelector(&quot;.J_layerDom&quot;)?document.querySelector(&quot;.J_layerDom&quot;).style.display=&quot;block&quot;:(b=document.createElement(&quot;div&quot;),b.className=&quot;J_layerDom&quot;,b.style.cssText=&quot;position: fixed; z-index: 3000; left: 50%; top: 50%; margin: -85px 0 0 -140px; width: 280px; padding: 20px 0; text-align: center; background: rgba(0,0,0, .8); border-radius: 6px; color: #fff&quot;,b.innerHTML='&lt;p style=&quot;margin-bottom: 30px; font-size: 18px;&quot;&gt;&#19979;&#36733;&#23433;&#35013;&#20140;&#19996;&#38065;&#21253;&#23458;&#25143;&#31471;&lt;/p&gt;&lt;a href=&quot;'+a+'&quot; class=&quot;J_appDownload&quot; style=&quot;display: block; width: 90%; margin-left: 5%; font-size: 16px; line-height: 40px; border-radius: 3px; text-decoration:none;font-weight: bold; background: #d9434b; color: #fff; &quot;&gt;&#31435;&#21363;&#19979;&#36733;&lt;/a&gt;',document.body.appendChild(b)),setTimeout(function(){document.querySelector(&quot;.J_layerDom&quot;).style.display=&quot;none&quot;},6e3)}function i(a){var d,b=f(a.params),c=&quot;wangyin://wallet/start?module=&quot;+a.name+b;c&amp;&amp;(d=document.createElement(&quot;iframe&quot;),d.src=c,d.style.display=&quot;none&quot;,document.body.appendChild(d),setTimeout(function(){document.body.removeChild(d)},2e3),setTimeout(function(){h()},300))}function j(a){var b=document.createElement(&quot;iframe&quot;);b.src=a,b.style.display=&quot;none&quot;,document.body.appendChild(b),setTimeout(function(){document.body.removeChild(b)},2e3)}function k(a){var b=e.baseUrl;&quot;ACTIVITY&quot;==a.name&amp;&amp;(b+=&quot;?url=&quot;+a.params.browserUrl),window.location.href=b+&quot;#&quot;+a.name}function l(a){try{a.name=&quot;LOGIN&quot;==a.name?&quot;HOME&quot;:a.name,&quot;ACTIVITY&quot;==a.name?android.start(a.params.browserUrl,a.callback):&quot;CLOSE&quot;==a.name?android.close():&quot;TITLE&quot;==a.name?android.setTitleName(a.params.text):android.start(a.name,JSON.stringify(a.params),a.callback)}catch(b){alert(&quot;&#35831;&#21319;&#32423;&#26032;&#29256;&#20140;&#19996;&#38065;&#21253;&quot;)}}function m(a){var b=a.params?f(a.params):&quot;&quot;,c=&quot;native://start?name=&quot;+a.name+b+&quot;&amp;callback=&quot;+a.callback;&quot;CLOSE&quot;==a.name?c=&quot;native://close&quot;:&quot;ACTIVITY&quot;==a.name?c=&quot;native://start?name=&quot;+a.params.browserUrl:&quot;TITLE&quot;==a.name&amp;&amp;(c=&quot;native://setTitleName?titleName=&quot;+a.params.text),j(c)}function n(a){e.inAndroid&amp;&amp;e.inApp()?l(a):e.inIos&amp;&amp;e.inIosApp&amp;&amp;!e.inWx?m(a):e.inWx?&quot;jd.com&quot;==e.get_domain()?i(a):k(a):i(a)}var p,q,r,s,c=a.navigator,d=c.userAgent,e={baseUrl:&quot;//sale.jd.com/app/act/KBuoE641DZmxgYf.html&quot;,androidDownload:&quot;//sq.jd.com/TjVEZ7&quot;,iosDownload:&quot;//itunes.apple.com/us/app/wang-yin-qian-bao/id832444218?ls=1&amp;mt=8&quot;,inWx:-1==d.search(/micromessenger/gi)?!1:!0,inIosApp:-1==d.search(/safari/gi)&amp;&amp;-1==d.indexOf(&quot;jdapp&quot;)?!0:!1,inAndroid:d.indexOf(&quot;Android&quot;)&gt;-1||d.indexOf(&quot;Linux&quot;)&gt;-1,inIos:d.indexOf(&quot;iPhone&quot;)&gt;-1||d.indexOf(&quot;iPad&quot;)&gt;-1,check_domain:function(){var b=&quot;/^aero$|^cat$|^coop$|^int$|^museum$|^pro$|^travel$|^xxx$|^com$|^net$|^gov$|^org$|^mil$|^edu$|^biz$|^info$|^name$|^ac$|^mil$|^co$|^ed$|^gv$|^nt$|^bj$|^hz$|^sh$|^tj$|^cq$|^he$|^nm$|^ln$|^jl$|^hl$|^js$|^zj$|^ah$|^hb$|^hn$|^gd$|^gx$|^hi$|^sc$|^gz$|^yn$|^xz$|^sn$|^gs$|^qh$|^nx$|^xj$|^tw$|^hk$|^mo$|^fj$|^ha$|^jx$|^sd$|^sx$/i&quot;;return str.match(b)?1:0},get_domain:function(){var f,g,a=b.domain.replace(/^www\./,&quot;&quot;),c=a.split(&quot;.&quot;),d=c.length;if(3==d)f=c[1]+&quot;.&quot;+c[2];else if(d&gt;3){if(g=&quot;^[0-9]*.[0-9]*.[0-9]*.[0-9]*$&quot;,a.match(g))return a;f=e.check_domain(c[d-2])?c[d-3]+&quot;.&quot;+c[d-2]+&quot;.&quot;+c[d-1]:c[d-2]+&quot;.&quot;+c[d-1]}return f},inApp:function(){return e.inAndroid?&quot;undefined&quot;!=typeof android?!0:!1:e.inIos?this.inIosApp:!1}},o=window.App||{};for(o.noop=function(){},o.open=function(){var d,a=arguments.length,b=this,c={name:&quot;&quot;,params:{},callback:&quot;App.noop&quot;};switch(c.name=arguments[0]?arguments[0].toUpperCase():&quot;LOGIN&quot;,b.noop=function(){},2==a?&quot;function&quot;==typeof arguments[1]?b.noop=arguments[1]:d=arguments[1]:3==a&amp;&amp;(&quot;function&quot;==typeof arguments[2]&amp;&amp;(b.noop=arguments[2]),d=arguments[1]),c.name){case&quot;FUND&quot;:d&amp;&amp;(c.params.code=d);break;case&quot;JRB&quot;:arguments[1]&amp;&amp;(c.params.forceLogin=&quot;JRB&quot;,c.params.action=arguments[1],c.params.channel=&quot;web&quot;);break;case&quot;ACTIVITY&quot;:c.params.browserUrl=d;break;case&quot;TITLE&quot;:c.params.text=d}n(c)},o.close=function(){n({name:&quot;CLOSE&quot;})},o.share=function(a){var b;if(a=a||window.dataForWeixin,e.inAndroid&amp;&amp;e.inApp())android.shareWebPage(a.url,a.title,a.desc);else if(e.inIos&amp;&amp;e.inIosApp&amp;&amp;!e.inWx){b=&quot;native://shareWebPage?url=&quot;+a.url+&quot;&amp;webTitle=&quot;+a.title+&quot;&amp;webDesc=&quot;+a.desc;try{safari.open=b}catch(c){window.location.href=b}}else e.inWx&amp;&amp;(window.dataForWeixin.url=a.url,window.dataForWeixin.title=a.title,window.dataForWeixin.desc=a.desc,p())},o.buriedPointOnce=function(a){if(e.inAndroid&amp;&amp;e.inApp())android.buriedPointOnce(a);else if(e.inIos&amp;&amp;e.inIosApp&amp;&amp;!e.inWx){var b=&quot;native://buriedPointOnce?eventId=&quot;+a;j(b)}},o.setMenu=function(a){var b={};str=&quot;[&quot;,a.forEach(function(a,c){var d=a.menuAction+(new Date).getTime();window.str=a.menuAction=b[&quot;item&quot;+c]=a,d+=JSON.stringify(a)+&quot;,&quot;}),str=str.substring(0,str.length-1),str+=&quot;]&quot;,this.android?android.setTitleMenu(str):WebViewJavascriptBridge.callHandler(&quot;setMenu&quot;,b)},window.App=o,p=function(){dataForWeixin&amp;&amp;(WeixinJSBridge.on(&quot;menu:share:appmessage&quot;,function(){WeixinJSBridge.invoke(&quot;sendAppMessage&quot;,{appid:dataForWeixin.appId,img_url:dataForWeixin.MsgImg,img_width:&quot;120&quot;,img_height:&quot;120&quot;,link:dataForWeixin.url,desc:dataForWeixin.desc,title:dataForWeixin.title},function(){dataForWeixin.callback()})}),WeixinJSBridge.on(&quot;menu:share:timeline&quot;,function(){dataForWeixin.callback(),WeixinJSBridge.invoke(&quot;shareTimeline&quot;,{img_url:dataForWeixin.TLImg,img_width:&quot;120&quot;,img_height:&quot;120&quot;,link:dataForWeixin.url,desc:dataForWeixin.desc,title:dataForWeixin.title},function(){})}),WeixinJSBridge.on(&quot;menu:share:weibo&quot;,function(){WeixinJSBridge.invoke(&quot;shareWeibo&quot;,{content:dataForWeixin.title,url:dataForWeixin.url},function(){dataForWeixin.callback()})}))},document.addEventListener(&quot;WeixinJSBridgeReady&quot;,p,!1),function(){var a=0,b=_qsa(&quot;.cd-popup-close&quot;),c=_qsa(&quot;.cd-popup-btn&quot;),d=_qsa(&quot;.cd-popup&quot;);if(c.length)for(_qs(&quot;.cd-popup-wrap&quot;).style.position=&quot;fixed&quot;,a=0;a&lt;c.length;a++)!function(a){c[a].addEventListener(&quot;click&quot;,function(){_qs(&quot;.cd-popup-wrap&quot;).style.display=&quot;block&quot;,setTimeout(function(){_qs(&quot;.is-visible&quot;)&amp;&amp;_qs(&quot;.is-visible&quot;).classList.remove(&quot;.is-visible&quot;),d[a].classList.add(&quot;is-visible&quot;)},30)},!1),d[a].addEventListener(&quot;touchmove&quot;,function(a){a.target.classList.contains(&quot;cd-popup-cover&quot;)&amp;&amp;a.stopPropagation()},!1),b[a].addEventListener(&quot;click&quot;,function(){_qs(&quot;.cd-popup-wrap&quot;).style.display=&quot;none&quot;,d[a].classList.remove(&quot;is-visible&quot;)},!1)}(a)}(),function(){var b,c,a=document.querySelectorAll(&quot;img[data-srcset]&quot;);for(b=0,c=a.length;c&gt;b;b++)a[b].setAttribute(&quot;src&quot;,a[b].getAttribute(&quot;data-srcset&quot;))}(),window.shareCallback=function(){jdp.shareUrl({url:dataForWeixin.url,title:dataForWeixin.title,desc:dataForWeixin.desc,channel:&quot;WX|QQ|WB&quot;,callback:function(){}})},e.inApp()&amp;&amp;!e.inWx&amp;&amp;e.inAndroid&amp;&amp;(jdp.setTitle(dataForWeixin.docTitle),jdp.setMenu([{menuTitle:&quot;&#20998;&#20139;&quot;,menuAction:&quot;shareCallback&quot;}])),e.inApp()&amp;&amp;!e.inWx&amp;&amp;e.inIos&amp;&amp;(jdp.setTitle(dataForWeixin.docTitle),q=setInterval(function(){window.WebViewJavascriptBridge&amp;&amp;(jdp.setMenu([{menuTitle:&quot;&#20998;&#20139;&quot;,menuAction:&quot;shareCallback&quot;}]),clearInterval(q))},100)),_qs(&quot;.J_confirm&quot;).ontouchstart=function(){o.open()},(!e.inApp()||e.inWx)&amp;&amp;(_qs(&quot;.J_openBtn&quot;).style.display=&quot;block&quot;,_qs(&quot;#con&quot;).style.paddingBottom=&quot;70px&quot;),r=_qsa(&quot;.openBtn&quot;),s=0;s&lt;r.length;s++)!function(a){r[a].onclick=function(){var a=this.getAttribute(&quot;data-code&quot;),b=this.getAttribute(&quot;data-name&quot;);a?o.open(&quot;fund&quot;,a):o.open(b)}}(s)}(window,document);
+    &lt;/script&gt;
+    &lt;/body&gt;
+
+&lt;/html&gt;
+
+</code>
+</pre>
+</details>
+<div class="footer">
+    <div class="container">
+        <p class="footer-entry">This page is only the latest version of Chrome</p>
+        <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p>
+        <p class="footer-entry">Syntax highlighting for the Web <a href="//highlightjs.org/" target="_blank">highlightjs</a></p>
+        <p class="footer-entry">Original Base16 color scheme by <a href="http://chriskempson.github.io/base16/#ocean">Base16 Builder</a>, Style by <a href="//github.com/idleberg/base16-highlight.js">Base16 for highlight.js</a></p>
+        <p class="footer-entry">&copy; 2015-2016 <a href="//tech.jandou.com/" target="_blank">ZHUZIYI</a>.</p>
+        <span class="bg-logo"></span>
+    </div>
+</div>
+
+    </div>
+
+</body>
+
+</html>

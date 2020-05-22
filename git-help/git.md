@@ -15,21 +15,22 @@
 - git config --global alias.s status	# 将别名`git s`分配给`git status`
 - git config --global --unset http.proxy	# 删除上的代理配置
 - git config --global core.quotepath false	# 避免中文字符以八进制编码显示
+- git config core.ignorecase false # 严格区分目录名的大小写
 
 ## 基本操作
 
-- git status# 查看当前版本状态（是否修改）
-- git add xxx                                               # 添加xxx文件至index
-- git add .                                                 # 增加当前子目录下所有更改过的文件至index
-- git commit -m 'xxx'                                       # 提交
-- git commit --amend -m 'xxx'                               # 合并上一次提交（用于反复修改）
-- git commit -am 'xxx'                                      # 将add和commit合为一步
-- git rm xxx                                                # 删除index中的文件
-- git rm -r *                                               # 递归删除
+- git status # 查看当前版本状态（是否修改）
+- git add xxx	# 添加xxx文件至index
+- git add .	# 增加当前子目录下所有更改过的文件至index
+- git commit -m 'xxx' # 提交
+- git commit --amend -m 'xxx' # 合并上一次提交（用于反复修改）
+- git commit -am 'xxx'	# 将add和commit合为一步
+- git rm xxx # 删除index中的文件
+- git rm -r *	# 递归删除
 
 ## 日志、信息
 
-- git log                                                   # 显示提交日志
+- git log # 显示提交日志
 - git log -1                                                # 显示 1 行日志 -n 为 n 行
 - git log --stat                                            # 显示提交日志及相关变动文件
 - git log -p -m

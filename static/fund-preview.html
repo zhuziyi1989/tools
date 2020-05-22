@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>基金标题</title>
+    <style>
+    /*Common css*/
+    
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    html,
+    body {
+        height: 100%;
+        width: 100%
+    }
+    
+    li {
+        list-style: none
+    }
+    
+    html b,
+    html strong {
+        font-weight: bold
+    }
+    
+    iframe {
+        display: none;
+    }
+    
+    .fix-bottom {
+        position: fixed;
+        box-sizing: border-box;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 15px 10px;
+        overflow: hidden;
+        line-height: 1;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 999;
+    }
+    
+    .fb-logo {
+        color: #fff;
+        font-size: 14px;
+    }
+    
+    .fb-logo-img {
+        width: 40px;
+        height: 40px;
+        background: url(//img10.360buyimg.com/cms/jfs/t1183/186/686337570/3864/1bbe3315/553dce10Nf1d299e5.png) no-repeat;
+        background-size: 100% 100%;
+        float: left;
+        width: 40px;
+        margin-right: 10px;
+        vertical-align: bottom;
+    }
+    
+    .fb-logo p {
+        font-size: 18px;
+        margin-bottom: 8px;
+        color: #fff;
+    }
+    
+    .fb-logo span {
+        color: #fff;
+    }
+    
+    .fb-download {
+        float: right;
+        border-radius: 4px;
+        width: 80px;
+        padding: 0 15px;
+        text-align: center;
+        line-height: 40px;
+        font-size: 18px;
+        color: #fff;
+        background: #d7454e;
+    }
+    /*Page css*/
+    
+    #con {
+        position: relative;
+        width: 100%;
+        /*padding: 0 10px 20px 10px;*/
+        box-sizing: border-box;
+        background: #efeff4 url(//img10.360buyimg.com/cms/jfs/t1966/159/1635909723/22730/385bf5a/56cfc109N201d34cf.png) 0 0 no-repeat;
+        background-size: 100% auto;
+    }
+    /*修改背景图片*/
+    
+    #con .helve {
+        font-family: 'HelveticaNeue'
+    }
+    
+    #con .fz30 {
+        font-size: 30px
+    }
+    
+    #con .fz40 {
+        font-size: 40px
+    }
+    
+    #con .red {
+        color: #d9434b
+    }
+    
+    #imgcon img {
+        width: 100%;
+        display: block;
+    }
+    
+    #textcon {
+        padding: 15px;
+    }
+    
+    .bgsize {
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        background-position: 0 0
+    }
+    
+    .top {
+        background: rgba(255, 255, 255, 1);
+    }
+    
+    .top div {
+        height: auto;
+        background: #fff;
+        font-size: 12px;
+    }
+    
+    .top h2 {
+        font-size: 13px;
+        font-weight: 500;
+        line-height: 26px;
+        color: #464646
+    }
+    
+    .top p {
+        margin-bottom: 10px;
+        line-height: 20px;
+        color: #888
+    }
+    
+    .separate-dashed {
+        width: 100%;
+        height: 0;
+        border-bottom: 1px dashed #ddd;
+    }
+    
+    .con-ul li {
+        margin: 5px 0
+    }
+    
+    .list {
+        position: relative;
+        background: rgba(255, 255, 255, 1);
+        padding: 5px;
+    }
+    
+    .list-con {
+        background: #fff;
+        border-radius: 2px;
+        padding: 10px 5px
+    }
+    
+    .list-con div:nth-child(1) p {
+        color: #333;
+        font-size: 16px;
+        padding: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap
+    }
+    
+    .list-con div:nth-child(1) span {
+        display: inline-block;
+        margin: 5px 0 5px 5px;
+        padding: 2px 6px;
+        font-size: 9px;
+        color: #8a8a8a;
+        border: 1px solid #ddd;
+        border-radius: 2px
+    }
+    
+    .list-title {
+        text-align: center;
+    }
+    
+    .list-info {
+        margin: 10px 0 10px 0;
+        overflow: hidden;
+        text-align: center;
+        padding: 0 0 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .list-infoX {
+        font-size: 12px;
+        margin: 0 0 10px 0;
+        overflow: hidden;
+        text-align: center;
+        padding: 0 0 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .bgcolor-01 {
+        color: #8a8a8a;
+        font-weight: 500;
+    }
+    
+    .bgcolor-02 {
+        color: #e0495a;
+        font-weight: 800;
+    }
+    
+    .list-info p {
+        float: left;
+        box-sizing: border-box;
+        margin-top: 10px;
+        font-size: 12px;
+        color: #8a8a8a;
+        line-height: 1
+    }
+    
+    .list-info p:nth-child(1) {
+        width: 36.429%
+    }
+    
+    .list-info p:nth-child(2) {
+        width: 30%;
+    }
+    
+    .list-info p:nth-child(3) {
+        width: 27.857%;
+    }
+    
+    .list-info span {
+        display: inline-block;
+        padding-bottom: 6px;
+        color: #333;
+        font-size: 20px;
+        font-family: 'HelveticaNeue'
+    }
+    
+    .list-info-center {
+        padding: 0 5px;
+        margin: 0 2px;
+        border-left: 1px solid #e7e7e7;
+        border-right: 1px solid #e7e7e7
+    }
+    
+    .list-con a {
+        text-decoration: none;
+        color: #fff;
+        background: #D8656C;
+        display: block;
+        width: 96%;
+        line-height: 40px;
+        margin: 0 auto;
+        text-align: center;
+        border-radius: 3px;
+        -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    }
+    
+    .footer p {
+        margin-top: 20px;
+        height: 64px;
+        color: #E0495A;
+        font-size: 12px;
+        line-height: 24px;
+        text-align: center;
+        overflow: hidden
+    }
+    </style>
+</head>
+
+<body>
+    <!-- My dom -->
+    <div id="con">
+        <!-- 文字描述、图片描述区域  要包裹在top标签里 -->
+        <div class="top">
+            <!-- imgcon 是图片区域 -->
+            <div id="imgcon">
+                <img src="//img12.360buyimg.com/jrpmobile/jfs/t2290/184/2331021634/110481/9e3dc89f/56fe3538Nd8c8ca00.jpg">
+            </div>
+            <!-- textcon 是文字区域 -->
+            <div id="textcon" class="ng-binding">
+                <h2>风险收益特征</h2>
+                <p>本基金为债券型基金，预期收益和风险高于货币市场基金，低于混合型基金、股 票型基金，属于中低风险 /收益的产品。</p>
+                <p class="separate-dashed"></p>
+                <h2>风险收益特征</h2>
+                <p>本基金为债券型基金，预期收益和风险高于货币市场基金，低于混合型基金、股 票型基金，属于中低风险 /收益的产品。本基金为债券型基金，预期收益和风险高于货币市场基金，低于混合型基金、股 票型基金，属于中低风险 /收益的产品。本基金为债券型基金，预期收益和风险高于货币市场基金，低于混合型基金、股 票型基金，属于中低风险 /收益的产品。本基金为债券型基金，预期收益和风险高于货币市场基金，低于混合型基金、股 票型基金，属于中低风险 /收益的产品。</p>
+            </div>
+            <div id="imgcon">
+                <img src="//img10.360buyimg.com/cms/jfs/t1846/152/2305898830/31724/f100c932/56cfe319N4e07eab4.png">
+            </div>
+        </div>
+        <!-- 基金 1 -->
+        <ul class="con-ul">
+            <li>
+                <div class="list">
+                    <div class="list-con">
+                        <div class="list-title">
+                            <p>建信改革红利(000592)</p>
+                        </div>
+                        <div class="list-infoX">
+                            <p class="list-infoX-big bgcolor-01">
+                                <span class="fz40 bgcolor-02 helve">136.58%</span>
+                                <br>近一年涨幅
+                            </p>
+                        </div>
+                        <a href="javascript:;" class="openBtn" data-code="000592">立即购买</a>
+                        <!-- data-code 对应相应模块名 -->
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 基金 1 结束-->
+        <!-- 基金 2 -->
+        <ul class="con-ul">
+            <li>
+                <div class="list">
+                    <div class="list-con">
+                        <div class="list-title">
+                            <p>建信改革红利(000592)</p>
+                        </div>
+                        <div class="list-infoX">
+                            <p class="list-infoX-big bgcolor-01">
+                                <span class="fz40 bgcolor-02 helve">新基金</span>
+                            </p>
+                        </div>
+                        <a href="javascript:;" class="openBtn" data-code="000592">立即购买</a>
+                        <!-- data-code 对应相应模块名 -->
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 基金 2 结束-->
+        <!-- 多信息基金模块 -->
+        <ul class="con-ul">
+            <li>
+                <div class="list">
+                    <div class="list-con">
+                        <div class="list-title">
+                            <p>建信改革红利(000592)</p><span>100元起购</span><span>低风险</span><span>零费率</span>
+                        </div>
+                        <div class="list-info">
+                            <p><span class="helve red">4.67</span>
+                                <br>七日年化收益率(%)</p>
+                            <p class="list-info-center"><span>1.1910</span>
+                                <br>单位净值</p>
+                            <p><span>679</span>
+                                <br>申购人数 (人)</p>
+                        </div>
+                        <a href="javascript:;" class="openBtn" data-code="000592">立即购买</a>
+                        <!-- data-code 对应相应的基金代码 -->
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 多信息基金模块 结束-->
+        <!-- 小金库 -->
+        <ul class="con-ul">
+            <li>
+                <div class="list">
+                    <div class="list-con">
+                        <div class="list-title">
+                            <p>京东小金库</p>
+                        </div>
+                        <div class="list-infoX">
+                            <p class="list-infoX-big bgcolor-01">
+                                <span class="fz40 bgcolor-02 helve">3.75%</span>
+                                <br>7日年化收益率
+                            </p>
+                        </div>
+                        <a href="javascript:;" class="openBtn" data-name="JRB">立即购买</a>
+                        <!-- data-name 对应相应模块名 -->
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 小金库 结束-->
+        <!-- 旺财 -->
+        <ul class="con-ul">
+            <li>
+                <div class="list">
+                    <div class="list-con">
+                        <div class="list-title">
+                            <p>京东旺财</p>
+                        </div>
+                        <div class="list-infoX">
+                            <p class="list-infoX-big bgcolor-01">
+                                <span class="fz40 bgcolor-02 helve">3.75%</span>
+                                <br>7日年化收益率
+                            </p>
+                        </div>
+                        <a href="javascript:;" class="openBtn" data-name="WANGCAi">立即购买</a>
+                        <!-- data-code 对应相应模块名 -->
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- 旺财 结束-->
+        <div class="footer">
+            <p class="ng-binding">
+                以上数据截至
+                <br>*基金过往收益不代表未来，投资需谨慎。
+            </p>
+        </div>
+    </div>
+    <!-- Common dom -->
+    <div class="fix-bottom J_openBtn" style="display: none;">
+        <div class="fb-download J_confirm">立即打开</div>
+        <div class="fb-logo">
+            <div class="fb-logo-img"></div>
+            <p>京东钱包客户端</p>
+            <span>理财专家 生活助手</span>
+        </div>
+    </div>
+    <!-- JavaScript -->
+    <script>
+    //SDK Dependent libraries
+    window.dataForWeixin = {
+        appId: "",
+        MsgImg: "https://img13.360buyimg.com/cms/jfs/t790/61/1403238732/5911/2dcd4cf2/559f6b56Na06dce77.png",
+        TLImg: "https://img13.360buyimg.com/cms/jfs/t790/61/1403238732/5911/2dcd4cf2/559f6b56Na06dce77.png",
+        url: location.href,
+        docTitle:'对应上面的基金标题',
+        title: "分享标题",
+        desc: "分享描述",
+        fakeid: "",
+        callback: function() {}
+    };
+    </script>
+    <script>
+    function connectWebViewJavascriptBridge(a){window.WebViewJavascriptBridge?a(WebViewJavascriptBridge):document.addEventListener("WebViewJavascriptBridgeReady",function(){a(WebViewJavascriptBridge)},!1)}function JDP(){this.ua=navigator.userAgent,this.android=this.ua.match(/(Android)\s+([\d.]+)/),this.ios=this.ua.match(/(iPhone\sOS)\s([\d_]+)/)}var jdp,_qs,_qsa;JDP.prototype={constructor:JDP,getInfo:function(a){var b=("globalCallback"+Math.random()).replace(/\./,"");this.fnCallback(b,a),this.android?android.getInfo(b):this.openIframe("native://getInfo?callback="+b)},setTitle:function(a){this.android?android.setTitleName(a):this.openIframe("native://setTitleName?titleName="+a)},shareText:function(a){var b=("globalCallback"+Math.random()).replace(/\./,""),c=a.channel||"";this.fnCallback(b,a.callback),this.android?android.shareText(a.text,c,b):this.openIframe("native://shareText?text="+a.text+"&jsonChannel="+c+"&callback="+b)},shareImage:function(a){var b=("globalCallback"+Math.random()).replace(/\./,"");a.channel||"",this.fnCallback(b,a.callback),this.android?android.shareImage(a.startY,a.endY,a.channel,b):this.openIframe("native://shareImage?startY="+a.startY+"&endY="+a.endY+"&jsonChannel="+a.channel+"&callback="+b)},shareUrl:function(a){var b=("globalCallback"+Math.random()).replace(/\./,""),c=a.channel||"";this.fnCallback(b,a.callback),this.android?android.shareWebPage(a.url,a.title,a.desc,c,b):this.openIframe("native://shareWebPage?url="+a.url+"&webTitle="+a.title+"&webDesc="+a.desc+"&jsonChannel="+c+"&callback="+b)},json2str:function(a){var c,b="";for(c in a)b+="&"+c+"="+a[c];return b},openIframe:function(a){var b=document.createElement("iframe");b.src=a,document.body.appendChild(b),setTimeout(function(){document.body.removeChild(b)},2e3)},fnCallback:function(a,b){window[a]=function(c){b&&b(c),delete window[a]}},setMenu:function(a){var b={};str="[",a.forEach(function(a,c){b["item"+c]=a,str+=JSON.stringify(a)+","}),str=str.substring(0,str.length-1),str+="]",this.android?android.setTitleMenu(str):WebViewJavascriptBridge.callHandler("setMenu",b)}},window.JDP=JDP,jdp=new JDP,_qs=function(a){return document.querySelector(a)},_qsa=function(a){return document.querySelectorAll(a)},function(a,b){function f(a){var c,b="";for(c in a)b+="&"+c+"="+a[c];return b}function h(){var b,a=e.inIos?e.iosDownload:e.androidDownload;document.querySelector(".J_layerDom")?document.querySelector(".J_layerDom").style.display="block":(b=document.createElement("div"),b.className="J_layerDom",b.style.cssText="position: fixed; z-index: 3000; left: 50%; top: 50%; margin: -85px 0 0 -140px; width: 280px; padding: 20px 0; text-align: center; background: rgba(0,0,0, .8); border-radius: 6px; color: #fff",b.innerHTML='<p style="margin-bottom: 30px; font-size: 18px;">下载安装京东钱包客户端</p><a href="'+a+'" class="J_appDownload" style="display: block; width: 90%; margin-left: 5%; font-size: 16px; line-height: 40px; border-radius: 3px; text-decoration:none;font-weight: bold; background: #d9434b; color: #fff; ">立即下载</a>',document.body.appendChild(b)),setTimeout(function(){document.querySelector(".J_layerDom").style.display="none"},6e3)}function i(a){var d,b=f(a.params),c="wangyin://wallet/start?module="+a.name+b;c&&(d=document.createElement("iframe"),d.src=c,d.style.display="none",document.body.appendChild(d),setTimeout(function(){document.body.removeChild(d)},2e3),setTimeout(function(){h()},300))}function j(a){var b=document.createElement("iframe");b.src=a,b.style.display="none",document.body.appendChild(b),setTimeout(function(){document.body.removeChild(b)},2e3)}function k(a){var b=e.baseUrl;"ACTIVITY"==a.name&&(b+="?url="+a.params.browserUrl),window.location.href=b+"#"+a.name}function l(a){try{a.name="LOGIN"==a.name?"HOME":a.name,"ACTIVITY"==a.name?android.start(a.params.browserUrl,a.callback):"CLOSE"==a.name?android.close():"TITLE"==a.name?android.setTitleName(a.params.text):android.start(a.name,JSON.stringify(a.params),a.callback)}catch(b){alert("请升级新版京东钱包")}}function m(a){var b=a.params?f(a.params):"",c="native://start?name="+a.name+b+"&callback="+a.callback;"CLOSE"==a.name?c="native://close":"ACTIVITY"==a.name?c="native://start?name="+a.params.browserUrl:"TITLE"==a.name&&(c="native://setTitleName?titleName="+a.params.text),j(c)}function n(a){e.inAndroid&&e.inApp()?l(a):e.inIos&&e.inIosApp&&!e.inWx?m(a):e.inWx?"jd.com"==e.get_domain()?i(a):k(a):i(a)}var p,q,r,s,c=a.navigator,d=c.userAgent,e={baseUrl:"//sale.jd.com/app/act/KBuoE641DZmxgYf.html",androidDownload:"//sq.jd.com/TjVEZ7",iosDownload:"//itunes.apple.com/us/app/wang-yin-qian-bao/id832444218?ls=1&mt=8",inWx:-1==d.search(/micromessenger/gi)?!1:!0,inIosApp:-1==d.search(/safari/gi)&&-1==d.indexOf("jdapp")?!0:!1,inAndroid:d.indexOf("Android")>-1||d.indexOf("Linux")>-1,inIos:d.indexOf("iPhone")>-1||d.indexOf("iPad")>-1,check_domain:function(){var b="/^aero$|^cat$|^coop$|^int$|^museum$|^pro$|^travel$|^xxx$|^com$|^net$|^gov$|^org$|^mil$|^edu$|^biz$|^info$|^name$|^ac$|^mil$|^co$|^ed$|^gv$|^nt$|^bj$|^hz$|^sh$|^tj$|^cq$|^he$|^nm$|^ln$|^jl$|^hl$|^js$|^zj$|^ah$|^hb$|^hn$|^gd$|^gx$|^hi$|^sc$|^gz$|^yn$|^xz$|^sn$|^gs$|^qh$|^nx$|^xj$|^tw$|^hk$|^mo$|^fj$|^ha$|^jx$|^sd$|^sx$/i";return str.match(b)?1:0},get_domain:function(){var f,g,a=b.domain.replace(/^www\./,""),c=a.split("."),d=c.length;if(3==d)f=c[1]+"."+c[2];else if(d>3){if(g="^[0-9]*.[0-9]*.[0-9]*.[0-9]*$",a.match(g))return a;f=e.check_domain(c[d-2])?c[d-3]+"."+c[d-2]+"."+c[d-1]:c[d-2]+"."+c[d-1]}return f},inApp:function(){return e.inAndroid?"undefined"!=typeof android?!0:!1:e.inIos?this.inIosApp:!1}},o=window.App||{};for(o.noop=function(){},o.open=function(){var d,a=arguments.length,b=this,c={name:"",params:{},callback:"App.noop"};switch(c.name=arguments[0]?arguments[0].toUpperCase():"LOGIN",b.noop=function(){},2==a?"function"==typeof arguments[1]?b.noop=arguments[1]:d=arguments[1]:3==a&&("function"==typeof arguments[2]&&(b.noop=arguments[2]),d=arguments[1]),c.name){case"FUND":d&&(c.params.code=d);break;case"JRB":arguments[1]&&(c.params.forceLogin="JRB",c.params.action=arguments[1],c.params.channel="web");break;case"ACTIVITY":c.params.browserUrl=d;break;case"TITLE":c.params.text=d}n(c)},o.close=function(){n({name:"CLOSE"})},o.share=function(a){var b;if(a=a||window.dataForWeixin,e.inAndroid&&e.inApp())android.shareWebPage(a.url,a.title,a.desc);else if(e.inIos&&e.inIosApp&&!e.inWx){b="native://shareWebPage?url="+a.url+"&webTitle="+a.title+"&webDesc="+a.desc;try{safari.open=b}catch(c){window.location.href=b}}else e.inWx&&(window.dataForWeixin.url=a.url,window.dataForWeixin.title=a.title,window.dataForWeixin.desc=a.desc,p())},o.buriedPointOnce=function(a){if(e.inAndroid&&e.inApp())android.buriedPointOnce(a);else if(e.inIos&&e.inIosApp&&!e.inWx){var b="native://buriedPointOnce?eventId="+a;j(b)}},o.setMenu=function(a){var b={};str="[",a.forEach(function(a,c){var d=a.menuAction+(new Date).getTime();window.str=a.menuAction=b["item"+c]=a,d+=JSON.stringify(a)+","}),str=str.substring(0,str.length-1),str+="]",this.android?android.setTitleMenu(str):WebViewJavascriptBridge.callHandler("setMenu",b)},window.App=o,p=function(){dataForWeixin&&(WeixinJSBridge.on("menu:share:appmessage",function(){WeixinJSBridge.invoke("sendAppMessage",{appid:dataForWeixin.appId,img_url:dataForWeixin.MsgImg,img_width:"120",img_height:"120",link:dataForWeixin.url,desc:dataForWeixin.desc,title:dataForWeixin.title},function(){dataForWeixin.callback()})}),WeixinJSBridge.on("menu:share:timeline",function(){dataForWeixin.callback(),WeixinJSBridge.invoke("shareTimeline",{img_url:dataForWeixin.TLImg,img_width:"120",img_height:"120",link:dataForWeixin.url,desc:dataForWeixin.desc,title:dataForWeixin.title},function(){})}),WeixinJSBridge.on("menu:share:weibo",function(){WeixinJSBridge.invoke("shareWeibo",{content:dataForWeixin.title,url:dataForWeixin.url},function(){dataForWeixin.callback()})}))},document.addEventListener("WeixinJSBridgeReady",p,!1),function(){var a=0,b=_qsa(".cd-popup-close"),c=_qsa(".cd-popup-btn"),d=_qsa(".cd-popup");if(c.length)for(_qs(".cd-popup-wrap").style.position="fixed",a=0;a<c.length;a++)!function(a){c[a].addEventListener("click",function(){_qs(".cd-popup-wrap").style.display="block",setTimeout(function(){_qs(".is-visible")&&_qs(".is-visible").classList.remove(".is-visible"),d[a].classList.add("is-visible")},30)},!1),d[a].addEventListener("touchmove",function(a){a.target.classList.contains("cd-popup-cover")&&a.stopPropagation()},!1),b[a].addEventListener("click",function(){_qs(".cd-popup-wrap").style.display="none",d[a].classList.remove("is-visible")},!1)}(a)}(),function(){var b,c,a=document.querySelectorAll("img[data-srcset]");for(b=0,c=a.length;c>b;b++)a[b].setAttribute("src",a[b].getAttribute("data-srcset"))}(),window.shareCallback=function(){jdp.shareUrl({url:dataForWeixin.url,title:dataForWeixin.title,desc:dataForWeixin.desc,channel:"WX|QQ|WB",callback:function(){}})},e.inApp()&&!e.inWx&&e.inAndroid&&(jdp.setTitle(dataForWeixin.docTitle),jdp.setMenu([{menuTitle:"分享",menuAction:"shareCallback"}])),e.inApp()&&!e.inWx&&e.inIos&&(jdp.setTitle(dataForWeixin.docTitle),q=setInterval(function(){window.WebViewJavascriptBridge&&(jdp.setMenu([{menuTitle:"分享",menuAction:"shareCallback"}]),clearInterval(q))},100)),_qs(".J_confirm").ontouchstart=function(){o.open()},(!e.inApp()||e.inWx)&&(_qs(".J_openBtn").style.display="block",_qs("#con").style.paddingBottom="70px"),r=_qsa(".openBtn"),s=0;s<r.length;s++)!function(a){r[a].onclick=function(){var a=this.getAttribute("data-code"),b=this.getAttribute("data-name");a?o.open("fund",a):o.open(b)}}(s)}(window,document);
+    </script>
+    <body>
+
+</html>

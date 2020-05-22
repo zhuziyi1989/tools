@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>测试页面</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="js/jdp-sdk.js?v=2"></script>
+    <!-- <script src="http://static.jdpay.com/basic/dist/js/m-public/common.js"></script> -->
+    <script src="http://static.jdpay.com/basic/dist/js/m-public/wx-sdk.js"></script>
+    <style>
+    iframe{display: none;}
+    </style>
+    <script>
+
+     window.wxParam = {
+        appid:'',
+        timestamp:'',
+        noncestr:'',
+        signature:'',
+        link:window.location.href,
+        title:'分享标题啊。。',
+        desc:'分享的描述哦。。',
+        imgUrl:'http://img11.360buyimg.com/cms/jfs/t1390/32/402540112/7690/8a8b277b/558015bfN5a154c71.png',
+     }
+
+    window.onload = function() {
+        document.getElementById("terminal").onclick = function() {
+            /* Act on the event */
+            var u = navigator.userAgent,
+                isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //Android 终端
+            isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //iOS 终端（第 1 种方法）
+            isiOSx = u.indexOf('iPhone') > -1 || u.indexOf('iPad') > -1; //iOS 终端（第 2 种方法）
+            console.log('是否是Android：' + isAndroid + '!\n(第 1 种)是否是iOS：' + isiOS + '!\n(第 2 种)是否是iOS：' + isiOSx);
+        };
+    };
+    var xDate = new Date(),
+        getFullYear = xDate.getFullYear(),
+        getMonth = xDate.getMonth(),
+        getDate = xDate.getDate(),
+        getHour = xDate.getHours(),
+        getMinutes = xDate.getMinutes(),
+        getSeconds = xDate.getSeconds(),
+        getMilliseconds = xDate.getMilliseconds(),
+        getTime = xDate.getTime(),//从1970年1月1日午夜开始的毫秒数，时间戳
+        valueOf = xDate.valueOf(),//从1970年1月1日午夜开始的毫秒数，时间戳
+        xDateArray = [getFullYear,getMonth+1,getDate,getHour,getMinutes,getSeconds,getMilliseconds,getTime,valueOf];
+    console.log(xDateArray);
+
+
+    for(var a in window)console.log(a)
+    </script>
+</head>
+
+<body>
+    <a href="javascript:;" id="terminal">Device type test</a>
+    <a href="javascript:;" id="getinfo">getinfo test</a>
+    <script>
+    //Custom module
+    function alertObj(obj){
+        var output = "";
+        for(var i in obj){  
+            var property=obj[i];  
+            output+=i+" = "+property+"\n";   
+        }  
+        alert(output);
+    }
+
+    var list = document.getElementById('getinfo');
+    list.onclick = function() {
+            jdp.getInfo(function(json) {
+                var json = JSON.parse(json),
+                    isAuth = json.auth,
+                    isLogin = json.isLogin;
+                    if(isLogin=="1"){
+                        alertObj(json)
+                    }else{
+                        jdp.alert("请先登录！")
+                    }
+            });
+    };
+    </script>
+</body>
+
+</html>
