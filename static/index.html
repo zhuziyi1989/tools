@@ -85,6 +85,7 @@
 </head>
 <body>
     <div class="warp">
+        <p style="text-align: center;padding: 15px 0;font-size: 12px;color: #999"> 十年前的工具页面，仅做记录，不再更新！</p>
         <details class="qrcode" open>
             <summary>二维码生成：</summary>
             <div class="in-01">
@@ -677,16 +678,16 @@ ul[href$="xxxx"]{
         });
     });
      //鼠标滑过文本框自动选中
-    function selectInputContent(e){
-        var pac = document.querySelectorAll(e),
-                leng = pac.length;
-        for(i=0;i<leng;i++){
-            pac[i].onmouseover = function(){this.focus();this.select();};
-            pac[i].onmouseout = function(){this.blur();};
-        };
-    };
-    selectInputContent('.config input');
-    selectInputContent('.qrcode_url');
+    // function selectInputContent(e){
+    //     var pac = document.querySelectorAll(e),
+    //             leng = pac.length;
+    //     for(i=0;i<leng;i++){
+    //         pac[i].onmouseover = function(){this.focus();this.select();};
+    //         pac[i].onmouseout = function(){this.blur();};
+    //     };
+    // };
+    // selectInputContent('.config input');
+    // selectInputContent('.qrcode_url');
     // selectInputContent('#url');
 
     window.onload = function(){
@@ -794,7 +795,7 @@ ul[href$="xxxx"]{
     
     // 短网址获取
     function getShort(newurl,newurlStr,val,isShort){
-        var apiUrl = "https://laoxianghuijia.cn:6688/other/shorten"; //Node封装  Nginx的6688端口为https，同事转发到node的6699端口
+        var apiUrl = "https://api.jandou.com/public/tools/shorten"; 
         if( val === ""){
             $('#tips').html("请输入URL！！");
             $("#url").attr('class', 'red-placeholder');
@@ -813,8 +814,8 @@ ul[href$="xxxx"]{
             type: "GET",
             timeout : 1000,
             data: {
-                source: 31641035,// appkey
-                url_long: newurlStr, // 需要压缩的原始网址
+                format: 'json',//  输出格式
+                url: newurlStr, // 需要压缩的原始网址
             },
             dataType: "json",
             cache: false,
