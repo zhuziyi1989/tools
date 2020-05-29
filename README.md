@@ -16,7 +16,7 @@
 | [/wechat-deleted-friends](./wechat-deleted-friends) |检测是否被微信好友删除的脚本（失效，不更新）|
 |    [alfred-workflow](./alfred-workflow)    |  分享个人常用alfred工作流（不更新）|
 | [/static/AriaNg](./static/AriaNg) | Aria2 前端面板( GUI、WebUI ) |
-| 静态工具页面 [/static](/static/) | 可能有点用的工具<br />- [自动生成二维码](./static/qcode-bookmark.html)<br />- [时间屏保](./static/time.html)<br />- [Linux命令](./static/linux.html)<br />- [微信 SDK](./static/wx-sdk.html)<br />-[个人维护的 gfwlist 文件](https://raw.githubusercontent.com/zhuziyi1989/tools/master/scientific-internet/gfwlist.txt) |
+| 静态工具页面 [/static](./static/) | 可能有点用的工具<br />- [自动生成二维码](./static/qcode-bookmark.html)<br />- [时间屏保](./static/time.html)<br />- [Linux命令](./static/linux.html)<br />- [微信 SDK](./static/wx-sdk.html)<br />-[个人维护的 gfwlist 文件](https://raw.githubusercontent.com/zhuziyi1989/tools/master/scientific-internet/gfwlist.txt) |
 
 做了一年的笔记，突然某一天消失了，由此放弃中国版 Evernote。
 
