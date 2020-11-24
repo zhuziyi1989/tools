@@ -2,11 +2,11 @@
 
 | file/folder|Destination Address|
 |:---|:---:|
-| [/战略防备](./战略防备)<br />-[战略防备/防疫/](./战略防备/防疫/) |   战略防备  |
-|   [/router](./router) |      路由器相关      |
+| [/战略防备](./#)<br />-[战略防备/防疫/](./战略防备/防疫/) |   战略防备  |
+| [/router](./#)<br />[/router/树莓派安装 OpenWrt 打造超级路由器](./router/树莓派安装 OpenWrt 打造超级路由器.html) |      路由器相关      |
 | -[/react/React 技能图](./react/react-developer-roadmap.png)<br />-[/react/一张图读懂 React 技术栈.png](./react/一张图读懂 React 技术栈.png)<br />-[/react/Redux 文档](./react/redux-in-chinese.pdf)<br />-[/react/React-Cheatsheet.pdf](./react/React-Cheatsheet.pdf)<br />-[/react/Redux-Cheatsheet.pdf](./react/Redux-Cheatsheet.pdf) |      react相关      |
 | [/iTerm2](./iTerm2)			|      iTerm2 相关      |
-| [/Shell](./Shell)	|      shell 相关     |
+| [/shell](./shell)	|      shell 相关     |
 |  [/git-help](./git-help) |      git 相关      |
 | [/Linux](./Linux)			|      Linux 使用笔记	   |
 | [/macOS](./macOS)			|      macOS 使用笔记	   |
