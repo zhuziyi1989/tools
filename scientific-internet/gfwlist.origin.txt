@@ -7982,6 +7982,7 @@ ultrasurf
 ||*.environment.google^
 ||*.unsplash.com^
 ||*.githubusercontent.com^
+||*.githubassets.com^
 ||*.disq.us^
 ||*.gitbooks.io^
 ||*.jsfiddle.net^
