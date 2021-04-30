@@ -18,7 +18,7 @@
 #    🐞 fix (一般的修复补丁)
 #    🚑 hotfix (关键的热修复补丁)
 #    🔥 removing (删除代码、功能等)
-#    ⚡️ performance (改善性能)
+#    ⚡️ perf ( performance 优化相关，如改善性能、提升用户体验)
 #    📝 docs (文档的改动)
 #    📦 package (更新管理依赖关系和元数据的文件，如 package.json)
 #    🎨 style (格式化代码，缺失分号等；不包括生产代码变动)
