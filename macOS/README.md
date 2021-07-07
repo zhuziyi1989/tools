@@ -133,14 +133,14 @@ Via: [More...](https://www.alibabacloud.com/help/zh/faq-detail/40572.htm) 
 
  放弃本地所有的改动  git reset --hard HEAD  （谨慎操作！请先提交存档本地改动！）
 
-
 ##  RK61键盘使用技巧
 
 - FN+Ctrl(左)  切换功能键（YUIHJKNM、FN功能键的切换）
 - FN+Shift(右)  上下左右按键切换
 - Shift+FN+↑ 输入问号？
-
-官方说明书：http://www.rkgaming.com/zh-CN/article.php?id=44
+- FN+P 蓝牙配对模式
+- FN+Q MacBook Pro
+- FN+E Star (iPhone 8 Puls)
 
 
 ##  NPM 烂笔头
