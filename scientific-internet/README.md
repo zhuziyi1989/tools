@@ -1,8 +1,8 @@
 # 客户端关键词
 
-~~下载说明，在以上列表中找到您的设备所对应的客户端，并点击进入页面，然后点击`View Raw`即可下载。~~ 
+~~下载说明，在以上列表中找到您的设备所对应的客户端，并点击进入页面，然后点击`View Raw`即可下载。~~
 
-**已不提供下载，请关键字自行搜索**
+## 已不提供下载，请关键字自行搜索
 
 - GoAgentX-v2.3.7(OS X).dmg  
 - Shadowsocks-3.0(Windows XP & 7).zip
@@ -13,11 +13,12 @@
 - ShadowsocksX-NG （MacOS）
 - V2RayX（MacOS）
 
-## 使用建议：
+## 使用建议
+
 - iPhone: 在 App Store 非中国区搜索 Shadowrocket、Quantumult X、Loon 等
-- Android: Shadowsocks-nightly
-- Mac: 推荐 V2RayX 和 ShadowsocksX-NG 
-- Windows: 推荐 Shadowsocks
+- Android: Shadowsocks-nightly、Clash for Android
+- Mac: 推荐 V2RayX、ShadowsocksX-NG、Clash，或直接用官方版本
+- Windows: 推荐 Shadowsocks ，或直接用官方版本
 
 ShadowsocksX-NG-R8 是ShadowsocksX-NG 的变种，**但在2018年10月已停止更新**
 
@@ -25,4 +26,4 @@ ShadowsocksX-NG 最新下载地址：[https://github.com/shadowsocks/Shadowsocks
 
 ## 个人维护的 gfwlist 列表
 
-> https://raw.githubusercontent.com/zhuziyi1989/tools/master/scientific-internet/gfwlist.txt
+> <https://raw.githubusercontent.com/zhuziyi1989/tools/master/scientific-internet/gfwlist.txt>
