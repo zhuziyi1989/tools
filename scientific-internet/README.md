@@ -4,20 +4,21 @@
 
 ## 已不提供下载，请关键字自行搜索
 
-- GoAgentX-v2.3.7(OS X).dmg  
+- GoAgentX-v2.3.7(MacOS).dmg  
 - Shadowsocks-3.0(Windows XP & 7).zip
 - Shadowsocks-4.0-\*.\*.\*(Windows 8 & 10).zip
 - ShadowsocksX.dmg
 - Shadowsocks-nightly.apk （保留）
 - ShadowsocksX-NG-R8（MacOS）
-- ShadowsocksX-NG （MacOS）
+- ShadowsocksX-NG（MacOS）
 - V2RayX（MacOS）
+- Clash
 
 ## 使用建议
 
-- iPhone: 在 App Store 非中国区搜索 Shadowrocket、Quantumult X、Loon 等
+- iOS: 在 App Store 非中国区搜索 Shadowrocket、Quantumult X、Loon 等
 - Android: Shadowsocks-nightly、Clash for Android
-- Mac: 推荐 V2RayX、ShadowsocksX-NG、Clash，或直接用官方版本
+- MacOS: 推荐 V2RayX、ShadowsocksX-NG、Clash，或直接用官方版本
 - Windows: 推荐 Shadowsocks ，或直接用官方版本
 
 ShadowsocksX-NG-R8 是ShadowsocksX-NG 的变种，**但在2018年10月已停止更新**
