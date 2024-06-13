@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>我的前端工具箱</title>
-    <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=0, initial-scale=1"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="-1" />
     <!-- <meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi"> -->
     <link rel="shortcut icon" href="img/favicon.ico?version=1.0.1" />
     <!--移动端版本兼容 -->
-<!--     <script type="text/javascript">
+    <!--     <script type="text/javascript">
         var phoneWidth = parseInt(window.screen.width);
         var phoneScale = phoneWidth / 640;
         var ua = navigator.userAgent;
@@ -28,132 +31,419 @@
         }
     </script> -->
     <!--移动端版本兼容 end -->
-    <link rel="stylesheet" href="styles/solarized_light.min.css">
+    <link rel="stylesheet" href="styles/solarized_light.min.css" />
     <script type="text/javascript" src="js/highlight.min.js"></script>
-    <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
-    <script type="text/javascript" src="//cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      hljs.initHighlightingOnLoad();
+    </script>
+    <script
+      type="text/javascript"
+      src="//cdn.staticfile.org/jquery/1.9.1/jquery.min.js"
+    ></script>
     <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
     <style type="text/css">
-    * { margin: 0; padding: 0; }
-    ::-webkit-scrollbar{width:10px;height:10px;background:white}
-    ::-webkit-scrollbar-thumb{background-color:rgba(188,193,196,0.8);background-clip:padding-box;min-height:28px}
-    ::-webkit-scrollbar-track-piece{background-color:whiteSmoke}
-    .warp { width: 980px; margin: 0 auto; font-family: "Yahei Consolas Hybrid","Microsoft Yahei",sans-serif, serif; font-size: 16px; }
-    @media (max-device-width: 640px) {
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        background: white;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgba(188, 193, 196, 0.8);
+        background-clip: padding-box;
+        min-height: 28px;
+      }
+      ::-webkit-scrollbar-track-piece {
+        background-color: whiteSmoke;
+      }
       .warp {
-            max-width: 640px;
-            font-size: 20px
+        width: 980px;
+        margin: 0 auto;
+        font-family: "Yahei Consolas Hybrid", "Microsoft Yahei", sans-serif,
+          serif;
+        font-size: 16px;
+      }
+      @media (max-device-width: 640px) {
+        .warp {
+          max-width: 640px;
+          font-size: 20px;
         }
-    }
-    .qrcode{ position: relative; }
-    .in-01,.in-02 {color: #0086BB; }
-    .in-01 { padding-left: 1em;box-sizing: border-box;min-height: 50px; line-height: 50px; background-color: #FBFBFB;    margin-top: 15px; }
-    #qrcode { display: none;width: 256px;height: 256px;position: absolute;top: 100%;left: 50%;margin-left: -123px; padding: 30px;background: rgba(251,251,251,0.5);box-shadow: 0 0 2em rgba(101,115,126,0.5); }
-    #qrcode:before{content: "×";position: absolute; top: 0; right: 0;display: inline-block;width: 24px;font-size:20px;font-weight:700;line-height:24px;color:#000;text-shadow:0 1px 0 #fff;opacity:.2;-webkit-transition:all .3s;transition:all .3s; }
-    #qrcode:focus, #qrcode:hover {cursor:pointer;opacity:.8;outline:0; }
-    #btn,#btnX,#btnS { width: 100px; height: 34px; line-height: 34px; color: #fff; background: hsla(160, 100%, 32%, 0.9); display: inline-block; text-align: center; cursor: pointer; font-size: 16px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05); color: #ffffff; }
-    #btn { background-color: hsla(0, 80%, 60%, 0.9); }
-    #btnS { background-color: hsla(197, 100%, 37%, 0.9); }
-    #url { width: 300px; height: 30px; line-height: 30px; border: 1px solid #ddd; }
-    .red-placeholder::-webkit-input-placeholder{
+      }
+      .qrcode {
+        position: relative;
+      }
+      .in-01,
+      .in-02 {
+        color: #0086bb;
+      }
+      .in-01 {
+        padding-left: 1em;
+        box-sizing: border-box;
+        min-height: 50px;
+        line-height: 50px;
+        background-color: #fbfbfb;
+        margin-top: 15px;
+      }
+      #qrcode {
+        display: none;
+        width: 256px;
+        height: 256px;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -123px;
+        padding: 30px;
+        background: rgba(251, 251, 251, 0.5);
+        box-shadow: 0 0 2em rgba(101, 115, 126, 0.5);
+      }
+      #qrcode:before {
+        content: "×";
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: inline-block;
+        width: 24px;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 24px;
+        color: #000;
+        text-shadow: 0 1px 0 #fff;
+        opacity: 0.2;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+      #qrcode:focus,
+      #qrcode:hover {
+        cursor: pointer;
+        opacity: 0.8;
+        outline: 0;
+      }
+      #btn,
+      #btnX,
+      #btnS {
+        width: 100px;
+        height: 34px;
+        line-height: 34px;
+        color: #fff;
+        background: hsla(160, 100%, 32%, 0.9);
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+        font-size: 16px;
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+        color: #ffffff;
+      }
+      #btn {
+        background-color: hsla(0, 80%, 60%, 0.9);
+      }
+      #btnS {
+        background-color: hsla(197, 100%, 37%, 0.9);
+      }
+      #url {
+        width: 300px;
+        height: 30px;
+        line-height: 30px;
+        border: 1px solid #ddd;
+      }
+      .red-placeholder::-webkit-input-placeholder {
         color: hsla(0, 80%, 60%, 0.9);
-    }
-    .result { text-align: left; width: 100%; height: 30px; line-height: 30px; font-size: 12px;color: #0086BB; background-color: #FBFBFB; text-indent: 2em; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
-    .qrcode_url{display: inline-block; width: 100%; height: 30px; line-height: 30px; text-align: left; color: #2AA8B6;box-sizing: border-box;background-color: #FBFBFB; }
-    .tool-link { text-align: left; width: auto; height: 48px; border: 1px solid #f5f5f5; line-height: 50px; color: #0086BB; background-color: #FBFBFB; margin-bottom: 5px; padding-left: 2em; }
-    .tool-link a { font-family: inherit; font-size: 14px; text-decoration: none; display: inline-block; color: #0086BB; width: auto; height: 18px; line-height: 18px; padding: 3px; }
-    .tool-link a:visited { color: inherit; }
-    .tool-link a:hover { color: inherit; border-bottom: 2px solid #ED5959; }
-    .config {width: 100%;padding-left: 2em;box-sizing: border-box;background-color: #FBFBFB;}
-    .config span{ display: inline-block; width: 20%; color: #2AA8B6;}
-    .config input{display: inline-block; width: 80%; height: 30px; padding: 20px 5px; font-size: 14px; line-height: 30px; text-align: left; color: #2AA8B6;box-sizing: border-box;background-color: #FBFBFB; }
-    input::selection {background:#2AA8B6; color:#fff;}
-    input::-moz-selection {background:#2AA8B6; color:#fff;}
-    input::-webkit-selection {background:#2AA8B6; color:#fff;}
-    details summary { font-size: 16px; text-align: left; height: 30px; line-height: 30px; margin-top: 6px;color: #19AC7B;outline: none;cursor: pointer;}
-    /*.zhitu, .uploadImages, .fileManage{ padding: 20px 0; }*/
-    .zhitu iframe{width:100%;height:100%;min-height:960px;border:none;}
-    .uploadImages iframe{width:100%;height:100%;min-height:600px;border:none;}
-    .fileManage iframe{width:100%;height:100%;min-height:900px;border:none;}
-    .footer { font-family: monospace; width: 100%;padding-bottom: 10px; font-size: 14px; line-height: 20px; text-align: center; color: #BCC1C4; }
-    .container { max-width: 800px; width: 80%; margin: auto; padding: 0 10px; }
-    .footer-entry>a { color: #939ba0; text-decoration: none; transition: color 0.15s linear; outline: none; }
-    .bg-logo{display: block;width: 60px;height: 30px;padding: 5px 0;margin:0 auto;background: url(img/logo-2.png) 50% 50% no-repeat;background-size: 60%}
-    input { border: 0; outline: none; padding-left: 5px; font-family: inherit; }
-    pre code{font-size: 12px;font-family: "Source Code Pro";}
+      }
+      .result {
+        text-align: left;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        font-size: 12px;
+        color: #0086bb;
+        background-color: #fbfbfb;
+        text-indent: 2em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .qrcode_url {
+        display: inline-block;
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        text-align: left;
+        color: #2aa8b6;
+        box-sizing: border-box;
+        background-color: #fbfbfb;
+      }
+      .tool-link {
+        text-align: left;
+        width: auto;
+        height: 48px;
+        border: 1px solid #f5f5f5;
+        line-height: 50px;
+        color: #0086bb;
+        background-color: #fbfbfb;
+        margin-bottom: 5px;
+        padding-left: 2em;
+      }
+      .tool-link a {
+        font-family: inherit;
+        font-size: 14px;
+        text-decoration: none;
+        display: inline-block;
+        color: #0086bb;
+        width: auto;
+        height: 18px;
+        line-height: 18px;
+        padding: 3px;
+      }
+      .tool-link a:visited {
+        color: inherit;
+      }
+      .tool-link a:hover {
+        color: inherit;
+        border-bottom: 2px solid #ed5959;
+      }
+      .config {
+        width: 100%;
+        padding-left: 2em;
+        box-sizing: border-box;
+        background-color: #fbfbfb;
+      }
+      .config span {
+        display: inline-block;
+        width: 20%;
+        color: #2aa8b6;
+      }
+      .config input {
+        display: inline-block;
+        width: 80%;
+        height: 30px;
+        padding: 20px 5px;
+        font-size: 14px;
+        line-height: 30px;
+        text-align: left;
+        color: #2aa8b6;
+        box-sizing: border-box;
+        background-color: #fbfbfb;
+      }
+      input::selection {
+        background: #2aa8b6;
+        color: #fff;
+      }
+      input::-moz-selection {
+        background: #2aa8b6;
+        color: #fff;
+      }
+      input::-webkit-selection {
+        background: #2aa8b6;
+        color: #fff;
+      }
+      details summary {
+        font-size: 16px;
+        text-align: left;
+        height: 30px;
+        line-height: 30px;
+        margin-top: 6px;
+        color: #19ac7b;
+        outline: none;
+        cursor: pointer;
+      }
+      /*.zhitu, .uploadImages, .fileManage{ padding: 20px 0; }*/
+      .zhitu iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 960px;
+        border: none;
+      }
+      .uploadImages iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 600px;
+        border: none;
+      }
+      .fileManage iframe {
+        width: 100%;
+        height: 100%;
+        min-height: 900px;
+        border: none;
+      }
+      .footer {
+        font-family: monospace;
+        width: 100%;
+        padding-bottom: 10px;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        color: #bcc1c4;
+      }
+      .container {
+        max-width: 800px;
+        width: 80%;
+        margin: auto;
+        padding: 0 10px;
+      }
+      .footer-entry > a {
+        color: #939ba0;
+        text-decoration: none;
+        transition: color 0.15s linear;
+        outline: none;
+      }
+      .bg-logo {
+        display: block;
+        width: 60px;
+        height: 30px;
+        padding: 5px 0;
+        margin: 0 auto;
+        background: url(img/logo-2.png) 50% 50% no-repeat;
+        background-size: 60%;
+      }
+      input {
+        border: 0;
+        outline: none;
+        padding-left: 5px;
+        font-family: inherit;
+      }
+      pre code {
+        font-size: 12px;
+        font-family: "Source Code Pro";
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="warp">
-        <p style="text-align: center;padding: 15px 0;font-size: 12px;color: #999"> 十年前的工具页面，仅做记录，不再更新！</p>
-        <details class="qrcode" open>
-            <summary>二维码生成：</summary>
-            <div class="in-01">
-                <span>URL或SKU → </span>
-                <input type="text" id="url" class="" placeholder="URL需包含传输协议，如：http://">
-                <span id="btn" value="生成普通二维码">普通二维码</span>
-                <span id="btnS" value="生成短址二维码">短址二维码</span>
-                <span id="btnX" value="用于生成京粉专链">京粉专链</span>
-            </div>
-            <div class="in-02">
-                <div id="qrcode" title="关闭二维码">
-                    <canvas width="256" height="256"></canvas>
-                </div>
-                <div class="result"><span>原始地址：</span><input type="text" class="qrcode_url" id="qrcode_url" placeholder="光标移动自动选中，可直接拷贝粘贴，点击二维码关闭！" /></div>
-                <div class="result"><span>新浪短址：</span><input type="text" class="qrcode_url" id="qrcode_url_shorten" placeholder="" /></div>
-            </div>
-        </details>
+      <p
+        style="
+          text-align: center;
+          padding: 15px 0;
+          font-size: 12px;
+          color: #999;
+        "
+      >
+        十年前的工具页面，仅做存档，不再更新！
+      </p>
+      <details class="qrcode" open>
+        <summary>二维码生成：</summary>
+        <div class="in-01">
+          <span>URL或SKU → </span>
+          <input
+            type="text"
+            id="url"
+            class=""
+            placeholder="URL需包含传输协议，如：http://"
+          />
+          <span id="btn" value="生成普通二维码">普通二维码</span>
+          <span id="btnS" value="生成短址二维码">短址二维码</span>
+          <span id="btnX" value="用于生成京粉专链">京粉专链</span>
+        </div>
+        <div class="in-02">
+          <div id="qrcode" title="关闭二维码">
+            <canvas width="256" height="256"></canvas>
+          </div>
+          <div class="result">
+            <span>原始地址：</span
+            ><input
+              type="text"
+              class="qrcode_url"
+              id="qrcode_url"
+              placeholder="光标移动自动选中，可直接拷贝粘贴，点击二维码关闭！"
+            />
+          </div>
+          <div class="result">
+            <span>新浪短址：</span
+            ><input
+              type="text"
+              class="qrcode_url"
+              id="qrcode_url_shorten"
+              placeholder=""
+            />
+          </div>
+        </div>
+      </details>
 
-        <details class="tools" open>
-            <summary>一些工具：</summary>
-            <div class="tool-link">
-                <a href="console.html?eruda=true" target="_blank">移动端调试</a>
-                <a href="sdk.html" target="_blank">接口测试</a>
-                <a href="../demo/slider.html" target="_blank">滑动切屏例</a>
-                <a href="../demo/fund.html" target="_blank">M端案例</a>
-                <a href="../demo/download_page.html" target="_blank">下载渠道包</a>
-                <a href="/pux/kwx/activity.html" target="_blank">M端工具</a>
-                <a href="../demo/fund/index.html" target="_blank">基金工具</a>
-            </div>
-            <div class="tool-link">
-                <a href="fund.html" target="_blank">基金模板</a>
-                <a href="fund-preview.html" target="_blank">基金模板预览</a>
-                <a href="http://www.freeformatter.com/html-escape.html" target="_blank">HTML转码</a>
-                <a href="http://www.css-js.com/" target="_blank">压缩美化</a>
-                <a href="http://tool.lu/" target="_blank">在线工具</a>
-                <a href="http://tool.chinaz.com/" target="_blank">站长工具</a>
-                <a href="javascript:;" id="uploadImages">压缩工具</a>
-                <a href="#y" id="fileManage">图片管理</a>
-                <a href="#z" id="zhitu">加载智图</a>
-                <a href="http://staticfile.org/" target="_blank">七牛CDN</a>
-            </div>
-            <div class="tool-link">
-                <a href="up_oa.html" target="_blank">上线说明</a>
-                <a href="time.html" target="_blank">时间啊</a>
-                <a href="http://kaoqin.jd.com/" target="_blank">打卡机</a>
-                <a href="http://timline.jd.com/index.action" target="_blank">TimLine</a>
-                <a href="javascript:void(function(u,s){s=document.body.appendChild(document.createElement('script'));s.src=u+'?ts='+Date.now();s.charset='UTF-8'}('http://zythum.sinaapp.com/mama2/dest/index.js'))" target="_blank">MAMA2</a>
-                <a href="linux.html" target="_blank">linux命令查询</a>
-                <a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/base/index.html" target="_blank">linux学习</a>
-            </div>
-        </details>
+      <details class="tools" open>
+        <summary>一些工具：</summary>
+        <div class="tool-link">
+          <a href="console.html?eruda=true" target="_blank">移动端调试</a>
+          <a href="sdk.html" target="_blank">接口测试</a>
+          <a href="../demo/slider.html" target="_blank">滑动切屏例</a>
+          <a href="../demo/fund.html" target="_blank">M端案例</a>
+          <a href="../demo/download_page.html" target="_blank">下载渠道包</a>
+          <a href="/pux/kwx/activity.html" target="_blank">M端工具</a>
+          <a href="../demo/fund/index.html" target="_blank">基金工具</a>
+        </div>
+        <div class="tool-link">
+          <a href="fund.html" target="_blank">基金模板</a>
+          <a href="fund-preview.html" target="_blank">基金模板预览</a>
+          <a
+            href="http://www.freeformatter.com/html-escape.html"
+            target="_blank"
+            >HTML转码</a
+          >
+          <a href="http://www.css-js.com/" target="_blank">压缩美化</a>
+          <a href="http://tool.lu/" target="_blank">在线工具</a>
+          <a href="http://tool.chinaz.com/" target="_blank">站长工具</a>
+          <a href="javascript:;" id="uploadImages">压缩工具</a>
+          <a href="#y" id="fileManage">图片管理</a>
+          <a href="#z" id="zhitu">加载智图</a>
+          <a href="http://staticfile.org/" target="_blank">七牛CDN</a>
+        </div>
+        <div class="tool-link">
+          <a href="up_oa.html" target="_blank">上线说明</a>
+          <a href="time.html" target="_blank">时间啊</a>
+          <a href="http://kaoqin.jd.com/" target="_blank">打卡机</a>
+          <a href="http://timline.jd.com/index.action" target="_blank"
+            >TimLine</a
+          >
+          <a
+            href="javascript:void(function(u,s){s=document.body.appendChild(document.createElement('script'));s.src=u+'?ts='+Date.now();s.charset='UTF-8'}('http://zythum.sinaapp.com/mama2/dest/index.js'))"
+            target="_blank"
+            >MAMA2</a
+          >
+          <a href="linux.html" target="_blank">linux命令查询</a>
+          <a
+            href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/base/index.html"
+            target="_blank"
+            >linux学习</a
+          >
+        </div>
+      </details>
 
-        <details class="tools" open>
+      <details class="tools" open>
         <summary>常用的链接：</summary>
-            <div class="config">
-                <span>pac</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/config/proxy.pac" />
-                <span>Proxy</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/config/OmegaOptions.bak" />
-                <span>jdPay SDK</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/tool/js/jdp-sdk.js" />
-                <span>下载和统计</span><input type="text" value="http://sale.jd.com/app/act/KBuoE641DZmxgYf.html?reffer={渠道包}#{跳转模块名}" />
-                <span>日志打印</span><input type="text" value="http://172.25.47.49/pux/zhuziyi/tool/js/vConsole.min.js" />
-            </div>
-        </details>
-        <div class="uploadImages"></div>
-        <div class="fileManage" id="y"></div>
+        <div class="config">
+          <span>pac</span
+          ><input
+            type="text"
+            value="http://172.25.47.49/pux/zhuziyi/config/proxy.pac"
+          />
+          <span>Proxy</span
+          ><input
+            type="text"
+            value="http://172.25.47.49/pux/zhuziyi/config/OmegaOptions.bak"
+          />
+          <span>jdPay SDK</span
+          ><input
+            type="text"
+            value="http://172.25.47.49/pux/zhuziyi/tool/js/jdp-sdk.js"
+          />
+          <span>下载和统计</span
+          ><input
+            type="text"
+            value="http://sale.jd.com/app/act/KBuoE641DZmxgYf.html?reffer={渠道包}#{跳转模块名}"
+          />
+          <span>日志打印</span
+          ><input
+            type="text"
+            value="http://172.25.47.49/pux/zhuziyi/tool/js/vConsole.min.js"
+          />
+        </div>
+      </details>
+      <div class="uploadImages"></div>
+      <div class="fileManage" id="y"></div>
 
-<details class="dd-code" close>
-<summary>常用 PC 端代码块：</summary>
-<pre>
+      <details class="dd-code" close>
+        <summary>常用 PC 端代码块：</summary>
+        <pre>
 <code class="javascript">/**
  * 代码块：
  */
@@ -180,11 +470,11 @@ $(document).ready(function(){
 });
 </code>
 </pre>
-</details>
+      </details>
 
-<details class="dd-code" close>
-<summary>常用移动端代码块：</summary>
-<pre>
+      <details class="dd-code" close>
+        <summary>常用移动端代码块：</summary>
+        <pre>
 <code class="txt">/**
  * 普通模块名 （模块名询问：XXX）
  */
@@ -334,7 +624,7 @@ jdp.openAppModel({
 </code>
 </pre>
 
-<pre>
+        <pre>
 <code class="html">&lt;!-- Popup dom --&gt;
 &lt;div class=&quot;content&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;http://img14.360buyimg.com/cms/jfs/t2206/231/1011598291/246978/534c8a24/5665635bN02a78b13.jpg&quot; /&gt;
     &lt;a href=&quot;javascript:;&quot; class=&quot;cd-popup-btn&quot;&gt;&lt;/a&gt;
@@ -403,11 +693,11 @@ jdp.openAppModel({
 }();
 </code>
 </pre>
-</details>
+      </details>
 
-<details class="dd-code" close>
-<summary>不常用的代码块：</summary>
-<pre>
+      <details class="dd-code" close>
+        <summary>不常用的代码块：</summary>
+        <pre>
 <code class="html">/**
  * HTML ISO-8859-1 参考手册
  */
@@ -436,7 +726,7 @@ jdp.openAppModel({
 &lt;!--[if gte IE 7]&gt; IE7&#20197;&#21450;IE7&#20197;&#19978;&#29256;&#26412;&#21487;&#35782;&#21035; &lt;![endif]--&gt;
 </code>
 </pre>
-<pre>
+        <pre>
 <code class="css">/**
  * PC端初始化样式
  */
@@ -511,10 +801,10 @@ a:hover {
 
 </code>
 </pre>
-</details>
-<details class="dd-code" close>
-<summary>闲碎 CSS 代码块：</summary>
-<pre>
+      </details>
+      <details class="dd-code" close>
+        <summary>闲碎 CSS 代码块：</summary>
+        <pre>
 <code class="css">/**
  * 常用的且不太熟悉的样式
  */
@@ -651,114 +941,138 @@ ul[href$="xxxx"]{
 
 </code>
 </pre>
-</details>
-<div class="zhitu" id="z"></div>
-<div class="footer">
-    <div class="container">
-        <p class="footer-entry">This page is only the latest version of Chrome</p>
-        <p class="footer-entry">All content is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA</a></p>
-        <p class="footer-entry">Syntax highlighting for the Web <a href="//highlightjs.org/" target="_blank">highlightjs</a></p>
-        <p class="footer-entry">Original Base16 color scheme by <a href="http://chriskempson.github.io/base16/#ocean">Base16 Builder</a>, Style by <a href="https://github.com/idleberg/base16-highlight.js">Base16 for highlight.js</a></p>
-        <p class="footer-entry">&copy; 2015-2016 <a href="//tech.jandou.com/" target="_blank">ZHUZIYI</a>.</p>
-        <span class="bg-logo"></span>
-    </div>
-</div>
+      </details>
+      <div class="zhitu" id="z"></div>
+      <div class="footer">
+        <div class="container">
+          <p class="footer-entry">
+            This page is only the latest version of Chrome
+          </p>
+          <p class="footer-entry">
+            All content is licensed under
+            <a
+              href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+              target="_blank"
+              >CC BY-NC-SA</a
+            >
+          </p>
+          <p class="footer-entry">
+            Syntax highlighting for the Web
+            <a href="//highlightjs.org/" target="_blank">highlightjs</a>
+          </p>
+          <p class="footer-entry">
+            Original Base16 color scheme by
+            <a href="http://chriskempson.github.io/base16/#ocean"
+              >Base16 Builder</a
+            >, Style by
+            <a href="https://github.com/idleberg/base16-highlight.js"
+              >Base16 for highlight.js</a
+            >
+          </p>
+          <p class="footer-entry">
+            &copy; 2015-2016
+            <a href="//tech.jandou.com/" target="_blank">ZHUZIYI</a>.
+          </p>
+          <span class="bg-logo"></span>
+        </div>
+      </div>
     </div>
     <script type="text/javascript">
-    //锚点滑动
-    $(document).ready(function() {
-        $("#zhitu,#fileManage").click(function() {
-            $("html, body").animate({
-                scrollTop: $($(this).attr("href")).offset().top + "px"
-            }, {
-                duration: 300,
-                easing: "swing"
-            });
-            return false;
+      //锚点滑动
+      $(document).ready(function () {
+        $("#zhitu,#fileManage").click(function () {
+          $("html, body").animate(
+            {
+              scrollTop: $($(this).attr("href")).offset().top + "px",
+            },
+            {
+              duration: 300,
+              easing: "swing",
+            }
+          );
+          return false;
         });
-    });
-     //鼠标滑过文本框自动选中
-    // function selectInputContent(e){
-    //     var pac = document.querySelectorAll(e),
-    //             leng = pac.length;
-    //     for(i=0;i<leng;i++){
-    //         pac[i].onmouseover = function(){this.focus();this.select();};
-    //         pac[i].onmouseout = function(){this.blur();};
-    //     };
-    // };
-    // selectInputContent('.config input');
-    // selectInputContent('.qrcode_url');
-    // selectInputContent('#url');
+      });
+      //鼠标滑过文本框自动选中
+      // function selectInputContent(e){
+      //     var pac = document.querySelectorAll(e),
+      //             leng = pac.length;
+      //     for(i=0;i<leng;i++){
+      //         pac[i].onmouseover = function(){this.focus();this.select();};
+      //         pac[i].onmouseout = function(){this.blur();};
+      //     };
+      // };
+      // selectInputContent('.config input');
+      // selectInputContent('.qrcode_url');
+      // selectInputContent('#url');
 
-    window.onload = function(){
-        var firstInput = document.querySelector('.in-01 input');
-        firstInput.select();//选取文本域中的内容
-    }
+      window.onload = function () {
+        var firstInput = document.querySelector(".in-01 input");
+        firstInput.select(); //选取文本域中的内容
+      };
 
-     ~function(){
-         var zhitu = document.getElementById("zhitu"),
-                 zhituDiv = document.querySelector(".zhitu");
-         var uploadImages = document.getElementById("uploadImages"),
-                 uploadImagesDiv = document.querySelector(".uploadImages");
-         var fileManage = document.getElementById("fileManage"),
-                 fileManageDiv = document.querySelector(".fileManage");
+      ~(function () {
+        var zhitu = document.getElementById("zhitu"),
+          zhituDiv = document.querySelector(".zhitu");
+        var uploadImages = document.getElementById("uploadImages"),
+          uploadImagesDiv = document.querySelector(".uploadImages");
+        var fileManage = document.getElementById("fileManage"),
+          fileManageDiv = document.querySelector(".fileManage");
 
+        zhitu.onclick = function () {
+          if (!document.querySelector(".zhitu iframe")) {
+            var lDom = document.createElement("iframe");
+            lDom.src = "https://zhitu.isux.us";
+            lDom.scrolling = "auto";
+            zhituDiv.appendChild(lDom);
+          }
+        };
+        uploadImages.onclick = function () {
+          if (!document.querySelector(".uploadImages iframe")) {
+            var lDom = document.createElement("iframe");
+            lDom.src = "http://www.css-js.com/";
+            lDom.scrolling = "auto";
+            uploadImagesDiv.appendChild(lDom);
+          }
+        };
+        fileManage.onclick = function () {
+          if (!document.querySelector(".fileManage iframe")) {
+            var lDom = document.createElement("iframe");
+            lDom.src = "http://jshop.jd.com/file/manage.html";
+            lDom.scrolling = "auto";
+            fileManageDiv.appendChild(lDom);
+          }
+        };
+      })();
 
-         zhitu.onclick = function(){
-             if(!document.querySelector('.zhitu iframe')){
-                 var lDom = document.createElement('iframe');
-                 lDom.src = 'https://zhitu.isux.us';
-                 lDom.scrolling = 'auto';
-                 zhituDiv.appendChild(lDom);
-             };
-         };
-         uploadImages.onclick = function(){
-             if(!document.querySelector('.uploadImages iframe')){
-                 var lDom = document.createElement('iframe');
-                 lDom.src = 'http://www.css-js.com/';
-                 lDom.scrolling = 'auto';
-                 uploadImagesDiv.appendChild(lDom);
-             };
-         };
-         fileManage.onclick = function(){
-             if(!document.querySelector('.fileManage iframe')){
-                 var lDom = document.createElement('iframe');
-                 lDom.src = 'http://jshop.jd.com/file/manage.html';
-                 lDom.scrolling = 'auto';
-                 fileManageDiv.appendChild(lDom);
-             };
-         };
-     }();
-
-
-    // jquery-qrcode是采用charCodeAt()方式进行编码转换的。而这个方法默认会获取它的Unicode编码，如果有中文内容，在生成二维码前就要把字符串转换成UTF-8，然后再生成二维码。
-    function toUtf8(str) {
+      // jquery-qrcode是采用charCodeAt()方式进行编码转换的。而这个方法默认会获取它的Unicode编码，如果有中文内容，在生成二维码前就要把字符串转换成UTF-8，然后再生成二维码。
+      function toUtf8(str) {
         var out, i, len, c;
         out = "";
         len = str.length;
-        for(i = 0; i < len; i++) {
-            c = str.charCodeAt(i);
-            if ((c >= 0x0001) && (c <= 0x007F)) {
-                out += str.charAt(i);
-            } else if (c > 0x07FF) {
-                out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
-                out += String.fromCharCode(0x80 | ((c >>  6) & 0x3F));
-                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
-            } else {
-                out += String.fromCharCode(0xC0 | ((c >>  6) & 0x1F));
-                out += String.fromCharCode(0x80 | ((c >>  0) & 0x3F));
-            }
+        for (i = 0; i < len; i++) {
+          c = str.charCodeAt(i);
+          if (c >= 0x0001 && c <= 0x007f) {
+            out += str.charAt(i);
+          } else if (c > 0x07ff) {
+            out += String.fromCharCode(0xe0 | ((c >> 12) & 0x0f));
+            out += String.fromCharCode(0x80 | ((c >> 6) & 0x3f));
+            out += String.fromCharCode(0x80 | ((c >> 0) & 0x3f));
+          } else {
+            out += String.fromCharCode(0xc0 | ((c >> 6) & 0x1f));
+            out += String.fromCharCode(0x80 | ((c >> 0) & 0x3f));
+          }
         }
         return out;
-    }
-    function getPar(par) {
+      }
+      function getPar(par) {
         //获取当前URL
         var local_url = document.location.href;
         //获取要取得的get参数位置
         var get = local_url.indexOf(par + "=");
 
         if (get == -1) {
-            return false;
+          return false;
         }
         //截取字符串
         var get_par = local_url.slice(par.length + get + 1);
@@ -766,90 +1080,89 @@ ul[href$="xxxx"]{
         var nextPar = get_par.indexOf("&");
 
         if (nextPar != -1) {
-            get_par = get_par.slice(0, nextPar);
+          get_par = get_par.slice(0, nextPar);
         }
         return get_par;
-    };
+      }
 
-    $('#btn').on('click', function() {
-        var val = $('#url').val(),
-            str = toUtf8(val);
-        getShort(val, str, val)
-    });
+      $("#btn").on("click", function () {
+        var val = $("#url").val(),
+          str = toUtf8(val);
+        getShort(val, str, val);
+      });
 
-    $('#btnS').on('click', function() {
-        var val = $('#url').val(),
-            str = toUtf8(val);
-        getShort(val, str, val, 1)
-    });
+      $("#btnS").on("click", function () {
+        var val = $("#url").val(),
+          str = toUtf8(val);
+        getShort(val, str, val, 1);
+      });
 
-    $('#btnX').on('click', function() {
-        var val = $('#url').val(),
-            str = toUtf8(val),
-            pre = 'https://wqitem.jd.com/item/view?sku=',
-            suffix = '&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1000164560_',//京粉后缀
-            newurl =  pre + val + suffix ,
-            newurlStr = pre + str + suffix ;
-            getShort(newurl, newurlStr,val, 1);
-    });
-    
-    // 短网址获取
-    function getShort(newurl,newurlStr,val,isShort){
-        var apiUrl = "https://api.jandou.com/public/tools/shorten"; 
-        if( val === ""){
-            $('#tips').html("请输入URL！！");
-            $("#url").attr('class', 'red-placeholder');
-            $('#url').attr("placeholder",'请输入您的 URL ！')
-            return false;
+      $("#btnX").on("click", function () {
+        var val = $("#url").val(),
+          str = toUtf8(val),
+          pre = "https://wqitem.jd.com/item/view?sku=",
+          suffix =
+            "&cu=true&utm_source=kong&utm_medium=jingfen&utm_campaign=t_1000164560_", //京粉后缀
+          newurl = pre + val + suffix,
+          newurlStr = pre + str + suffix;
+        getShort(newurl, newurlStr, val, 1);
+      });
+
+      // 短网址获取
+      function getShort(newurl, newurlStr, val, isShort) {
+        var apiUrl = "https://api.jandou.com/public/tools/shorten";
+        if (val === "") {
+          $("#tips").html("请输入URL！！");
+          $("#url").attr("class", "red-placeholder");
+          $("#url").attr("placeholder", "请输入您的 URL ！");
+          return false;
         }
-        if( isShort === undefined){
-            $('#qrcode').html('');
-            $('#qrcode').qrcode(newurlStr);
-            $('#qrcode_url').val(newurl);
-            $('#qrcode').fadeIn('400'); 
-            return false;
+        if (isShort === undefined) {
+          $("#qrcode").html("");
+          $("#qrcode").qrcode(newurlStr);
+          $("#qrcode_url").val(newurl);
+          $("#qrcode").fadeIn("400");
+          return false;
         }
         var request = $.ajax({
-            url: apiUrl,
-            type: "GET",
-            timeout : 1000,
-            data: {
-                format: 'json',//  输出格式
-                url: newurlStr, // 需要压缩的原始网址
-            },
-            dataType: "json",
-            cache: false,
+          url: apiUrl,
+          type: "GET",
+          timeout: 1000,
+          data: {
+            format: "json", //  输出格式
+            url: newurlStr, // 需要压缩的原始网址
+          },
+          dataType: "json",
+          cache: false,
         });
-        request.done(function(data) {
-            console.log(data);
-            var url_short = data[0].url_short;
-            $('#qrcode').html('');
-            $('#qrcode').qrcode(url_short);
-            $('#qrcode_url').val(newurl);
-            $('#qrcode_url_shorten').val(url_short);
-            $('#qrcode').fadeIn('400');
+        request.done(function (data) {
+          console.log(data);
+          var url_short = data[0].url_short;
+          $("#qrcode").html("");
+          $("#qrcode").qrcode(url_short);
+          $("#qrcode_url").val(newurl);
+          $("#qrcode_url_shorten").val(url_short);
+          $("#qrcode").fadeIn("400");
         });
-        request.fail(function(jqXHR, textStatus) {
-            console.log(textStatus);
-            $('#qrcode').html('');
-            $('#qrcode').qrcode(newurlStr);
-            $('#qrcode_url').val(newurl);
-            $('#qrcode_url_shorten').val("压缩失败！");
-            $('#qrcode').fadeIn('400'); 
+        request.fail(function (jqXHR, textStatus) {
+          console.log(textStatus);
+          $("#qrcode").html("");
+          $("#qrcode").qrcode(newurlStr);
+          $("#qrcode_url").val(newurl);
+          $("#qrcode_url_shorten").val("压缩失败！");
+          $("#qrcode").fadeIn("400");
         });
-    }
+      }
 
-    $('#qrcode').on('click', function() {
-        $(this).fadeOut('400')
-    })
+      $("#qrcode").on("click", function () {
+        $(this).fadeOut("400");
+      });
 
-    var url = getPar('url');
-    if (url) {
-        $('#url').val(url);
-        $('#btn').trigger('click');
-    };
-
+      var url = getPar("url");
+      if (url) {
+        $("#url").val(url);
+        $("#btn").trigger("click");
+      }
     </script>
-</body>
-
+  </body>
 </html>
