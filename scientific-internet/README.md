@@ -23,6 +23,8 @@ date: 2021-12-06 文章已过时，仅做存档
 - MacOS: 推荐 **ClashX Pro、ClashX、Clash Verge**、V2RayX、ShadowsocksX-NG、、sing-box
 - Windows: 推荐 Clash for Windows、**Clash Verge**、Shadowsocks
 
+ClashX Pro 1.118.1.5 安装包 [传送门](https://t.me/NiNiShare/2184?comment=5759)
+
 ShadowsocksX-NG-R8 是 ShadowsocksX-NG 的变种，**但在 2018 年 10 月已停止更新**
 
 ShadowsocksX-NG 最新下载地址：[https://github.com/shadowsocks/ShadowsocksX-NG/releases](https://github.com/shadowsocks/ShadowsocksX-NG/releases)
