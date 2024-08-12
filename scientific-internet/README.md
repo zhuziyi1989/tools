@@ -14,14 +14,14 @@ date: 2021-12-06 文章已过时，仅做存档
 - ShadowsocksX-NG-R8（MacOS）
 - ShadowsocksX-NG（MacOS）
 - V2RayX（MacOS）
-- Clash
+- ClashX
 
 ## 使用建议
 
-- iOS: 在 App Store 非中国区搜索 Shadowrocket、Quantumult X、Loon 等
-- Android: Shadowsocks-nightly、Clash for Android
-- MacOS: 推荐 V2RayX、ShadowsocksX-NG、Clash，或直接用官方版本
-- Windows: 推荐 Shadowsocks ，或直接用官方版本
+- iOS: 在 App Store 非中国区搜索 Shadowrocket、Quantumult X、Loon、Stash、sing-box、surge 等
+- Android: Clash for Android、sing-box、Shadowsocks-nightly
+- MacOS: 推荐 **ClashX Pro、ClashX、Clash Verge**、V2RayX、ShadowsocksX-NG、、sing-box
+- Windows: 推荐 Clash for Windows、**Clash Verge**、Shadowsocks
 
 ShadowsocksX-NG-R8 是 ShadowsocksX-NG 的变种，**但在 2018 年 10 月已停止更新**
 
