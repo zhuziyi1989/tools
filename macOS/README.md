@@ -6,27 +6,27 @@ date: 2016-09-17 11:34:38
 
 ### 快捷键
 
-- ctrl+shift+△  关闭显示器
-- command+option+△  睡眠
+- ctrl+shift+△ 关闭显示器
+- command+option+△ 睡眠
 - command+control+△ 关闭所有的应用程序并重启
 - command+option+esc / command+Q 退出程序
 
-> super按键就是command
+> super 按键就是 command
 
 ### Sublime Text 快捷技巧
 
-- Ctrl+Alt+Enter 每一行包裹标签，修改标签名字 
-- Ctrl+Shift+K（Command+Shift+K）  删除行
+- Ctrl+Alt+Enter 每一行包裹标签，修改标签名字
+- Ctrl+Shift+K（Command+Shift+K） 删除行
 - 鼠标选中文本，按下 Alt+F3（ Ctrl+Command+G ），即可一次性选择全部的相同文本进行同时编辑；
 - 鼠标选中多行，按下 Ctrl+Shift+L（Command+Shift+L），即可同时编辑这些行；
 - Shift 鼠标右键 (Win) 或 Option 鼠标左键 (Mac) 或使用鼠标中键可以用鼠标进行竖向多行选择；
 - Ctrl 鼠标左键(Win) 或 Command 鼠标左键(Mac) 可以自定义选择要编辑的地方。
 
-### TNT的破解软件的使用
+### TNT 的破解软件的使用
 
-如果你的 macOS 装的是TNT的破解软件的话，因为Apple删除了TNT的证书，因此应用程序将在7月12日之后崩溃。目前的解决方案是自己签名。
+如果你的 macOS 装的是 TNT 的破解软件的话，因为 Apple 删除了 TNT 的证书，因此应用程序将在 7 月 12 日之后崩溃。目前的解决方案是自己签名。
 
-- 首先，打开终端，安装xcode命令行模式:
+- 首先，打开终端，安装 xcode 命令行模式:
 
 xcode-select --install
 
@@ -34,21 +34,21 @@ xcode-select --install
 
 codesign --force --deep --sign - /Applications/name.app
 
-* name.app实际上是你的应用软件的包名。
+- name.app 实际上是你的应用软件的包名。
 
 > Via：https://qiujunya.com/article/2019/7/17/45.html
 
 ### 如何制作一个 macOS 系统引导安装盘？
 
-- 格式化 U盘：填写名称 HighSierra 或 Mojave  、选 MacOS 扩展（日志式） 、GUID 分区图
+- 格式化 U 盘：填写名称 HighSierra 或 Mojave 、选 MacOS 扩展（日志式） 、GUID 分区图
 
-- 安装 macOS Mojave.app  10.14.6 (18G103)
+- 安装 macOS Mojave.app 10.14.6 (18G103)
 
 ```
 sudo /Applications/Install\ macOS\ Mojave.app/Contents/Resources/createinstallmedia --volume /Volumes/Mojave /Applications/Install\ macOS\ Mojave.app --nointeraction
 ```
 
-- 安装 macOS High Sierra.app   10.13.6(17G4015)   2018年12月5日  High Sierra最后一个版本
+- 安装 macOS High Sierra.app 10.13.6(17G4015) 2018 年 12 月 5 日 High Sierra 最后一个版本
 
 ```
 sudo /Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume /Volumes/HighSierra --applicationpath /Applications/Install\ macOS\ High\ Sierra.app --nointeraction
@@ -66,6 +66,7 @@ sudo mv ~/Library/Google/GoogleSoftwareUpdate/GoogleSoftwareUpdate.bundle  Googl
 ```
 
 - 若要恢复需要执行：
+
 ```
 sudo mv /Library/Google/GoogleSoftwareUpdate.bak GoogleSoftwareUpdate.bundle
 sudo mv ~/Library/Google/GoogleSoftwareUpdate.bak GoogleSoftwareUpdate.bundle
@@ -73,7 +74,7 @@ sudo mv ~/Library/Google/GoogleSoftwareUpdate.bak GoogleSoftwareUpdate.bundle
 
 #### 更改上级文件夹所有者权限
 
-其实过一会儿 GoogleSoftwareUpdate.bundle 文件又会自动生成，于是更改上级文件夹所有者权限，不让浏览器写入文件信息即可 
+其实过一会儿 GoogleSoftwareUpdate.bundle 文件又会自动生成，于是更改上级文件夹所有者权限，不让浏览器写入文件信息即可
 
 ```
 sudo chown root:wheel /Library/Google/GoogleSoftwareUpdate
@@ -84,11 +85,11 @@ sudo chown root:wheel ~/Library/Google/GoogleSoftwareUpdate
 
 需求：安装一个旧版本 Chrome 版本方法，并与新版本共存
 
-* 以下的新版本是 77，旧版本是 70
+- 以下的新版本是 77，旧版本是 70
 
-- ① 首先备份新版本 Chrome 的用户个人资料，在这个路径：
+* ① 首先备份新版本 Chrome 的用户个人资料，在这个路径：
 
-~/Library/ApplicationSupport/Google/  
+~/Library/ApplicationSupport/Google/
 
 将该路径目录下的 “Chrome” 文件夹暂时更改为“Chrome.bak”。
 
@@ -107,15 +108,17 @@ do shell script "/Applications/Google\\ Chrome\\ 70.app/Contents/MacOS/Google\\ 
 选中“Google Chrome 70 启动器”，并右键“显示包内容”，Contents → Resources，替换“applet.icns”即可。
 
 ## 终端 Terminal
+
 ### 一些不好记住的命令
-- sudo killall -9  networkd
-- ifconfig  网络配置
-- lsof -i tcp:8090 -n  查看8090端口使用情况
-- traceroute -p 10086 us.jandou.com  查看主机端口是否开放（或被阻断）
 
-###  traceroute  Linux 环境下端口可用性探测工具
+- sudo killall -9 networkd
+- ifconfig 网络配置
+- lsof -i tcp:8090 -n 查看 8090 端口使用情况
+- traceroute -p 10086 us.jandou.com 查看主机端口是否开放（或被阻断）
 
-这个工具在Mac上有些略微不同，在centOS使用没问题。
+### traceroute Linux 环境下端口可用性探测工具
+
+这个工具在 Mac 上有些略微不同，在 centOS 使用没问题。
 
 `traceroute [-n] -T -p <目标端口号> Host`
 
@@ -126,39 +129,41 @@ do shell script "/Applications/Google\\ Chrome\\ 70.app/Contents/MacOS/Google\\ 
 - -n 直接使用 IP 地址而非主机名称（禁用 DNS 反查）。
 - -T 通过 TCP 探测。
 - -p 探测目标端口号。
--  Host 目标服务器域名或 IP。
+- Host 目标服务器域名或 IP。
 
-Via: [More...](https://www.alibabacloud.com/help/zh/faq-detail/40572.htm) 
-## Git 
+Via: [More...](https://www.alibabacloud.com/help/zh/faq-detail/40572.htm)
 
- 放弃本地所有的改动  git reset --hard HEAD  （谨慎操作！请先提交存档本地改动！）
+## Git
 
-##  RK61键盘使用技巧
+放弃本地所有的改动 git reset --hard HEAD （谨慎操作！请先提交存档本地改动！）
 
-- FN+Ctrl(左)  切换功能键（YUIHJKNM、FN功能键的切换）
-- FN+Shift(右)  上下左右按键切换
+## RK61 键盘使用技巧
+
+- FN+Ctrl(左) 切换功能键（YUIHJKNM、FN 功能键的切换）
+- FN+Shift(右) 上下左右按键切换
 - Shift+FN+↑ 输入问号？
 - FN+P 蓝牙配对模式
 - FN+Q MacBook Pro
 - FN+E Star (iPhone 8 Puls)
 
-
-##  NPM 烂笔头
+## NPM 烂笔头
 
 - npm home 打开项目主页
 - npm bugs 打开项目的 issue 反馈页面
 
 - 构建钩子
+
 ```
 "prebuild": "echo I run before the build script",
 "build": "cross-env NODE_ENV=production webpack",
 "postbuild": "echo I run after the build script"
 ```
-npm 脚本有pre和post两个钩子。
-用户执行npm run build的时候，会自动按照下面的顺序执行：
+
+npm 脚本有 pre 和 post 两个钩子。
+用户执行 npm run build 的时候，会自动按照下面的顺序执行：
 
 ```
 npm run prebuild && npm run build && npm run postbuild
 ```
 
-npm scripts  (link)[http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html]
+npm scripts (link)[http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html]
