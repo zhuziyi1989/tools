@@ -1,26 +1,21 @@
 payload:
-  ## > OpenAI
-  - DOMAIN-KEYWORD,openai
-  - DOMAIN-SUFFIX,ai.com
-  - DOMAIN-SUFFIX,auth0.com
-  - DOMAIN-SUFFIX,challenges.cloudflare.com # 人机验证（CAPTCHA）服务
-  - DOMAIN-SUFFIX,chat.com
-  - DOMAIN-SUFFIX,chatgpt.com
-  - DOMAIN-SUFFIX,client-api.arkoselabs.com
-  - DOMAIN-SUFFIX,events.statsigapi.net
-  - DOMAIN-SUFFIX,featuregates.org
-  - DOMAIN-SUFFIX,identrust.com
-  - DOMAIN-SUFFIX,intercom.io
-  - DOMAIN-SUFFIX,intercomcdn.com
-  - DOMAIN-SUFFIX,oaistatic.com
-  - DOMAIN-SUFFIX,oaiusercontent.com
-  - DOMAIN-SUFFIX,openai.com
-  - DOMAIN-SUFFIX,sentry.io
-  - DOMAIN-SUFFIX,sora.com
-  - DOMAIN-SUFFIX,stripe.com
+  - '+.ai.com'
+  - '+.auth0.com'
+  - '+.challenges.cloudflare.com' # 人机验证（CAPTCHA）服务
+  - '+.client-api.arkoselabs.com'
+  - '+.events.statsigapi.net'
+  - '+.featuregates.org'
+  - '+.identrust.com'
+  - '+.intercom.io'
+  - '+.intercomcdn.com'
+  - '+.poe.com'
+  - '+.sentry.io'
+  - '+.stripe.com'
+  - 'openai'
   ## >> CDN & API
-  - DOMAIN-SUFFIX,openai.com.cdn.cloudflare.net
-  - DOMAIN-SUFFIX,openaiapi-site.azureedge.net
-  - DOMAIN-SUFFIX,openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net
-  - DOMAIN-SUFFIX,openaicomproductionae4b.blob.core.windows.net
-  - DOMAIN-SUFFIX,production-openaicom-storage.azureedge.net
+  - 'openai.com.cdn.cloudflare.net'
+  - 'openaiapi-site.azureedge.net'
+  - 'openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net'
+  - 'openaicomproductionae4b.blob.core.windows.net'
+  - 'production-openaicom-storage.azureedge.net'
+
