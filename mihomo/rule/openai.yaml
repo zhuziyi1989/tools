@@ -12,7 +12,7 @@ payload:
   - '+.poe.com'
   - '+.sentry.io'
   - '+.stripe.com'
-  - 'openai'
+  - '+.openai.com'
   - 'persistent.oaistatic.com' #  是 OpenAI 的一个内容分发网络（CDN）域名，专门用于提供那些需要持久化存储的静态资源，以确保你获得更快速、更稳定的服务体验
   ## >> CDN & API
   - 'openai.com.cdn.cloudflare.net'
