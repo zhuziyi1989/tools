@@ -62,7 +62,7 @@ payload:
   - PROCESS-NAME,Surge%203
   - PROCESS-NAME,Surge%204
   - PROCESS-NAME,News
-  - PROCESS-NAME,Apple News
+  - PROCESS-NAME,Apple%20News
   - PROCESS-NAME,BitComet
   - PROCESS-NAME,BitComet.exe
   - PROCESS-NAME,BitComet_x64.exe
