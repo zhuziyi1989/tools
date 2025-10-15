@@ -1,4 +1,5 @@
 payload:
+  - PROCESS-NAME,App Store
   - PROCESS-NAME,Music
   - PROCESS-NAME,WeChat
   - PROCESS-NAME,WeChatAppEx Helper
