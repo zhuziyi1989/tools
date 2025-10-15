@@ -1,4 +1,9 @@
 payload:
+  - PROCESS-NAME,WeChat
+  - PROCESS-NAME,Music
+  - PROCESS-NAME,WeChatAppEx Helper
+  - PROCESS-NAME,Longbridge Pro
+  - PROCESS-NAME,Longbridge Pro Helper
   - PROCESS-NAME,frpc
   - PROCESS-NAME,frpc.exe
   - PROCESS-NAME,frps
