@@ -1,6 +1,6 @@
 payload:
-  - PROCESS-NAME,WeChat
   - PROCESS-NAME,Music
+  - PROCESS-NAME,WeChat
   - PROCESS-NAME,WeChatAppEx Helper
   - PROCESS-NAME,Longbridge Pro
   - PROCESS-NAME,Longbridge Pro Helper
