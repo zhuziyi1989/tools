@@ -14,4 +14,3 @@ payload:
   - DOMAIN-SUFFIX,ibkr.com.cn # ibkr cn
   - DOMAIN-SUFFIX,api.ibkr.com # ibkr hk api
   - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
-  - DOMAIN-SUFFIX,local # 本地开发
