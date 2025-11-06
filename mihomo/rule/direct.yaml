@@ -15,4 +15,5 @@ payload:
   - DOMAIN-SUFFIX,idmsa.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
   - DOMAIN-SUFFIX,sdc1.ibllc.com # 盈透新加坡服务器
+  - DOMAIN-SUFFIX,ibkr.com.cn # 盈透广东广州服务器
 
