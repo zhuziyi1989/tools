@@ -6,8 +6,6 @@ payload:
   - DOMAIN,zhuziyi1989.github.io # clash meta dashboard
   - DOMAIN,board.zash.run.place # clash dashboard
   - DOMAIN-SUFFIX,pairdrop.net # PairDrop 走直连（局域网内传输）
-  - DOMAIN-SUFFIX,ibkr.com.cn # ibkr cn
-  - DOMAIN-SUFFIX,api.ibkr.com # ibkr hk api
   - DOMAIN-SUFFIX,push.apple.com # Apple Push
   - DOMAIN-SUFFIX,gsa.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,appleid.apple.com # Apple ID 登录服务
