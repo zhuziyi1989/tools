@@ -1,0 +1,11 @@
+payload:
+  - "DOMAIN-SUFFIX,perplexity.ai" # Perplexity
+  - "DOMAIN-SUFFIX,pplx.ai" # Perplexity
+  - "DOMAIN-SUFFIX,futunn.com" # 富途牛牛
+  - "DOMAIN-SUFFIX,futuhk.com" # 富途牛牛
+  - "DOMAIN-SUFFIX,linkedin.com" # 领英 Linkedin
+  - "DOMAIN,npr.brightspotcdn.com" # 美国全国公共广播电台 CDN
+  - "DOMAIN,gspe1-ssl.ls.apple.com" # Apple News
+  - "DOMAIN,amp-api-edge.apps.apple.com" # Apple News
+  - "DOMAIN,amp-api-edge.apps.apple.com" # Apple News
+  # - 'PROCESS-NAME,News' # Apple News
