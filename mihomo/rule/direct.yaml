@@ -6,12 +6,13 @@ payload:
   - DOMAIN,zhuziyi1989.github.io # clash meta dashboard
   - DOMAIN,board.zash.run.place # clash dashboard
   - DOMAIN-SUFFIX,pairdrop.net # PairDrop 走直连（局域网内传输）
+  - DOMAIN-SUFFIX,ibkr.com.cn # ibkr cn
+  - DOMAIN-SUFFIX,api.ibkr.com # ibkr api（例如“余额”模块）
+  - DOMAIN-SUFFIX,ibllc.com # ibkr （股票实时数据，自动分配机房，如 sdc1.ibllc.com 为新加坡机房）
+  - DOMAIN-SUFFIX,widgets.tipranks.com # ibkr 三方服务，一个提供股票市场数据和分析工具的平台
   - DOMAIN-SUFFIX,push.apple.com # Apple Push
   - DOMAIN-SUFFIX,gsa.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,appleid.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,appleid.cdn-apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,idmsa.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
-  - DOMAIN-SUFFIX,sdc1.ibllc.com # 盈透-新加坡服务器
-  - DOMAIN-SUFFIX,www.ibkr.com.cn # 盈透-广东广州服务器
-  - DOMAIN-SUFFIX,api.ibkr.com # 盈透-多服务器
