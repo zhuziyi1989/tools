@@ -2,3 +2,6 @@ payload:
   - "+.itangtalk.com"
   - "+.note.com" # Japan Note
   - "+.translate.google.com"
+  - translate.googleapis.com
+  - translate.google.com
+  - translate-pa.googleapis.com
