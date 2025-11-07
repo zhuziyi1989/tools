@@ -16,3 +16,4 @@ payload:
   - DOMAIN-SUFFIX,appleid.cdn-apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,idmsa.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
+  - DOMAIN-SUFFIX,githubusercontent.com # GitHub 上所有下载资源直连
