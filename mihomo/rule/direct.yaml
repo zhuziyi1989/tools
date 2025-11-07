@@ -2,8 +2,6 @@ payload:
   - DOMAIN,clash.razord.top # clash dashboard 🚫 已废弃
   - DOMAIN,yacd.metacubex.one # clash meta dashboard
   - DOMAIN,yacd.haishan.me # clash dashboard
-  - DOMAIN,metacubex.github.io # clash dashboard
-  - DOMAIN,zhuziyi1989.github.io # clash meta dashboard
   - DOMAIN,board.zash.run.place # clash dashboard
   - DOMAIN-SUFFIX,pairdrop.net # PairDrop 走直连（局域网内传输）
   - DOMAIN-SUFFIX,ibkr.com.cn # ibkr cn
@@ -16,4 +14,3 @@ payload:
   - DOMAIN-SUFFIX,appleid.cdn-apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,idmsa.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
-  - DOMAIN-SUFFIX,githubusercontent.com # GitHub 上所有下载资源直连
