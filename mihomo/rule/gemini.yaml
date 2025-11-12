@@ -1,5 +1,6 @@
 payload:
-  - "+.gemini.google.com"
-  - "+.gemini-pa.googleapis.com"
-  - "signaler-pa.clients6.google.com" # 保障流式对话的稳定性
-  - "gemini"
+    - '+.gemini.google.com'
+    - '+.gemini-pa.googleapis.com'
+    - 'clients4.google.com'
+    - 'signaler-pa.clients6.google.com' # 保障流式对话的稳定性
+    - 'gemini'
