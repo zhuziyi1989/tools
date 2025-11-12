@@ -4,3 +4,4 @@ payload:
   - "translate.googleapis.com" # Google Chrome 翻译器服务
   - "translate.google.com" # Google Chrome 翻译器服务
   - "translate-pa.googleapis.com" # Google Chrome 翻译器服务
+  - "+.fox59.com"
