@@ -15,3 +15,4 @@ payload:
   - DOMAIN-SUFFIX,idmsa.apple.com # Apple ID 登录服务
   - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
   - DOMAIN,longbridge.app.wbrks.com # longbridge desktop
+  - DOMAIN-SUFFIX,longbridgeapp.com # longbridge
