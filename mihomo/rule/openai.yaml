@@ -1,6 +1,6 @@
 payload:
-    - 'chatgpt.com'
     - '+.ai.com'
+    - 'chatgpt.com'
     - '+.auth0.com'
     - '+.challenges.cloudflare.com' # 人机验证（CAPTCHA）服务
     - '+.client-api.arkoselabs.com'
@@ -13,6 +13,7 @@ payload:
     - '+.sentry.io'
     - '+.stripe.com'
     - '+.openai.com'
+    - 'cdn.oaistatic.com'
     - 'persistent.oaistatic.com' #  是 OpenAI 的一个内容分发网络（CDN）域名，专门用于提供那些需要持久化存储的静态资源，以确保你获得更快速、更稳定的服务体验
     ## >> CDN & API
     - 'openai.com.cdn.cloudflare.net'
