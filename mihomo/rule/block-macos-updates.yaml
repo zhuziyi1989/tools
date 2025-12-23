@@ -1,8 +1,8 @@
 payload:
-  ## > 屏蔽 macOS 系统更新 Block macOS system software updates
-  - "+.swdist.apple.com"
-  - "+.swscan.apple.com"
-  - "+.swcdn.apple.com"
-  - "+.gdmf.apple.com"
-  - "+.mesu.apple.com"
-  - "+.xp.apple.com"
+    ## > 屏蔽 macOS 系统更新 Block macOS system software updates
+    - '+.swdist.apple.com'
+    - '+.swscan.apple.com'
+    - '+.swcdn.apple.com'
+    - '+.gdmf.apple.com'
+    - '+.mesu.apple.com'
+    - '+.xp.apple.com'

@@ -1,4 +1,4 @@
 payload:
-  - DOMAIN-SUFFIX,githubusercontent.com # GitHub 上所有下载资源
-  - DOMAIN,metacubex.github.io # clash dashboard
-  - DOMAIN,zhuziyi1989.github.io # clash meta dashboard
+    - DOMAIN-SUFFIX,githubusercontent.com # GitHub 上所有下载资源
+    - DOMAIN,metacubex.github.io # clash dashboard
+    - DOMAIN,zhuziyi1989.github.io # clash meta dashboard

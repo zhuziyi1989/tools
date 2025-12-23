@@ -1,7 +1,7 @@
 payload:
-  - "+.itangtalk.com"
-  - "+.note.com" # Japan Note
-  - "translate.googleapis.com" # Google Chrome 翻译器服务
-  - "translate.google.com" # Google Chrome 翻译器服务
-  - "translate-pa.googleapis.com" # Google Chrome 翻译器服务
-  - "+.fox59.com"
+    - '+.itangtalk.com'
+    - '+.note.com' # Japan Note
+    - 'translate.googleapis.com' # Google Chrome 翻译器服务
+    - 'translate.google.com' # Google Chrome 翻译器服务
+    - 'translate-pa.googleapis.com' # Google Chrome 翻译器服务
+    - '+.fox59.com'

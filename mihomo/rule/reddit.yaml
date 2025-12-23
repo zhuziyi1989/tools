@@ -1,10 +1,10 @@
 payload:
-  ## > Reddit
-  - "+.redd.it"
-  - "+.reddit.com"
-  - "+.redditmail.com"
-  - "+.redditmedia.com"
-  - "+.redditstatic.com"
-  - "+.reddituploads.com"
-  - "+.reddituploads.com.cdn-cf.behance.net"
-  - "+.reddituploads.com.cdn-cf.dropbox.com"
+    ## > Reddit
+    - '+.redd.it'
+    - '+.reddit.com'
+    - '+.redditmail.com'
+    - '+.redditmedia.com'
+    - '+.redditstatic.com'
+    - '+.reddituploads.com'
+    - '+.reddituploads.com.cdn-cf.behance.net'
+    - '+.reddituploads.com.cdn-cf.dropbox.com'
