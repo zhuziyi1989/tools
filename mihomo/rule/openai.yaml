@@ -1,6 +1,6 @@
 payload:
     - '+.ai.com'
-    - 'chatgpt.com'
+    - '+.chatgpt.com'
     - '+.auth0.com'
     - '+.challenges.cloudflare.com' # 人机验证（CAPTCHA）服务
     - '+.client-api.arkoselabs.com'
