@@ -1,20 +1,35 @@
 payload:
+    # + 局域网工具-直连
+    - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
     - DOMAIN,clash.razord.top # clash dashboard 🚫 已废弃
     - DOMAIN,yacd.metacubex.one # clash meta dashboard
     - DOMAIN,yacd.haishan.me # clash dashboard
     - DOMAIN,board.zash.run.place # clash dashboard
     - DOMAIN-SUFFIX,pairdrop.net # PairDrop 走直连（局域网内传输）
-    # - DOMAIN-SUFFIX,ibkr.com.cn # ibkr cn
-    # - DOMAIN-SUFFIX,api.ibkr.com # ibkr api（例如“余额”模块）
-    # - DOMAIN-SUFFIX,ibllc.com # ibkr （股票实时数据，自动分配机房，如 sdc1.ibllc.com 为新加坡机房）
+    # + 苹果部分服务-直连
     - DOMAIN-SUFFIX,push.apple.com # Apple Push
     - DOMAIN-SUFFIX,gsa.apple.com # Apple ID 登录服务
     - DOMAIN-SUFFIX,appleid.apple.com # Apple ID 登录服务
     - DOMAIN-SUFFIX,appleid.cdn-apple.com # Apple ID 登录服务
     - DOMAIN-SUFFIX,idmsa.apple.com # Apple ID 登录服务
-    - DOMAIN-SUFFIX,nip.io # nip.io 简单通配符 DNS
+    # + 盈透证券-直连
+    # - DOMAIN-SUFFIX,ibkr.com.cn # ibkr cn
+    # - DOMAIN-SUFFIX,api.ibkr.com # ibkr api（例如“余额”模块）
+    # - DOMAIN-SUFFIX,ibllc.com # ibkr （股票实时数据，自动分配机房，如 sdc1.ibllc.com 为新加坡机房）
+    # + 长桥证券-直连
     - DOMAIN,longbridge.app.wbrks.com # longbridge
     - DOMAIN-SUFFIX,longbridgeapp.com # longbridge
     - DOMAIN-SUFFIX,lbkrs.com # longbridge
     - DOMAIN-SUFFIX,lbctrl.com # longbridge
     - DOMAIN-SUFFIX,execute-api.ap-east-1.amazonaws.com # longbridge
+    # + 嘉信理财-直连
+    - DOMAIN-SUFFIX,schwab.com
+    - DOMAIN-SUFFIX,schwab.co.uk
+    - DOMAIN-SUFFIX,schwab.com.hk
+    - DOMAIN-SUFFIX,schwab.com.sg
+    - DOMAIN-SUFFIX,schwabplan.com
+    - DOMAIN-SUFFIX,schwabassetmanagement.com
+    # + 香港部分银行-直连
+    - DOMAIN-SUFFIXm,bochk.com # 中银香港
+    - DOMAIN-SUFFIXm,bochk01.etnet.com.hk # etnet 经济通 中银香港资讯
+
