@@ -7,6 +7,9 @@ payload:
     - '+.fox59.com'
     - '+.bigme.pro'
     - '+.wccftech.com' # Wccftech，一家专注于电脑硬件、游戏、移动设备及科技行业新闻的知名媒体网站。
-    - '+.moomoo.com' # 富途 moomoo
-    - '+.moomooequity.com'
-    - '+.moomootrustee.com'
+    - '+.futunn.com' # 富途牛牛 主域
+    - '+.moomoo.com' #  # MOOMOO 主域
+    - '+.moomooequity.com' # MOOMOO
+    - '+.moomootrustee.com' # MOOMOO
+    - '+.futuhk.com' # 富途牛牛-香港 主域
+    # - '+.futustatic.com' # 富途牛牛 静态资源
