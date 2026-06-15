@@ -1,0 +1,1348 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="manifest" href="manifest.json" />
+		<meta name="theme-color" content="#f5f5f7" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<meta name="apple-mobile-web-app-title" content="资产大盘" />
+		<link rel="apple-touch-icon" href="icon-192.png" />
+		<title>多渠道资产收益追踪大盘</title>
+		<style>
+			:root {
+				--primary: #007aff;
+				--primary-rgb: 0, 122, 255;
+				--bg-color: #f5f5f7;
+				--card-bg: #ffffff;
+				--text-main: #1d1d1f;
+				--text-muted: #86868b;
+				--border: #d2d2d7;
+				--danger: #e53935;
+				--success: #43a047;
+			}
+			body {
+				font-family:
+					-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+					sans-serif;
+				background-color: var(--bg-color);
+				color: var(--text-main);
+				margin: 0;
+				padding: 16px;
+			}
+			.container {
+				max-width: 1000px;
+				margin: 0 auto;
+			}
+
+			.header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				margin-bottom: 24px;
+				padding-bottom: 16px;
+				border-bottom: 1px solid #e5e5ea;
+			}
+			h1 {
+				font-size: 22px;
+				margin: 20px 0;
+			}
+			h2,
+			h3 {
+				font-weight: 600;
+				margin: 0;
+			}
+
+			.user-controls {
+				display: flex;
+				align-items: center;
+				margin-top: 8px;
+				gap: 8px;
+				flex-wrap: wrap;
+			}
+			.user-controls > span {
+				font-size: 12px;
+				color: var(--text-muted);
+				white-space: nowrap;
+				flex-shrink: 0;
+			}
+			.user-controls select {
+				padding: 4px 28px 4px 8px;
+				height: 32px;
+				font-size: 13px;
+				max-width: 150px;
+				flex: 1;
+				min-width: 110px;
+				margin: 0;
+			}
+
+			input,
+			select {
+				padding: 10px 12px;
+				border: 1px solid var(--border);
+				border-radius: 8px;
+				font-size: 14px;
+				outline: none;
+				width: 100%;
+				box-sizing: border-box;
+				transition:
+					border-color 0.2s,
+					box-shadow 0.2s;
+				background-color: #fff;
+				color: var(--text-main);
+			}
+			input:focus,
+			select:focus {
+				border-color: var(--primary);
+				box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.2);
+			}
+			select {
+				appearance: none;
+				-webkit-appearance: none;
+				background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2386868b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3E%3C/svg%3E");
+				background-position: calc(100% - 12px) center !important;
+				background-repeat: no-repeat;
+				background-size: 1.2em 1.2em;
+				padding-right: 36px;
+				cursor: pointer;
+			}
+			optgroup {
+				font-weight: 600;
+				color: var(--text-muted);
+			}
+
+			button {
+				padding: 10px 16px;
+				background: var(--primary);
+				color: white;
+				border: none;
+				border-radius: 8px;
+				font-size: 14px;
+				font-weight: 500;
+				cursor: pointer;
+				transition:
+					background 0.2s,
+					transform 0.1s;
+				white-space: nowrap;
+			}
+			button:hover {
+				background: #006ee6;
+			}
+			button:active {
+				transform: scale(0.98);
+			}
+
+			.btn-outline {
+				background: transparent;
+				color: var(--text-main);
+				border: 1px solid var(--border);
+			}
+			.btn-outline:hover {
+				background: #f5f5f7;
+			}
+
+			.action-link {
+				font-size: 13px;
+				color: var(--primary);
+				cursor: pointer;
+				padding: 4px 8px;
+				border-radius: 4px;
+				transition: background 0.2s;
+				white-space: nowrap;
+				user-select: none;
+			}
+			.action-link:hover {
+				background: rgba(0, 122, 255, 0.1);
+			}
+			.action-link.danger {
+				color: var(--danger);
+			}
+			.action-link.danger:hover {
+				background: rgba(229, 57, 53, 0.1);
+			}
+			.action-link.muted {
+				color: var(--text-muted);
+			}
+			.action-link.muted:hover {
+				background: #e5e5ea;
+				color: var(--text-main);
+			}
+
+			.badge {
+				display: inline-block;
+				padding: 2px 6px;
+				border-radius: 4px;
+				font-size: 11px;
+				font-weight: 600;
+				margin-right: 6px;
+				vertical-align: text-bottom;
+			}
+			.badge-active {
+				background: rgba(52, 199, 89, 0.15);
+				color: #28a745;
+			}
+			.badge-closed {
+				background: #e5e5ea;
+				color: var(--text-muted);
+			}
+
+			/* --- 全局大盘模块 --- */
+			.global-section {
+				margin-bottom: 24px;
+			}
+			.global-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 12px;
+				cursor: pointer;
+				user-select: none;
+			}
+			.global-header h3 {
+				font-size: 15px;
+				display: flex;
+				align-items: center;
+				gap: 8px;
+			}
+			.global-header:hover h3 {
+				color: var(--primary);
+			}
+
+			.modal-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.4);
+				backdrop-filter: blur(4px);
+				-webkit-backdrop-filter: blur(4px);
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				z-index: 1000;
+				visibility: hidden;
+				opacity: 0;
+				transition: 0.3s;
+			}
+			.modal-overlay.active {
+				visibility: visible;
+				opacity: 1;
+			}
+			.modal-content {
+				background: var(--card-bg);
+				padding: 32px;
+				border-radius: 16px;
+				width: 90%;
+				max-width: 400px;
+				box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+				transform: translateY(20px);
+				transition: 0.3s;
+			}
+			.modal-overlay.active .modal-content {
+				transform: translateY(0);
+			}
+
+			.account-section {
+				margin-bottom: 24px;
+				padding-top: 24px;
+				border-top: 1px dashed #e5e5ea;
+			}
+			.account-bar {
+				display: flex;
+				gap: 8px;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+			.account-bar select {
+				flex: 1;
+				min-width: 200px;
+				max-width: 300px;
+				margin-right: 4px;
+			}
+
+			.dashboard {
+				margin-bottom: 24px;
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 16px;
+				transition: 0.3s;
+			}
+			.card {
+				background: var(--card-bg);
+				padding: 20px;
+				border-radius: 12px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+				text-align: center;
+			}
+			.global-card {
+				background: #f8f9fa;
+				border: 1px solid #e5e5ea;
+				box-shadow: none;
+			}
+			.card .title {
+				font-size: 13px;
+				color: var(--text-muted);
+				margin-bottom: 8px;
+			}
+			.card .value {
+				font-size: 24px;
+				font-weight: 600;
+				word-break: break-all;
+			}
+
+			.actions {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 16px;
+				margin-bottom: 24px;
+			}
+			.form-group {
+				background: var(--card-bg);
+				padding: 20px;
+				border-radius: 12px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+				display: flex;
+				gap: 12px;
+				align-items: flex-end;
+			}
+			.input-item {
+				display: flex;
+				flex-direction: column;
+				flex: 1;
+			}
+			.input-item label {
+				font-size: 12px;
+				color: var(--text-muted);
+				margin-bottom: 6px;
+				font-weight: 500;
+			}
+
+			.table-responsive {
+				width: 100%;
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+				margin-top: 12px;
+				margin-bottom: 24px;
+				border-radius: 12px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+				background: var(--card-bg);
+			}
+			table {
+				width: 100%;
+				border-collapse: collapse;
+				min-width: 850px;
+			}
+			th,
+			td {
+				padding: 14px 16px;
+				text-align: right;
+				border-bottom: 1px solid var(--border);
+				font-size: 14px;
+			}
+			th:first-child,
+			td:first-child {
+				text-align: left;
+			}
+			th {
+				background: #fafafa;
+				font-weight: 500;
+				color: var(--text-muted);
+				font-size: 13px;
+				white-space: nowrap;
+			}
+			.color-red {
+				color: var(--danger);
+			}
+			.color-green {
+				color: var(--success);
+			}
+
+			.raw-data-container {
+				display: flex;
+				gap: 16px;
+			}
+			.raw-list {
+				flex: 1;
+				background: var(--card-bg);
+				border-radius: 12px;
+				padding: 20px;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+			}
+			.raw-list h3 {
+				margin-bottom: 16px;
+				font-size: 15px;
+			}
+			.raw-list ul {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.raw-list li {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 12px 0;
+				border-bottom: 1px solid #eee;
+				font-size: 13px;
+			}
+			.raw-list li:last-child {
+				border-bottom: none;
+			}
+
+			.raw-list li .delete-btn {
+				font-size: 12px;
+				padding: 6px 12px;
+				height: auto;
+				opacity: 0;
+				visibility: hidden;
+				transition:
+					opacity 0.2s ease,
+					visibility 0.2s ease;
+				background: transparent;
+				color: var(--danger);
+				border: 1px solid var(--danger);
+			}
+			.raw-list li .delete-btn:hover {
+				background: #ffebeb;
+			}
+			.raw-list li:hover .delete-btn {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			@media (max-width: 768px) {
+				.header {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 16px;
+					border-bottom: none;
+					padding-bottom: 0;
+				}
+				.header-top {
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+				}
+				.header-actions {
+					/* width: 100%; */
+					display: flex;
+					justify-content: flex-start;
+					gap: 12px;
+					flex-wrap: wrap;
+					background: var(--card-bg);
+					padding: 12px;
+					border-radius: 12px;
+					box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+				}
+
+				.account-bar {
+					gap: 6px;
+					justify-content: flex-start;
+				}
+				.account-bar select {
+					width: 100%;
+					max-width: 100%;
+					margin-right: 0;
+					margin-bottom: 4px;
+				}
+				.account-bar .action-link {
+					flex: auto;
+					text-align: center;
+					padding: 6px;
+					font-size: 12px;
+				}
+				.account-bar .action-link.danger {
+					margin-left: 0 !important;
+				}
+
+				.dashboard {
+					grid-template-columns: repeat(2, 1fr);
+					gap: 12px;
+				}
+				.card {
+					padding: 16px 12px;
+				}
+				.card .value {
+					font-size: 20px;
+				}
+
+				.actions {
+					grid-template-columns: 1fr;
+					gap: 16px;
+				}
+				.form-group {
+					flex-wrap: wrap;
+					padding: 16px;
+				}
+				.input-item {
+					flex: 1 1 100%;
+				}
+				.form-group button {
+					width: 100%;
+					margin-top: 4px;
+					height: 44px;
+				}
+
+				.raw-data-container {
+					flex-direction: column;
+				}
+				.raw-list li .delete-btn {
+					opacity: 1;
+					visibility: visible;
+				}
+
+				.modal-content {
+					padding: 20px 16px;
+					width: 85%;
+				}
+				.modal-content h2 {
+					font-size: 18px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<input
+			type="file"
+			id="import-file"
+			accept=".json"
+			style="display: none"
+			onchange="importJSON(event)" />
+
+		<div id="user-modal" class="modal-overlay">
+			<div class="modal-content">
+				<h2 style="margin-bottom: 8px">建立资产档案</h2>
+				<p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px">
+					请先建立您的专属用户标识，系统将生成与您绑定的独立数据沙盒。
+				</p>
+
+				<div class="input-item">
+					<label>系统登录名 (唯一标识)</label>
+					<input type="text" id="reg-username" placeholder="例如: pengyuyan" />
+				</div>
+				<div class="input-item" style="margin-top: 16px">
+					<label>展示昵称</label>
+					<input type="text" id="reg-nickname" placeholder="例如: 彭于晏" />
+				</div>
+
+				<div style="display: flex; gap: 12px; margin-top: 28px">
+					<button
+						id="btn-cancel-user"
+						class="btn-outline"
+						style="flex: 1; display: none"
+						onclick="hideUserModal()">
+						取消
+					</button>
+					<button style="flex: 2" onclick="registerUser()">保存并进入</button>
+				</div>
+
+				<div
+					style="
+						margin-top: 24px;
+						text-align: center;
+						border-top: 1px solid #eee;
+						padding-top: 16px;
+					">
+					<span style="font-size: 13px; color: var(--text-muted)">已有备份数据？</span>
+					<span
+						class="action-link"
+						style="margin-left: 8px"
+						onclick="document.getElementById('import-file').click()">
+						直接导入恢复
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="container" id="app-content" style="display: none">
+			<div class="header">
+				<div class="header-top">
+					<div>
+						<h1>资产追踪大盘</h1>
+						<div class="user-controls" id="user-controls">
+							<span>当前用户:</span>
+							<select id="user-select" onchange="switchUser()"></select>
+							<span class="action-link muted" onclick="showUserModal(true)">
+								+ 新建
+							</span>
+							<span class="action-link danger" onclick="deleteCurrentUser()">
+								删除
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="header-actions">
+					<span
+						class="action-link"
+						id="btn-privacy"
+						onclick="togglePrivacy()"
+						style="background: rgba(0, 122, 255, 0.1); font-weight: 600">
+						👁️ 隐藏金额
+					</span>
+					<span class="action-link" onclick="exportJSON()">导出</span>
+					<span
+						class="action-link"
+						onclick="document.getElementById('import-file').click()">
+						导入
+					</span>
+					<span class="action-link danger" onclick="clearAllData()">清空所有数据</span>
+				</div>
+			</div>
+
+			<div class="global-section">
+				<div class="global-header" onclick="toggleGlobalDashboard()">
+					<h3>
+						全盘资产总览 (全渠道)
+						<span
+							class="badge badge-active"
+							style="margin-left: 8px; font-weight: normal; font-size: 10px"
+							id="global-acc-count">
+							0 个渠道
+						</span>
+					</h3>
+					<span class="action-link muted" id="global-toggle-text">收起面板</span>
+				</div>
+				<div class="dashboard" id="global-dashboard">
+					<div class="card global-card">
+						<div class="title">全盘总资产</div>
+						<div class="value" id="glb-balance">0.00</div>
+					</div>
+					<div class="card global-card">
+						<div class="title">全盘总投入本金</div>
+						<div class="value" id="glb-invested">0.00</div>
+					</div>
+					<div class="card global-card">
+						<div class="title">全盘绝对收益</div>
+						<div class="value" id="glb-return">0.00</div>
+					</div>
+					<div class="card global-card">
+						<div class="title">综合收益率 (全局 XIRR)</div>
+						<div class="value" id="glb-xirr">0.00%</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="account-section">
+				<div class="account-bar">
+					<select id="account-select" onchange="switchAccount()"></select>
+					<span class="action-link" onclick="createAccount()">+ 新增渠道</span>
+					<span class="action-link muted" onclick="editAccountName()">修改名称</span>
+					<span class="action-link muted" onclick="editAccountDesc()">修改描述</span>
+					<span
+						class="action-link muted"
+						id="btn-toggle-status"
+						onclick="toggleAccountStatus()">
+						设为清仓
+					</span>
+					<span
+						class="action-link danger"
+						style="margin-left: auto"
+						onclick="deleteCurrentAccount()">
+						删除渠道
+					</span>
+				</div>
+				<div
+					id="account-desc"
+					style="
+						font-size: 12px;
+						color: var(--text-muted);
+						margin-top: 8px;
+						padding-left: 4px;
+						min-height: 18px;
+						display: flex;
+						align-items: center;
+					"></div>
+			</div>
+
+			<div class="dashboard">
+				<div class="card">
+					<div class="title">当前渠道市值</div>
+					<div class="value" id="dash-balance">0.00</div>
+				</div>
+				<div class="card">
+					<div class="title">累计净投入</div>
+					<div class="value" id="dash-invested">0.00</div>
+				</div>
+				<div class="card">
+					<div class="title">绝对收益</div>
+					<div class="value" id="dash-return">0.00</div>
+				</div>
+				<div class="card">
+					<div class="title">XIRR (年化)</div>
+					<div class="value" id="dash-xirr">0.00%</div>
+				</div>
+			</div>
+
+			<div class="actions">
+				<div class="form-group">
+					<div class="input-item">
+						<label>流水日期</label>
+						<input type="date" id="tx-date" />
+					</div>
+					<div class="input-item">
+						<label>金额 (负数为入金)</label>
+						<input type="number" id="tx-amount" step="0.01" />
+					</div>
+					<button onclick="addTransaction()">记一笔流水</button>
+				</div>
+				<div class="form-group">
+					<div class="input-item">
+						<label>快照日期</label>
+						<input type="date" id="snap-date" />
+					</div>
+					<div class="input-item">
+						<label>当前总市值</label>
+						<input type="number" id="snap-balance" step="0.01" />
+					</div>
+					<button onclick="addSnapshot()">打一个快照</button>
+				</div>
+			</div>
+
+			<h2>衍生统计明细</h2>
+			<div class="table-responsive">
+				<table>
+					<thead>
+						<tr>
+							<th>快照日期</th>
+							<th>加权持有时间(天)</th>
+							<th>期末市值</th>
+							<th>累计本金</th>
+							<th>绝对收益</th>
+							<th>简单收益率</th>
+							<th>估算年化收益率(%)</th>
+							<th>XIRR (年化)</th>
+						</tr>
+					</thead>
+					<tbody id="table-body"></tbody>
+				</table>
+			</div>
+
+			<div class="raw-data-container">
+				<div class="raw-list">
+					<h3>原始出入金流水</h3>
+					<ul id="tx-list"></ul>
+				</div>
+				<div class="raw-list">
+					<h3>原始市值快照</h3>
+					<ul id="snap-list"></ul>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			const STORAGE_KEY_V3 = 'asset_tracker_data_v3';
+
+			// UI 临时状态（不入库持久化）
+			let isPrivacyMode = false;
+			let isGlobalShow = true;
+
+			const getDefaultAccountData = () => ({
+				activeId: 'acc_1',
+				accounts: [
+					{
+						id: 'acc_1',
+						name: '长桥证券 (港股)',
+						description: '港股主力交易账户',
+						status: 'active',
+						transactions: [],
+						snapshots: [],
+					},
+					{
+						id: 'acc_2',
+						name: '盈透证券 (IBKR)',
+						description: '美股主力交易账户',
+						status: 'active',
+						transactions: [],
+						snapshots: [],
+					},
+					{
+						id: 'acc_3',
+						name: '国泰海通 (A股)',
+						description: 'A股低佣金账户 (股票0.8‱ / ETF 0.5‱)',
+						status: 'active',
+						transactions: [],
+						snapshots: [],
+					},
+				],
+			});
+
+			const loadData = () => {
+				try {
+					const storedV3 = localStorage.getItem(STORAGE_KEY_V3);
+					if (storedV3) {
+						const parsed = JSON.parse(storedV3);
+						parsed.users.forEach((u) => {
+							u.data.accounts.forEach((acc) => {
+								acc.description = acc.description || '';
+								acc.status = acc.status || 'active';
+								acc.transactions = acc.transactions.map((t) => ({
+									...t,
+									date: new Date(t.date),
+								}));
+								acc.snapshots = acc.snapshots.map((s) => ({
+									...s,
+									date: new Date(s.date),
+								}));
+							});
+						});
+						return parsed;
+					}
+				} catch (e) {
+					console.error('数据读取失败', e);
+				}
+				return { currentUserId: null, users: [] };
+			};
+
+			let state = loadData();
+			const saveData = () => localStorage.setItem(STORAGE_KEY_V3, JSON.stringify(state));
+
+			const getCurrentUser = () => state.users.find((u) => u.id === state.currentUserId);
+			const getActiveAcc = () => {
+				const user = getCurrentUser();
+				return (
+					user.data.accounts.find((a) => a.id === user.data.activeId) ||
+					user.data.accounts[0]
+				);
+			};
+
+			// --- UI 状态切换 ---
+			window.togglePrivacy = () => {
+				isPrivacyMode = !isPrivacyMode;
+				const btn = document.getElementById('btn-privacy');
+				btn.innerText = isPrivacyMode ? '👀 显示金额' : '👁️ 隐藏金额';
+				btn.style.background = isPrivacyMode ? '#e5e5ea' : 'rgba(0,122,255,0.1)';
+				render();
+			};
+
+			window.toggleGlobalDashboard = () => {
+				isGlobalShow = !isGlobalShow;
+				document.getElementById('global-dashboard').style.display = isGlobalShow
+					? 'grid'
+					: 'none';
+				document.getElementById('global-toggle-text').innerText = isGlobalShow
+					? '收起面板'
+					: '展开面板';
+			};
+
+			// --- 格式化函数 (融入隐私模式拦截) ---
+			const fmtCurrency = (num) => {
+				if (isPrivacyMode) return '****';
+				return new Intl.NumberFormat('en-US', {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				}).format(num);
+			};
+			const fmtPercent = (num) => {
+				if (isPrivacyMode) return '****';
+				return (num * 100).toFixed(2) + '%';
+			};
+			const fmtDate = (date) => date.toISOString().split('T')[0];
+			const getColorClass = (num) =>
+				isPrivacyMode ? '' : num > 0 ? 'color-red' : num < 0 ? 'color-green' : '';
+
+			// --- 核心算法 ---
+			const calculateXIRR = (cashflows) => {
+				if (cashflows.length < 2) return 0;
+				let hasPos = false,
+					hasNeg = false;
+				for (let cf of cashflows) {
+					if (cf.amount > 0) hasPos = true;
+					if (cf.amount < 0) hasNeg = true;
+				}
+				if (!hasPos || !hasNeg) return 0;
+
+				const f = (r) => {
+					const d0 = cashflows[0].date.getTime();
+					return cashflows.reduce((sum, cf) => {
+						const exp = (cf.date.getTime() - d0) / 86400000 / 365.0;
+						const base = Math.max(1 + r, 1e-12);
+						return sum + cf.amount / Math.pow(base, exp);
+					}, 0);
+				};
+
+				const npv0 = f(0);
+				if (Math.abs(npv0) < 1e-6) return 0;
+
+				let low, high;
+				if (npv0 < 0) {
+					high = 0;
+					low = -0.9;
+					let attempts = 0;
+					while (f(low) < 0 && attempts < 20) {
+						low = -1 + (low + 1) / 10;
+						attempts++;
+					}
+					if (f(low) < 0) return -1;
+				} else {
+					low = 0;
+					high = 1;
+					let attempts = 0;
+					while (f(high) > 0 && attempts < 100) {
+						high = high * 2;
+						attempts++;
+					}
+				}
+
+				let r = 0;
+				for (let i = 0; i < 100; i++) {
+					r = (low + high) / 2;
+					const npv = f(r);
+					if (Math.abs(npv) < 1e-6) return r;
+					if (npv > 0) low = r;
+					else high = r;
+				}
+				return isNaN(r) || !isFinite(r) ? 0 : r;
+			};
+
+			const computeMetrics = (acc) => {
+				const txs = [...acc.transactions].sort((a, b) => a.date - b.date);
+				const snaps = [...acc.snapshots].sort((a, b) => a.date - b.date);
+				return snaps.map((snap) => {
+					const historicalTxs = txs.filter((tx) => tx.date <= snap.date);
+					const totalInvested = historicalTxs.reduce((sum, tx) => sum - tx.amount, 0);
+					const absoluteReturn = snap.balance - totalInvested;
+					const simpleROI = totalInvested !== 0 ? absoluteReturn / totalInvested : 0;
+
+					let weightedDaysSum = 0;
+					historicalTxs.forEach((tx) => {
+						const days = (snap.date.getTime() - tx.date.getTime()) / 86400000;
+						weightedDaysSum += -tx.amount * days;
+					});
+					const weightedDays =
+						totalInvested !== 0 ? Math.max(0, weightedDaysSum / totalInvested) : 0;
+					const estAnnualROI = weightedDays > 0 ? simpleROI / (weightedDays / 365) : 0;
+					const xirrCashflows = [
+						...historicalTxs.map((tx) => ({ date: tx.date, amount: tx.amount })),
+						{ date: snap.date, amount: snap.balance },
+					];
+
+					return {
+						date: fmtDate(snap.date),
+						weightedDays,
+						balance: snap.balance,
+						totalInvested,
+						absoluteReturn,
+						simpleROI,
+						estAnnualROI,
+						xirr: calculateXIRR(xirrCashflows),
+					};
+				});
+			};
+
+			// 计算全局综合指标
+			const computeGlobalMetrics = () => {
+				const user = getCurrentUser();
+				if (!user) return { balance: 0, invested: 0, absReturn: 0, xirr: 0, accCount: 0 };
+
+				let mergedTxs = [];
+				let globalBalance = 0;
+				let maxDate = new Date(0);
+
+				// 汇总所有渠道的终态市值和历史流水
+				user.data.accounts.forEach((acc) => {
+					mergedTxs.push(...acc.transactions);
+					if (acc.snapshots.length > 0) {
+						const sortedSnaps = [...acc.snapshots].sort((a, b) => a.date - b.date);
+						const latestSnap = sortedSnaps[sortedSnaps.length - 1];
+						globalBalance += latestSnap.balance;
+						if (latestSnap.date > maxDate) maxDate = latestSnap.date;
+					}
+				});
+
+				mergedTxs.sort((a, b) => a.date - b.date);
+				const globalInvested = mergedTxs.reduce((sum, tx) => sum - tx.amount, 0);
+				const globalAbsoluteReturn = globalBalance - globalInvested;
+
+				let globalXIRR = 0;
+				if (mergedTxs.length > 0 && maxDate > new Date(0)) {
+					const xirrCashflows = [
+						...mergedTxs.map((tx) => ({ date: tx.date, amount: tx.amount })),
+						{ date: maxDate, amount: globalBalance },
+					];
+					globalXIRR = calculateXIRR(xirrCashflows);
+				}
+
+				return {
+					balance: globalBalance,
+					invested: globalInvested,
+					absReturn: globalAbsoluteReturn,
+					xirr: globalXIRR,
+					accCount: user.data.accounts.length,
+				};
+			};
+
+			const render = () => {
+				if (!state.currentUserId || state.users.length === 0) {
+					document.getElementById('app-content').style.display = 'none';
+					showUserModal(false);
+					return;
+				}
+				hideUserModal();
+				document.getElementById('app-content').style.display = 'block';
+
+				const uSelect = document.getElementById('user-select');
+				uSelect.innerHTML = state.users
+					.map(
+						(u) =>
+							`<option value="${u.id}" ${u.id === state.currentUserId ? 'selected' : ''}>${u.nickname}</option>`
+					)
+					.join('');
+
+				const user = getCurrentUser();
+
+				// 渲染全局大盘
+				const globalData = computeGlobalMetrics();
+				document.getElementById('global-acc-count').innerText =
+					`${globalData.accCount} 个渠道`;
+				document.getElementById('glb-balance').innerText = fmtCurrency(globalData.balance);
+				document.getElementById('glb-invested').innerText = fmtCurrency(
+					globalData.invested
+				);
+				document.getElementById('glb-return').innerText = fmtCurrency(globalData.absReturn);
+				document.getElementById('glb-return').className =
+					`value ${getColorClass(globalData.absReturn)}`;
+				document.getElementById('glb-xirr').innerText = fmtPercent(globalData.xirr);
+				document.getElementById('glb-xirr').className =
+					`value ${getColorClass(globalData.xirr)}`;
+
+				// 渲染当前渠道
+				const activeAccounts = user.data.accounts.filter((a) => a.status !== 'closed');
+				const closedAccounts = user.data.accounts.filter((a) => a.status === 'closed');
+
+				let optionsHtml = '';
+				if (activeAccounts.length > 0) {
+					optionsHtml +=
+						`<optgroup label="持有中">` +
+						activeAccounts
+							.map(
+								(a) =>
+									`<option value="${a.id}" ${a.id === user.data.activeId ? 'selected' : ''}>${a.name}</option>`
+							)
+							.join('') +
+						`</optgroup>`;
+				}
+				if (closedAccounts.length > 0) {
+					optionsHtml +=
+						`<optgroup label="已清仓">` +
+						closedAccounts
+							.map(
+								(a) =>
+									`<option value="${a.id}" ${a.id === user.data.activeId ? 'selected' : ''}>${a.name}</option>`
+							)
+							.join('') +
+						`</optgroup>`;
+				}
+				document.getElementById('account-select').innerHTML = optionsHtml;
+
+				const activeAcc = getActiveAcc();
+				const isClosed = activeAcc.status === 'closed';
+
+				const badgeHtml = isClosed
+					? `<span class="badge badge-closed">清仓</span>`
+					: `<span class="badge badge-active">持有</span>`;
+				document.getElementById('account-desc').innerHTML =
+					`${badgeHtml} <span>${activeAcc.description || '暂无描述'}</span>`;
+				document.getElementById('btn-toggle-status').innerText = isClosed
+					? '恢复持有'
+					: '设为清仓';
+
+				const metrics = computeMetrics(activeAcc);
+				const latest =
+					metrics.length > 0
+						? metrics[metrics.length - 1]
+						: { balance: 0, totalInvested: 0, absoluteReturn: 0, xirr: 0 };
+
+				document.getElementById('dash-balance').innerText = fmtCurrency(latest.balance);
+				document.getElementById('dash-invested').innerText = fmtCurrency(
+					latest.totalInvested
+				);
+				document.getElementById('dash-return').innerText = fmtCurrency(
+					latest.absoluteReturn
+				);
+				document.getElementById('dash-return').className =
+					`value ${getColorClass(latest.absoluteReturn)}`;
+				document.getElementById('dash-xirr').innerText = fmtPercent(latest.xirr);
+				document.getElementById('dash-xirr').className =
+					`value ${getColorClass(latest.xirr)}`;
+
+				document.getElementById('table-body').innerHTML = metrics.length
+					? metrics
+							.map(
+								(m) => `
+      <tr>
+        <td>${m.date}</td>
+        <td>${Math.round(m.weightedDays)}</td>
+        <td>${fmtCurrency(m.balance)}</td>
+        <td>${fmtCurrency(m.totalInvested)}</td>
+        <td class="${getColorClass(m.absoluteReturn)}">${fmtCurrency(m.absoluteReturn)}</td>
+        <td class="${getColorClass(m.simpleROI)}">${fmtPercent(m.simpleROI)}</td>
+        <td class="${getColorClass(m.estAnnualROI)}">${fmtPercent(m.estAnnualROI)}</td>
+        <td class="${getColorClass(m.xirr)}">${fmtPercent(m.xirr)}</td>
+      </tr>
+    `
+							)
+							.join('')
+					: '<tr><td colspan="8" style="text-align:center;">当前渠道暂无快照数据</td></tr>';
+
+				document.getElementById('tx-list').innerHTML =
+					activeAcc.transactions
+						.sort((a, b) => a.date - b.date)
+						.map(
+							(tx, idx) => `
+      <li>
+        <span>${fmtDate(tx.date)} &nbsp;|&nbsp; <strong>${fmtCurrency(tx.amount)}</strong></span>
+        <button class="delete-btn" onclick="deleteTx(${idx})">删除</button>
+      </li>
+    `
+						)
+						.join('') ||
+					'<li style="color:#999; justify-content:center;">暂无流水</li>';
+
+				document.getElementById('snap-list').innerHTML =
+					activeAcc.snapshots
+						.sort((a, b) => a.date - b.date)
+						.map(
+							(snap, idx) => `
+      <li>
+        <span>${fmtDate(snap.date)} &nbsp;|&nbsp; <strong>${fmtCurrency(snap.balance)}</strong></span>
+        <button class="delete-btn" onclick="deleteSnap(${idx})">删除</button>
+      </li>
+    `
+						)
+						.join('') ||
+					'<li style="color:#999; justify-content:center;">暂无快照</li>';
+			};
+
+			// --- 操作绑定 ---
+			window.showUserModal = (isCancellable) => {
+				document.getElementById('user-modal').classList.add('active');
+				document.getElementById('btn-cancel-user').style.display = isCancellable
+					? 'block'
+					: 'none';
+			};
+			window.hideUserModal = () =>
+				document.getElementById('user-modal').classList.remove('active');
+
+			window.registerUser = () => {
+				const username = document.getElementById('reg-username').value.trim();
+				const nickname = document.getElementById('reg-nickname').value.trim();
+				if (!username || !nickname) return alert('请完整填写登录名和展示昵称！');
+				if (state.users.some((u) => u.username === username))
+					return alert('该登录名已被占用，请更换。');
+				const newUser = {
+					id: 'u_' + Date.now() + Math.random().toString(36).substr(2, 5),
+					username,
+					nickname,
+					data: getDefaultAccountData(),
+				};
+				state.users.push(newUser);
+				state.currentUserId = newUser.id;
+				saveData();
+				document.getElementById('reg-username').value = '';
+				document.getElementById('reg-nickname').value = '';
+				hideUserModal();
+				render();
+			};
+
+			window.switchUser = () => {
+				state.currentUserId = document.getElementById('user-select').value;
+				saveData();
+				render();
+			};
+			window.deleteCurrentUser = () => {
+				if (confirm(`确定要彻底删除用户及其所有数据吗？此操作不可恢复。`)) {
+					state.users = state.users.filter((u) => u.id !== state.currentUserId);
+					state.currentUserId = state.users.length > 0 ? state.users[0].id : null;
+					saveData();
+					render();
+				}
+			};
+
+			window.switchAccount = () => {
+				getCurrentUser().data.activeId = document.getElementById('account-select').value;
+				saveData();
+				render();
+			};
+			window.createAccount = () => {
+				const name = prompt('请输入新渠道名称 (例如: 招商银行)：');
+				if (!name || !name.trim()) return;
+				const desc = prompt('请输入渠道详细描述 (选填)：');
+				const newAcc = {
+					id: 'acc_' + Date.now(),
+					name: name.trim(),
+					description: desc ? desc.trim() : '',
+					status: 'active',
+					transactions: [],
+					snapshots: [],
+				};
+				getCurrentUser().data.accounts.push(newAcc);
+				getCurrentUser().data.activeId = newAcc.id;
+				saveData();
+				render();
+			};
+			window.editAccountName = () => {
+				const acc = getActiveAcc();
+				const newName = prompt('修改当前渠道名称：', acc.name);
+				if (newName !== null && newName.trim() !== '') {
+					acc.name = newName.trim();
+					saveData();
+					render();
+				}
+			};
+			window.editAccountDesc = () => {
+				const acc = getActiveAcc();
+				const newDesc = prompt('修改当前渠道描述：', acc.description || '');
+				if (newDesc !== null) {
+					acc.description = newDesc.trim();
+					saveData();
+					render();
+				}
+			};
+			window.deleteCurrentAccount = () => {
+				const user = getCurrentUser();
+				if (user.data.accounts.length <= 1) return alert('当前用户至少需要保留一个渠道！');
+				if (
+					confirm(
+						`确定要彻底删除渠道【${getActiveAcc().name}】及所有数据吗？此操作不可恢复。`
+					)
+				) {
+					user.data.accounts = user.data.accounts.filter(
+						(a) => a.id !== user.data.activeId
+					);
+					user.data.activeId = user.data.accounts[0].id;
+					saveData();
+					render();
+				}
+			};
+			window.toggleAccountStatus = () => {
+				const acc = getActiveAcc();
+				acc.status = acc.status === 'closed' ? 'active' : 'closed';
+				saveData();
+				render();
+			};
+
+			window.addTransaction = () => {
+				const dateStr = document.getElementById('tx-date').value;
+				const amountStr = document.getElementById('tx-amount').value;
+				if (!dateStr || !amountStr) return alert('请完整填写流水信息');
+				getActiveAcc().transactions.push({
+					date: new Date(dateStr),
+					amount: parseFloat(amountStr),
+				});
+				saveData();
+				render();
+			};
+			window.addSnapshot = () => {
+				const dateStr = document.getElementById('snap-date').value;
+				const balanceStr = document.getElementById('snap-balance').value;
+				if (!dateStr || !balanceStr) return alert('请完整填写快照信息');
+				getActiveAcc().snapshots.push({
+					date: new Date(dateStr),
+					balance: parseFloat(balanceStr),
+				});
+				saveData();
+				render();
+			};
+
+			window.deleteTx = (idx) => {
+				if (confirm('确定要删除这条流水记录吗？')) {
+					getActiveAcc().transactions.splice(idx, 1);
+					saveData();
+					render();
+				}
+			};
+			window.deleteSnap = (idx) => {
+				if (confirm('确定要删除这条资产快照吗？')) {
+					getActiveAcc().snapshots.splice(idx, 1);
+					saveData();
+					render();
+				}
+			};
+
+			window.clearAllData = () => {
+				if (
+					confirm(
+						'⚠️ 警告：此操作将清空本地所有的【用户档案】及其下属记录，且不可恢复！\n\n确定要继续清空吗？'
+					)
+				) {
+					localStorage.removeItem(STORAGE_KEY_V3);
+					localStorage.removeItem('asset_tracker_data_v2');
+					localStorage.removeItem('asset_tracker_data');
+					state = { currentUserId: null, users: [] };
+					render();
+				}
+			};
+
+			window.exportJSON = () => {
+				const blob = new Blob([JSON.stringify(state, null, 2)], {
+					type: 'application/json',
+				});
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement('a');
+				a.href = url;
+				a.download = `asset_tracker_${new Date().toISOString().split('T')[0]}.json`;
+				document.body.appendChild(a);
+				a.click();
+				document.body.removeChild(a);
+				URL.revokeObjectURL(url);
+			};
+
+			window.importJSON = (event) => {
+				const file = event.target.files[0];
+				if (!file) return;
+				const reader = new FileReader();
+				reader.onload = (e) => {
+					try {
+						const parsed = JSON.parse(e.target.result);
+						if (!parsed.users) throw new Error('不是有效的多用户版本数据');
+						state = {
+							currentUserId: parsed.currentUserId,
+							users: parsed.users.map((u) => ({
+								...u,
+								data: {
+									activeId: u.data.activeId,
+									accounts: u.data.accounts.map((acc) => ({
+										...acc,
+										description: acc.description || '',
+										status: acc.status || 'active',
+										transactions: acc.transactions.map((t) => ({
+											...t,
+											date: new Date(t.date),
+										})),
+										snapshots: acc.snapshots.map((s) => ({
+											...s,
+											date: new Date(s.date),
+										})),
+									})),
+								},
+							})),
+						};
+						saveData();
+						render();
+						alert('数据导入成功！');
+					} catch (err) {
+						alert('导入失败，请检查 JSON 格式。');
+					}
+				};
+				reader.readAsText(file);
+				event.target.value = '';
+			};
+
+			// 注册 Service Worker
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', () => {
+					navigator.serviceWorker.register('./sw.js').catch((err) => {
+						console.error('ServiceWorker 注册失败: ', err);
+					});
+				});
+			}
+
+			render();
+		</script>
+	</body>
+</html>
