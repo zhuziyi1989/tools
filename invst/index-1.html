@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>多渠道资产收益追踪大盘</title>
+  <style>
+    :root {
+      --primary: #007aff;
+      --bg-color: #f5f5f7;
+      --card-bg: #ffffff;
+      --text-main: #1d1d1f;
+      --text-muted: #86868b;
+      --border: #d2d2d7;
+      --danger: #ff3b30;
+      --success: #34c759;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      margin: 0;
+      padding: 16px;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    h1 { font-size: 22px; margin: 0; }
+    h2, h3 { font-weight: 600; margin: 0; }
+    
+    /* 账户切换与管理区 */
+    .account-bar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      background: var(--card-bg);
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    select {
+      padding: 8px 12px;
+      font-size: 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      flex: 1;
+    }
+    
+    /* 按钮样式 */
+    button {
+      padding: 8px 16px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    button:hover { background: #006ee6; }
+    .btn-outline { background: transparent; color: var(--text-main); border: 1px solid var(--border); }
+    .btn-outline:hover { background: #f0f0f0; }
+    .btn-danger { background: transparent; color: var(--danger); border: 1px solid var(--danger); }
+    .btn-danger:hover { background: #ffebeb; }
+
+    /* 数据大盘与表单 */
+    .dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .card { background: var(--card-bg); padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .card .title { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+    .card .value { font-size: 22px; font-weight: bold; word-break: break-all; }
+    
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    .form-group { background: var(--card-bg); padding: 16px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); display: flex; gap: 10px; align-items: flex-end; }
+    .input-item { display: flex; flex-direction: column; flex: 1; }
+    .input-item label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+    input { padding: 8px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; outline: none; width: 100%; box-sizing: border-box; }
+    
+    /* 表格与底层列表 */
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-top: 12px;
+      margin-bottom: 24px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      background: var(--card-bg);
+    }
+    table { width: 100%; border-collapse: collapse; min-width: 600px; }
+    th, td { padding: 12px 16px; text-align: right; border-bottom: 1px solid var(--border); font-size: 14px; }
+    th:first-child, td:first-child { text-align: left; }
+    th { background: #fafafa; font-weight: 500; color: var(--text-muted); font-size: 13px; }
+    .color-red { color: var(--danger); }
+    .color-green { color: var(--success); }
+
+    .raw-data-container { display: flex; gap: 16px; }
+    .raw-list { flex: 1; background: var(--card-bg); border-radius: 12px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+    .raw-list h3 { margin-bottom: 12px; font-size: 15px; }
+    .raw-list ul { list-style: none; padding: 0; margin: 0; }
+    .raw-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+    .raw-list li:last-child { border-bottom: none; }
+    .delete-btn { font-size: 12px; padding: 4px 8px; height: auto; }
+
+    /* --- 移动端响应式核心适配 --- */
+    @media (max-width: 768px) {
+      .header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .header > div { width: 100%; display: flex; justify-content: space-between; }
+      
+      .account-bar { flex-wrap: wrap; }
+      .account-bar select { width: 100%; flex: none; margin-bottom: 8px; }
+      .account-bar button { flex: 1; }
+      .account-bar .btn-danger { margin-left: 0 !important; }
+
+      .dashboard { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      
+      .actions { grid-template-columns: 1fr; gap: 16px; }
+      .form-group { flex-wrap: wrap; }
+      .input-item { flex: 1 1 100%; }
+      .form-group button { width: 100%; margin-top: 8px; height: 40px; }
+
+      .raw-data-container { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>资产追踪大盘</h1>
+    <div>
+      <button class="btn-outline" onclick="exportJSON()">导出 JSON</button>
+      <button class="btn-outline" onclick="document.getElementById('import-file').click()">导入恢复</button>
+      <input type="file" id="import-file" accept=".json" style="display: none;" onchange="importJSON(event)">
+    </div>
+  </div>
+
+  <div class="account-bar">
+    <select id="account-select" onchange="switchAccount()"></select>
+    <button class="btn-outline" onclick="createAccount()">+ 新增渠道</button>
+    <button class="btn-danger" style="margin-left: auto;" onclick="deleteCurrentAccount()">删除渠道</button>
+  </div>
+  
+  <div class="dashboard">
+    <div class="card"><div class="title">当前总市值</div><div class="value" id="dash-balance">0.00</div></div>
+    <div class="card"><div class="title">累计净投入</div><div class="value" id="dash-invested">0.00</div></div>
+    <div class="card"><div class="title">绝对收益</div><div class="value" id="dash-return">0.00</div></div>
+    <div class="card"><div class="title">XIRR (年化)</div><div class="value" id="dash-xirr">0.00%</div></div>
+  </div>
+
+  <div class="actions">
+    <div class="form-group">
+      <div class="input-item"><label>流水日期</label><input type="date" id="tx-date"></div>
+      <div class="input-item"><label>金额 (负数为入金)</label><input type="number" id="tx-amount" step="0.01"></div>
+      <button onclick="addTransaction()">记一笔流水</button>
+    </div>
+    <div class="form-group">
+      <div class="input-item"><label>快照日期</label><input type="date" id="snap-date"></div>
+      <div class="input-item"><label>当前总市值</label><input type="number" id="snap-balance" step="0.01"></div>
+      <button onclick="addSnapshot()">打一个快照</button>
+    </div>
+  </div>
+
+  <h2>衍生统计明细</h2>
+  <div class="table-responsive">
+    <table>
+      <thead>
+        <tr>
+          <th>快照日期</th>
+          <th>期末市值</th>
+          <th>累计本金</th>
+          <th>绝对收益</th>
+          <th>简单收益率</th>
+          <th>XIRR (年化)</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+  </div>
+
+  <div class="raw-data-container">
+    <div class="raw-list">
+      <h3>原始出入金流水</h3>
+      <ul id="tx-list"></ul>
+    </div>
+    <div class="raw-list">
+      <h3>原始市值快照</h3>
+      <ul id="snap-list"></ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // 保持之前的全部 JavaScript 逻辑不变，直接复用
+  const STORAGE_KEY = 'asset_tracker_data_v2';
+  const OLD_STORAGE_KEY = 'asset_tracker_data';
+
+  const getDefaultData = () => ({
+    activeId: 'acc_1',
+    accounts: [
+      { id: 'acc_1', name: '长桥证券 (港股)', transactions: [], snapshots: [] },
+      { id: 'acc_2', name: '嘉信理财 (美股)', transactions: [], snapshots: [] },
+      { id: 'acc_3', name: '国泰海通 (A股)', transactions: [], snapshots: [] }
+    ]
+  });
+
+  const loadData = () => {
+    try {
+      const storedV2 = localStorage.getItem(STORAGE_KEY);
+      if (storedV2) {
+        const parsed = JSON.parse(storedV2);
+        parsed.accounts.forEach(acc => {
+          acc.transactions = acc.transactions.map(t => ({ ...t, date: new Date(t.date) }));
+          acc.snapshots = acc.snapshots.map(s => ({ ...s, date: new Date(s.date) }));
+        });
+        return parsed;
+      }
+      const storedV1 = localStorage.getItem(OLD_STORAGE_KEY);
+      if (storedV1) {
+        const parsedV1 = JSON.parse(storedV1);
+        const migrated = {
+          activeId: 'default_acc',
+          accounts: [{
+            id: 'default_acc',
+            name: '默认资产账户',
+            transactions: parsedV1.transactions.map(t => ({ ...t, date: new Date(t.date) })),
+            snapshots: parsedV1.snapshots.map(s => ({ ...s, date: new Date(s.date) }))
+          }]
+        };
+        localStorage.removeItem(OLD_STORAGE_KEY);
+        return migrated;
+      }
+    } catch (e) { console.error(e); }
+    return getDefaultData();
+  };
+
+  let state = loadData();
+  const saveData = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  const getActiveAcc = () => state.accounts.find(a => a.id === state.activeId) || state.accounts[0];
+
+  window.switchAccount = () => { state.activeId = document.getElementById('account-select').value; saveData(); render(); };
+  window.createAccount = () => {
+    const name = prompt('请输入新资产渠道的名称：');
+    if (!name || !name.trim()) return;
+    const newAcc = { id: 'acc_' + Date.now(), name: name.trim(), transactions: [], snapshots: [] };
+    state.accounts.push(newAcc); state.activeId = newAcc.id; saveData(); render();
+  };
+  window.deleteCurrentAccount = () => {
+    if (state.accounts.length <= 1) return alert('至少需要保留一个渠道！');
+    if (confirm(`确定要删除渠道【${getActiveAcc().name}】及所有数据吗？`)) {
+      state.accounts = state.accounts.filter(a => a.id !== state.activeId);
+      state.activeId = state.accounts[0].id; saveData(); render();
+    }
+  };
+
+  const fmtCurrency = (num) => new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
+  const fmtPercent = (num) => (num * 100).toFixed(2) + '%';
+  const fmtDate = (date) => date.toISOString().split('T')[0];
+
+  const calculateXIRR = (cashflows) => {
+    if (cashflows.length < 2) return 0;
+    const f = (r) => {
+      const d0 = cashflows[0].date.getTime();
+      return cashflows.reduce((sum, cf) => sum + cf.amount / Math.pow(1 + r, (cf.date.getTime() - d0) / 86400000 / 365), 0);
+    };
+    const df = (r) => {
+      const d0 = cashflows[0].date.getTime();
+      return cashflows.reduce((sum, cf) => {
+        const exp = (cf.date.getTime() - d0) / 86400000 / 365;
+        return exp === 0 ? sum : sum - exp * cf.amount * Math.pow(1 + r, -exp - 1);
+      }, 0);
+    };
+    let r = 0.1; 
+    for (let i = 0; i < 100; i++) {
+      const fValue = f(r);
+      const dfValue = df(r);
+      if (Math.abs(dfValue) < 1e-12) break;
+      const nextR = r - fValue / dfValue;
+      if (Math.abs(nextR - r) < 1e-6) return nextR;
+      r = nextR;
+    }
+    return isNaN(r) ? 0 : r;
+  };
+
+  const computeMetrics = (acc) => {
+    const txs = [...acc.transactions].sort((a, b) => a.date - b.date);
+    const snaps = [...acc.snapshots].sort((a, b) => a.date - b.date);
+    return snaps.map(snap => {
+      const historicalTxs = txs.filter(tx => tx.date <= snap.date);
+      const totalInvested = historicalTxs.reduce((sum, tx) => sum - tx.amount, 0);
+      const absoluteReturn = snap.balance - totalInvested;
+      const simpleROI = totalInvested !== 0 ? absoluteReturn / totalInvested : 0;
+      const xirrCashflows = [...historicalTxs.map(tx => ({ date: tx.date, amount: tx.amount })), { date: snap.date, amount: snap.balance }];
+      return { date: fmtDate(snap.date), balance: snap.balance, totalInvested, absoluteReturn, simpleROI, xirr: calculateXIRR(xirrCashflows) };
+    });
+  };
+
+  const render = () => {
+    document.getElementById('account-select').innerHTML = state.accounts.map(a => `<option value="${a.id}" ${a.id === state.activeId ? 'selected' : ''}>${a.name}</option>`).join('');
+    const activeAcc = getActiveAcc();
+    const metrics = computeMetrics(activeAcc);
+    const latest = metrics.length > 0 ? metrics[metrics.length - 1] : { balance: 0, totalInvested: 0, absoluteReturn: 0, xirr: 0 };
+    
+    document.getElementById('dash-balance').innerText = fmtCurrency(latest.balance);
+    document.getElementById('dash-invested').innerText = fmtCurrency(latest.totalInvested);
+    document.getElementById('dash-return').innerText = fmtCurrency(latest.absoluteReturn);
+    document.getElementById('dash-return').className = `value ${latest.absoluteReturn > 0 ? 'color-red' : (latest.absoluteReturn < 0 ? 'color-green' : '')}`;
+    document.getElementById('dash-xirr').innerText = fmtPercent(latest.xirr);
+    document.getElementById('dash-xirr').className = `value ${latest.xirr > 0 ? 'color-red' : (latest.xirr < 0 ? 'color-green' : '')}`;
+
+    document.getElementById('table-body').innerHTML = metrics.length ? metrics.map(m => `
+      <tr>
+        <td>${m.date}</td>
+        <td>${fmtCurrency(m.balance)}</td>
+        <td>${fmtCurrency(m.totalInvested)}</td>
+        <td class="${m.absoluteReturn > 0 ? 'color-red' : (m.absoluteReturn < 0 ? 'color-green' : '')}">${fmtCurrency(m.absoluteReturn)}</td>
+        <td class="${m.simpleROI > 0 ? 'color-red' : (m.simpleROI < 0 ? 'color-green' : '')}">${fmtPercent(m.simpleROI)}</td>
+        <td class="${m.xirr > 0 ? 'color-red' : (m.xirr < 0 ? 'color-green' : '')}">${fmtPercent(m.xirr)}</td>
+      </tr>
+    `).join('') : '<tr><td colspan="6" style="text-align:center;">当前渠道暂无快照数据</td></tr>';
+
+    document.getElementById('tx-list').innerHTML = activeAcc.transactions.sort((a,b)=>a.date-b.date).map((tx, idx) => `
+      <li>
+        <span>${fmtDate(tx.date)} &nbsp;|&nbsp; <strong>${fmtCurrency(tx.amount)}</strong></span>
+        <button class="btn-danger delete-btn" onclick="deleteTx(${idx})">删除</button>
+      </li>
+    `).join('') || '<li style="color:#999; justify-content:center;">暂无流水</li>';
+
+    document.getElementById('snap-list').innerHTML = activeAcc.snapshots.sort((a,b)=>a.date-b.date).map((snap, idx) => `
+      <li>
+        <span>${fmtDate(snap.date)} &nbsp;|&nbsp; <strong>${fmtCurrency(snap.balance)}</strong></span>
+        <button class="btn-danger delete-btn" onclick="deleteSnap(${idx})">删除</button>
+      </li>
+    `).join('') || '<li style="color:#999; justify-content:center;">暂无快照</li>';
+  };
+
+  window.addTransaction = () => {
+    const dateStr = document.getElementById('tx-date').value;
+    const amountStr = document.getElementById('tx-amount').value;
+    if (!dateStr || !amountStr) return alert('请完整填写流水信息');
+    getActiveAcc().transactions.push({ date: new Date(dateStr), amount: parseFloat(amountStr) });
+    saveData(); render();
+  };
+
+  window.addSnapshot = () => {
+    const dateStr = document.getElementById('snap-date').value;
+    const balanceStr = document.getElementById('snap-balance').value;
+    if (!dateStr || !balanceStr) return alert('请完整填写快照信息');
+    getActiveAcc().snapshots.push({ date: new Date(dateStr), balance: parseFloat(balanceStr) });
+    saveData(); render();
+  };
+
+  window.deleteTx = (idx) => { getActiveAcc().transactions.splice(idx, 1); saveData(); render(); };
+  window.deleteSnap = (idx) => { getActiveAcc().snapshots.splice(idx, 1); saveData(); render(); };
+
+  window.exportJSON = () => {
+    const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `asset_tracker_${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  };
+
+  window.importJSON = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const parsed = JSON.parse(e.target.result);
+        if (!parsed.accounts) throw new Error('不是有效的 V2 版本数据');
+        state = {
+          activeId: parsed.activeId,
+          accounts: parsed.accounts.map(acc => ({
+            ...acc,
+            transactions: acc.transactions.map(t => ({ ...t, date: new Date(t.date) })),
+            snapshots: acc.snapshots.map(s => ({ ...s, date: new Date(s.date) }))
+          }))
+        };
+        saveData(); render(); alert('数据导入成功！');
+      } catch (err) { alert('导入失败，请检查 JSON 格式。'); }
+    };
+    reader.readAsText(file); event.target.value = '';
+  };
+
+  render();
+</script>
+</body>
+</html>
