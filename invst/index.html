@@ -291,6 +291,9 @@
 				gap: 16px;
 				transition: 0.3s;
 			}
+			.global-section .dashboard {
+				display: none;
+			}
 			.card {
 				background: var(--card-bg);
 				padding: 20px;
@@ -358,10 +361,10 @@
 			}
 			th,
 			td {
-				padding: 14px 16px;
+				padding: 14px 18px;
 				text-align: right;
 				border-bottom: 1px solid var(--border);
-				font-size: 14px;
+				font-size: 12px;
 			}
 			th:first-child,
 			td:first-child {
@@ -693,7 +696,7 @@
 							0 个渠道
 						</span>
 					</h3>
-					<span class="action-link muted" id="global-toggle-text">收起面板</span>
+					<span class="action-link muted" id="global-toggle-text">展开面板</span>
 				</div>
 				<div class="dashboard" id="global-dashboard">
 					<div class="card global-card">
@@ -763,7 +766,7 @@
 					<div class="value" id="dash-return">0.00</div>
 				</div>
 				<div class="card">
-					<div class="title">XIRR (年化)</div>
+					<div class="title">XIRR (%)</div>
 					<div class="value" id="dash-xirr">0.00%</div>
 				</div>
 			</div>
@@ -798,14 +801,14 @@
 				<table>
 					<thead>
 						<tr>
-							<th>快照日期</th>
-							<th>加权持有时间(天)</th>
-							<th>期末市值</th>
-							<th>累计本金</th>
-							<th>绝对收益</th>
-							<th>简单收益率</th>
-							<th>估算年化收益率(%)</th>
-							<th>XIRR (年化)</th>
+							<th>市值快照日期</th>
+							<th>加权时间(天)</th>
+							<th>期末市值(元)</th>
+							<th>累计本金(元)</th>
+							<th>绝对收益(元)</th>
+							<th>绝对收益率(%)</th>
+							<th>估算年化(%)</th>
+							<th>XIRR((%))</th>
 						</tr>
 					</thead>
 					<tbody id="table-body"></tbody>
@@ -838,7 +841,7 @@
 
 			// UI 临时状态（不入库持久化）
 			let isPrivacyMode = false;
-			let isGlobalShow = true;
+			let isGlobalShow = false;
 
 			const getDefaultAccountData = () => ({
 				activeId: 'acc_1',
