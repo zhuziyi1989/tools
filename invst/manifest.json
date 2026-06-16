@@ -1,15 +1,20 @@
 {
-  "name": "资产收益追踪大盘",
-  "short_name": "资产大盘",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#f5f5f7",
-  "theme_color": "#f5f5f7",
-  "icons": [
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    }
-  ]
+	"name": "资产收益追踪大盘",
+	"short_name": "资产追踪",
+	"start_url": "./index.html",
+	"display": "standalone",
+	"background_color": "#f5f5f7",
+	"theme_color": "#f5f5f7",
+	"icons": [
+		{
+			"src": "android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
 }
