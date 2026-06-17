@@ -24,7 +24,7 @@
 				--primary: #007aff;
 				--primary-rgb: 0, 122, 255;
 				--bg-color: #f5f5f7;
-				--btn-bg-color: #e5e5ea;
+				--btn-bg-color:#e5e5ea;
 				--card-bg: #ffffff;
 				--text-main: #1d1d1f;
 				--text-muted: #86868b;
@@ -90,10 +90,11 @@
 
 			input,
 			select {
+				height: 34px; /* 强制声明统一高度，解决 iOS Safari 渲染差异 */
 				padding: 8px 10px;
 				border: 1px solid var(--border);
 				border-radius: 6px;
-				font-size: 12px;
+				font-size: 13px;
 				outline: none;
 				width: 100%;
 				box-sizing: border-box;
@@ -102,6 +103,7 @@
 					box-shadow 0.2s;
 				background-color: #fff;
 				color: var(--text-main);
+				font-family: inherit;
 			}
 			input:focus,
 			select:focus {
@@ -117,6 +119,12 @@
 				background-size: 1.2em 1.2em;
 				padding-right: 28px;
 				cursor: pointer;
+			}
+			/* 针对日期控件的特殊防挤压补丁 */
+			input[type="date"] {
+				display: block;
+				-webkit-appearance: none;
+				line-height: 16px;
 			}
 			optgroup {
 				font-weight: 600;
@@ -202,12 +210,8 @@
 				color: #d08f00;
 			}
 
-			.mobile-menu-toggle {
-				display: none !important;
-			}
-			.mobile-account-toggle {
-				display: none !important;
-			}
+			.mobile-menu-toggle { display: none !important; }
+			.mobile-account-toggle { display: none !important; }
 
 			.global-section {
 				margin-bottom: 24px;
@@ -359,7 +363,7 @@
 				margin-bottom: 6px;
 				font-weight: 500;
 			}
-
+			
 			.section-header {
 				display: flex;
 				justify-content: space-between;
@@ -479,7 +483,7 @@
 					align-items: center;
 					width: 100%;
 				}
-
+				
 				.mobile-menu-toggle {
 					display: inline-flex !important;
 					align-items: center;
@@ -488,7 +492,7 @@
 					border-radius: 6px;
 					cursor: pointer;
 				}
-
+				
 				.mobile-account-toggle {
 					display: inline-flex !important;
 					align-items: center;
@@ -657,11 +661,11 @@
 					margin-top: 0;
 					margin-bottom: 24px;
 				}
-				.table-responsive table,
-				.table-responsive thead,
-				.table-responsive tbody,
-				.table-responsive th,
-				.table-responsive td,
+				.table-responsive table, 
+				.table-responsive thead, 
+				.table-responsive tbody, 
+				.table-responsive th, 
+				.table-responsive td, 
 				.table-responsive tr {
 					display: block;
 					min-width: auto;
@@ -706,37 +710,21 @@
 			style="display: none"
 			onchange="importJSON(event)" />
 
-		<div id="sys-modal" class="modal-overlay">
-			<div class="modal-content">
-				<h2 id="sys-modal-title" style="margin-bottom: 8px">提示</h2>
-				<p
-					id="sys-modal-msg"
-					style="
-						font-size: 13px;
-						color: var(--text-muted);
-						margin-bottom: 24px;
-						white-space: pre-wrap;
-						line-height: 1.5;
-					"></p>
-
-				<div id="sys-modal-input-wrap" style="margin-bottom: 24px; display: none">
-					<input type="text" id="sys-modal-input" />
-				</div>
-
-				<div style="display: flex; gap: 12px">
-					<button
-						id="sys-modal-cancel"
-						class="btn-outline"
-						style="flex: 1; display: none"
-						onclick="sysModal.handleCancel()">
-						取消
-					</button>
-					<button id="sys-modal-ok" style="flex: 2" onclick="sysModal.handleOk()">
-						确定
-					</button>
-				</div>
-			</div>
-		</div>
+        <div id="sys-modal" class="modal-overlay">
+            <div class="modal-content">
+                <h2 id="sys-modal-title" style="margin-bottom: 8px">提示</h2>
+                <p id="sys-modal-msg" style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px; white-space: pre-wrap; line-height: 1.5;"></p>
+                
+                <div id="sys-modal-input-wrap" style="margin-bottom: 24px; display: none;">
+                    <input type="text" id="sys-modal-input" />
+                </div>
+                
+                <div style="display: flex; gap: 12px;">
+                    <button id="sys-modal-cancel" class="btn-outline" style="flex: 1; display: none;" onclick="sysModal.handleCancel()">取消</button>
+                    <button id="sys-modal-ok" style="flex: 2;" onclick="sysModal.handleOk()">确定</button>
+                </div>
+            </div>
+        </div>
 
 		<div id="user-modal" class="modal-overlay">
 			<div class="modal-content">
@@ -812,12 +800,9 @@
 								+ 新建
 							</span>
 							<span class="action-link danger" onclick="deleteCurrentUser()">
-								- 删除
+								删除
 							</span>
-							<span
-								class="action-link mobile-menu-toggle"
-								onclick="toggleMobileMenu()"
-								style="background: var(--bg-color); color: var(--text-main)">
+							<span class="action-link mobile-menu-toggle" onclick="toggleMobileMenu()" style="background: var(--bg-color); color: var(--text-main);">
 								⚙️ 操作
 							</span>
 						</div>
@@ -887,9 +872,7 @@
 				<div class="account-bar">
 					<div class="account-select-wrapper">
 						<select id="account-select" onchange="switchAccount()"></select>
-						<span
-							class="action-link mobile-account-toggle"
-							onclick="toggleAccountMenu()">
+						<span class="action-link mobile-account-toggle" onclick="toggleAccountMenu()">
 							⚙️ 操作
 						</span>
 					</div>
@@ -947,58 +930,41 @@
 
 			<div class="actions">
 				<div class="form-group">
-					<div class="input-item" style="flex: 1.2">
+					<div class="input-item" style="flex: 1.5;">
 						<label>流水日期</label>
 						<input type="date" id="tx-date" />
 					</div>
-					<div class="input-item" style="flex: 0 0 90px">
+					<div class="input-item" style="flex: 0 0 75px;">
 						<label>类型</label>
 						<select id="tx-type">
 							<option value="deposit">入金</option>
 							<option value="withdraw">出金</option>
 						</select>
 					</div>
-					<div class="input-item" style="flex: 1.5">
+					<div class="input-item" style="flex: 1.5;">
 						<label>金额</label>
-						<input
-							type="number"
-							id="tx-amount"
-							step="0.01"
-							min="0"
-							placeholder="仅需填写正数" />
+						<input type="number" id="tx-amount" step="0.01" min="0" placeholder="需填写正数" />
 					</div>
-					<button onclick="addTransaction()" style="min-width: max-content">
-						记一笔流水
-					</button>
+					<button onclick="addTransaction()" style="min-width: max-content;">记一笔流水</button>
 				</div>
 				<div class="form-group">
-					<div class="input-item" style="flex: 1.5">
+					<div class="input-item" style="flex: 1.5;">
 						<label>快照日期</label>
 						<input type="date" id="snap-date" />
 					</div>
-					<div class="input-item" style="flex: 2">
+					<div class="input-item" style="flex: 2;">
 						<label>当前总市值</label>
-						<input type="number" id="snap-balance" step="0.01" />
+						<input type="number" id="snap-balance" step="0.01" placeholder="需填写正数" />
 					</div>
-					<button onclick="addSnapshot()" style="min-width: max-content">
-						打一个快照
-					</button>
+					<button onclick="addSnapshot()" style="min-width: max-content;">打一个快照</button>
 				</div>
 			</div>
 
-			<div class="section-header">
-				<h2 style="margin: 0">衍生统计明细</h2>
-				<select
-					id="history-filter"
-					style="
-						width: auto;
-						min-width: 120px;
-						padding: 4px 28px 4px 8px;
-						height: 32px;
-						font-size: 13px;
-					"
-					onchange="changeHistoryFilter()"></select>
-			</div>
+            <div class="section-header">
+                <h2 style="margin: 0;">衍生统计明细</h2>
+                <select id="history-filter" style="width: auto; min-width: 120px; padding: 4px 28px 4px 8px; height: 32px; font-size: 13px;" onchange="changeHistoryFilter()">
+                </select>
+            </div>
 			<div class="table-responsive">
 				<table>
 					<thead>
@@ -1019,25 +985,11 @@
 
 			<div class="raw-data-container">
 				<div class="raw-list">
-					<h3>
-						原始出入金流水
-						<span
-							id="tx-order-text"
-							style="font-size: 12px; font-weight: normal; color: var(--text-muted)">
-							(倒序)
-						</span>
-					</h3>
+					<h3>原始出入金流水 <span id="tx-order-text" style="font-size: 12px; font-weight: normal; color: var(--text-muted);">(倒序)</span></h3>
 					<ul id="tx-list"></ul>
 				</div>
 				<div class="raw-list">
-					<h3>
-						原始市值快照
-						<span
-							id="snap-order-text"
-							style="font-size: 12px; font-weight: normal; color: var(--text-muted)">
-							(倒序)
-						</span>
-					</h3>
+					<h3>原始市值快照 <span id="snap-order-text" style="font-size: 12px; font-weight: normal; color: var(--text-muted);">(倒序)</span></h3>
 					<ul id="snap-list"></ul>
 				</div>
 			</div>
@@ -1052,89 +1004,85 @@
 				});
 			}
 
-			const sysModal = {
-				resolve: null,
-				show(type, title, msg, defaultValue = '', isDanger = false) {
-					return new Promise((resolve) => {
-						this.resolve = resolve;
-						document.getElementById('sys-modal-title').innerText = title;
-						document.getElementById('sys-modal-msg').innerText = msg;
+            const sysModal = {
+                resolve: null,
+                show(type, title, msg, defaultValue = '', isDanger = false) {
+                    return new Promise(resolve => {
+                        this.resolve = resolve;
+                        document.getElementById('sys-modal-title').innerText = title;
+                        document.getElementById('sys-modal-msg').innerText = msg;
 
-						const inputWrap = document.getElementById('sys-modal-input-wrap');
-						const input = document.getElementById('sys-modal-input');
-						const cancelBtn = document.getElementById('sys-modal-cancel');
-						const okBtn = document.getElementById('sys-modal-ok');
+                        const inputWrap = document.getElementById('sys-modal-input-wrap');
+                        const input = document.getElementById('sys-modal-input');
+                        const cancelBtn = document.getElementById('sys-modal-cancel');
+                        const okBtn = document.getElementById('sys-modal-ok');
 
-						if (isDanger) {
-							okBtn.style.background = 'var(--danger)';
-						} else {
-							okBtn.style.background = 'var(--primary)';
-						}
+                        if (isDanger) {
+                            okBtn.style.background = 'var(--danger)';
+                        } else {
+                            okBtn.style.background = 'var(--primary)';
+                        }
 
-						if (type === 'alert') {
-							inputWrap.style.display = 'none';
-							cancelBtn.style.display = 'none';
-						} else if (type === 'confirm') {
-							inputWrap.style.display = 'none';
-							cancelBtn.style.display = 'block';
-						} else if (type === 'prompt') {
-							inputWrap.style.display = 'block';
-							cancelBtn.style.display = 'block';
-							input.value = defaultValue;
-						}
+                        if (type === 'alert') {
+                            inputWrap.style.display = 'none';
+                            cancelBtn.style.display = 'none';
+                        } else if (type === 'confirm') {
+                            inputWrap.style.display = 'none';
+                            cancelBtn.style.display = 'block';
+                        } else if (type === 'prompt') {
+                            inputWrap.style.display = 'block';
+                            cancelBtn.style.display = 'block';
+                            input.value = defaultValue;
+                        }
 
-						document.getElementById('sys-modal').classList.add('active');
+                        document.getElementById('sys-modal').classList.add('active');
+                        
+                        if (type === 'prompt') {
+                            setTimeout(() => input.focus(), 100);
+                        }
+                    });
+                },
+                close() {
+                    document.getElementById('sys-modal').classList.remove('active');
+                },
+                handleOk() {
+                    if (!this.resolve) return;
+                    this.close();
+                    const inputWrap = document.getElementById('sys-modal-input-wrap');
+                    if (inputWrap.style.display === 'block') {
+                        this.resolve(document.getElementById('sys-modal-input').value);
+                    } else {
+                        this.resolve(true);
+                    }
+                    this.resolve = null;
+                },
+                handleCancel() {
+                    if (!this.resolve) return;
+                    this.close();
+                    const inputWrap = document.getElementById('sys-modal-input-wrap');
+                    if (inputWrap.style.display === 'block') {
+                        this.resolve(null);
+                    } else {
+                        this.resolve(false);
+                    }
+                    this.resolve = null;
+                }
+            };
 
-						if (type === 'prompt') {
-							setTimeout(() => input.focus(), 100);
-						}
-					});
-				},
-				close() {
-					document.getElementById('sys-modal').classList.remove('active');
-				},
-				handleOk() {
-					if (!this.resolve) return;
-					this.close();
-					const inputWrap = document.getElementById('sys-modal-input-wrap');
-					if (inputWrap.style.display === 'block') {
-						this.resolve(document.getElementById('sys-modal-input').value);
-					} else {
-						this.resolve(true);
-					}
-					this.resolve = null;
-				},
-				handleCancel() {
-					if (!this.resolve) return;
-					this.close();
-					const inputWrap = document.getElementById('sys-modal-input-wrap');
-					if (inputWrap.style.display === 'block') {
-						this.resolve(null);
-					} else {
-						this.resolve(false);
-					}
-					this.resolve = null;
-				},
-			};
+            document.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('sys-modal-input').addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') sysModal.handleOk();
+                });
+            });
 
-			document.addEventListener('DOMContentLoaded', () => {
-				document
-					.getElementById('sys-modal-input')
-					.addEventListener('keydown', function (e) {
-						if (e.key === 'Enter') sysModal.handleOk();
-					});
-			});
-
-			window.customAlert = (msg, title = '提示') => sysModal.show('alert', title, msg);
-			window.customConfirm = (msg, title = '确认操作', isDanger = false) =>
-				sysModal.show('confirm', title, msg, '', isDanger);
-			window.customPrompt = (msg, defaultValue = '', title = '请输入') =>
-				sysModal.show('prompt', title, msg, defaultValue);
+            window.customAlert = (msg, title = '提示') => sysModal.show('alert', title, msg);
+            window.customConfirm = (msg, title = '确认操作', isDanger = false) => sysModal.show('confirm', title, msg, '', isDanger);
+            window.customPrompt = (msg, defaultValue = '', title = '请输入') => sysModal.show('prompt', title, msg, defaultValue);
 
 			const STORAGE_KEY_V3 = 'asset_tracker_data_v3';
 			let isPrivacyMode = false;
 			let isGlobalShow = false;
-			let currentHistoryFilter = 'latest';
+            let currentHistoryFilter = 'latest';
 
 			const getDefaultAccountData = () => ({
 				activeId: 'acc_1',
@@ -1380,7 +1328,7 @@
 				let maxDate = new Date(0);
 
 				user.data.accounts.forEach((acc) => {
-					if (acc.status === 'closed' && acc.snapshots.length === 0) return;
+					if (acc.status === 'closed' && acc.snapshots.length === 0) return; 
 
 					const rate = getRate(acc.currency);
 					acc.transactions.forEach((tx) => {
@@ -1414,11 +1362,11 @@
 				};
 			};
 
-			window.changeHistoryFilter = () => {
-				const el = document.getElementById('history-filter');
-				if (el) currentHistoryFilter = el.value;
-				render();
-			};
+            window.changeHistoryFilter = () => {
+                const el = document.getElementById('history-filter');
+                if (el) currentHistoryFilter = el.value;
+                render();
+            };
 
 			const render = () => {
 				if (!state.currentUserId || state.users.length === 0) {
@@ -1524,40 +1472,38 @@
 				document.getElementById('dash-xirr').className =
 					`value ${getColorClass(latest.xirr)}`;
 
-				// --- 渲染历史筛选器 ---
-				const filterSelect = document.getElementById('history-filter');
-				const reversedMetrics = [...metrics].reverse();
-
-				let filterOptionsHtml = `
+                // --- 渲染历史筛选器 ---
+                const filterSelect = document.getElementById('history-filter');
+                const reversedMetrics = [...metrics].reverse(); 
+                
+                let filterOptionsHtml = `
                     <option value="latest" ${currentHistoryFilter === 'latest' ? 'selected' : ''}>仅看最新</option>
                     <option value="all" ${currentHistoryFilter === 'all' ? 'selected' : ''}>全部历史 (倒序)</option>
                     <option value="all-asc" ${currentHistoryFilter === 'all-asc' ? 'selected' : ''}>全部历史 (正序)</option>
                     <optgroup label="按日期筛选">
                 `;
-				reversedMetrics.forEach((m) => {
-					filterOptionsHtml += `<option value="${m.date}" ${currentHistoryFilter === m.date ? 'selected' : ''}>${m.date}</option>`;
-				});
-				filterOptionsHtml += `</optgroup>`;
-				if (filterSelect) filterSelect.innerHTML = filterOptionsHtml;
+                reversedMetrics.forEach(m => {
+                    filterOptionsHtml += `<option value="${m.date}" ${currentHistoryFilter === m.date ? 'selected' : ''}>${m.date}</option>`;
+                });
+                filterOptionsHtml += `</optgroup>`;
+                if (filterSelect) filterSelect.innerHTML = filterOptionsHtml;
 
-				// --- 过滤要展示的数据 ---
-				const isAscending = currentHistoryFilter === 'all-asc';
-				let displayMetrics = reversedMetrics;
-				let targetDateFilter = null;
-
-				if (currentHistoryFilter === 'latest') {
-					displayMetrics = reversedMetrics.slice(0, 1);
-				} else if (currentHistoryFilter === 'all-asc') {
-					displayMetrics = [...metrics];
-				} else if (currentHistoryFilter !== 'all') {
-					displayMetrics = reversedMetrics.filter((m) => m.date === currentHistoryFilter);
-					targetDateFilter = currentHistoryFilter;
-				}
+                // --- 过滤要展示的数据 ---
+                const isAscending = currentHistoryFilter === 'all-asc';
+                let displayMetrics = reversedMetrics;
+                let targetDateFilter = null; 
+                
+                if (currentHistoryFilter === 'latest') {
+                    displayMetrics = reversedMetrics.slice(0, 1);
+                } else if (currentHistoryFilter === 'all-asc') {
+                    displayMetrics = [...metrics];
+                } else if (currentHistoryFilter !== 'all') {
+                    displayMetrics = reversedMetrics.filter(m => m.date === currentHistoryFilter);
+                    targetDateFilter = currentHistoryFilter;
+                }
 
 				document.getElementById('table-body').innerHTML = displayMetrics.length
-					? displayMetrics
-							.map(
-								(m) => `
+					? displayMetrics.map((m) => `
 						<tr>
 						<td data-label="市值快照日期">${m.date}</td>
 						<td data-label="加权时间(天)">${Math.round(m.weightedDays)}</td>
@@ -1568,45 +1514,33 @@
 						<td data-label="估算年化(%)" class="${getColorClass(m.estAnnualROI)}">${fmtPercent(m.estAnnualROI)}</td>
 						<td data-label="XIRR(%)" class="${getColorClass(m.xirr)}">${fmtPercent(m.xirr)}</td>
 						</tr>
-					`
-							)
-							.join('')
+					`).join('')
 					: '<tr><td colspan=\"8\" style=\"text-align:center; padding: 32px 0;\">当前暂无数据</td></tr>';
 
-				// --- 原始数据展示顺序同步 ---
-				const txOrderText = document.getElementById('tx-order-text');
-				if (txOrderText) txOrderText.innerText = isAscending ? '(正序)' : '(倒序)';
+                // --- 原始数据展示顺序同步 ---
+                const txOrderText = document.getElementById('tx-order-text');
+                if (txOrderText) txOrderText.innerText = isAscending ? '(正序)' : '(倒序)';
+                
+                const snapOrderText = document.getElementById('snap-order-text');
+                if (snapOrderText) snapOrderText.innerText = isAscending ? '(正序)' : '(倒序)';
 
-				const snapOrderText = document.getElementById('snap-order-text');
-				if (snapOrderText) snapOrderText.innerText = isAscending ? '(正序)' : '(倒序)';
+                // 确保底层数据严格按时间正序排列
+                activeAcc.transactions.sort((a, b) => a.date - b.date);
+                activeAcc.snapshots.sort((a, b) => a.date - b.date);
 
-				// 确保底层数据严格按时间正序排列
-				activeAcc.transactions.sort((a, b) => a.date - b.date);
-				activeAcc.snapshots.sort((a, b) => a.date - b.date);
+                let txRenderList = isAscending ? [...activeAcc.transactions] : [...activeAcc.transactions].reverse();
+                let snapRenderList = isAscending ? [...activeAcc.snapshots] : [...activeAcc.snapshots].reverse();
 
-				let txRenderList = isAscending
-					? [...activeAcc.transactions]
-					: [...activeAcc.transactions].reverse();
-				let snapRenderList = isAscending
-					? [...activeAcc.snapshots]
-					: [...activeAcc.snapshots].reverse();
+                // 核心修复：流水不参与日期筛选，仅快照列表联动过滤
+                if (targetDateFilter) {
+                    snapRenderList = snapRenderList.filter(snap => fmtDate(snap.date) === targetDateFilter);
+                }
 
-				// 核心修复：流水不参与日期筛选，仅快照列表联动过滤
-				if (currentHistoryFilter === 'latest') {
-					snapRenderList = snapRenderList.slice(0, 1);
-				} else if (targetDateFilter) {
-					snapRenderList = snapRenderList.filter(
-						(snap) => fmtDate(snap.date) === targetDateFilter
-					);
-				}
-
-				document.getElementById('tx-list').innerHTML =
-					txRenderList
-						.map((tx) => {
-							const originalIdx = activeAcc.transactions.indexOf(tx);
-							const typeText = tx.amount <= 0 ? '入金' : '出金';
-							const displayAmt = Math.abs(tx.amount);
-							return `
+				document.getElementById('tx-list').innerHTML = txRenderList.map((tx) => {
+                        const originalIdx = activeAcc.transactions.indexOf(tx); 
+                        const typeText = tx.amount <= 0 ? '入金' : '出金';
+                        const displayAmt = Math.abs(tx.amount);
+                        return `
                         <li>
                             <span>
                                 ${fmtDate(tx.date)} &nbsp;|&nbsp; 
@@ -1616,32 +1550,24 @@
                             <button class=\"delete-btn\" onclick=\"deleteTx(${originalIdx})\">删除</button>
                         </li>
                         `;
-						})
-						.join('') ||
-					'<li style=\"color:#999; justify-content:center;\">暂无流水</li>';
+                    }).join('') || '<li style=\"color:#999; justify-content:center;\">暂无流水</li>';
 
-				document.getElementById('snap-list').innerHTML =
-					snapRenderList
-						.map((snap) => {
-							const originalIdx = activeAcc.snapshots.indexOf(snap);
-							return `
+				document.getElementById('snap-list').innerHTML = snapRenderList.map((snap) => {
+                        const originalIdx = activeAcc.snapshots.indexOf(snap);
+                        return `
                         <li>
                             <span>${fmtDate(snap.date)} &nbsp;|&nbsp; <strong>${fmtCurrency(snap.balance, currCode)}</strong></span>
                             <button class=\"delete-btn\" onclick=\"deleteSnap(${originalIdx})\">删除</button>
                         </li>
                         `;
-						})
-						.join('') ||
-					'<li style=\"color:#999; justify-content:center;\">暂无快照</li>';
+                    }).join('') || '<li style=\"color:#999; justify-content:center;\">暂无快照</li>';
 			};
 
 			window.togglePrivacy = () => {
 				isPrivacyMode = !isPrivacyMode;
 				const btn = document.getElementById('btn-privacy');
 				btn.innerText = isPrivacyMode ? '👀 显示金额' : '👁️ 隐藏金额';
-				btn.style.background = isPrivacyMode
-					? 'var(--btn-bg-color)'
-					: 'rgba(0,122,255,0.1)';
+				btn.style.background = isPrivacyMode ? 'var(--btn-bg-color)' : 'rgba(0,122,255,0.1)';
 				render();
 			};
 
@@ -1667,8 +1593,7 @@
 			window.registerUser = async () => {
 				const username = document.getElementById('reg-username').value.trim();
 				const nickname = document.getElementById('reg-nickname').value.trim();
-				if (!username || !nickname)
-					return await customAlert('请完整填写登录名和展示昵称！');
+				if (!username || !nickname) return await customAlert('请完整填写登录名和展示昵称！');
 				if (state.users.some((u) => u.username === username))
 					return await customAlert('该登录名已被占用，请更换。');
 
@@ -1694,13 +1619,7 @@
 				render();
 			};
 			window.deleteCurrentUser = async () => {
-				if (
-					await customConfirm(
-						`确定要彻底删除用户及其所有数据吗？此操作不可恢复。`,
-						'删除用户',
-						true
-					)
-				) {
+				if (await customConfirm(`确定要彻底删除用户及其所有数据吗？此操作不可恢复。`, '删除用户', true)) {
 					state.users = state.users.filter((u) => u.id !== state.currentUserId);
 					state.currentUserId = state.users.length > 0 ? state.users[0].id : null;
 					saveData();
@@ -1718,12 +1637,9 @@
 				const name = await customPrompt('请输入新渠道名称 (例如: 招商银行)：', '');
 				if (!name || !name.trim()) return;
 				const desc = await customPrompt('请输入渠道详细描述 (选填)：', '');
-				if (desc === null) return;
-				const currency = await customPrompt(
-					'请输入渠道基础币种代码 (例如: CNY, USD, HKD 等)',
-					'CNY'
-				);
-				if (currency === null) return;
+                if (desc === null) return;
+				const currency = await customPrompt('请输入渠道基础币种代码 (例如: CNY, USD, HKD 等)', 'CNY');
+                if (currency === null) return;
 				const newAcc = {
 					id: 'acc_' + Date.now(),
 					name: name.trim(),
@@ -1769,13 +1685,10 @@
 
 			window.deleteCurrentAccount = async () => {
 				const user = getCurrentUser();
-				if (user.data.accounts.length <= 1)
-					return await customAlert('当前用户至少需要保留一个渠道！');
+				if (user.data.accounts.length <= 1) return await customAlert('当前用户至少需要保留一个渠道！');
 				if (
 					await customConfirm(
-						`确定要彻底删除渠道【${getActiveAcc().name}】及所有数据吗？此操作不可恢复。`,
-						'删除渠道',
-						true
+						`确定要彻底删除渠道【${getActiveAcc().name}】及所有数据吗？此操作不可恢复。`, '删除渠道', true
 					)
 				) {
 					user.data.accounts = user.data.accounts.filter(
@@ -1796,14 +1709,14 @@
 			window.addTransaction = async () => {
 				const dateStr = document.getElementById('tx-date').value;
 				const amountStr = document.getElementById('tx-amount').value;
-				const txType = document.getElementById('tx-type').value;
+                const txType = document.getElementById('tx-type').value;
 
 				if (!dateStr || !amountStr) return await customAlert('请完整填写流水信息');
 
-				let inputAmount = parseFloat(amountStr);
-				if (inputAmount < 0) inputAmount = Math.abs(inputAmount);
+                let inputAmount = parseFloat(amountStr);
+                if (inputAmount < 0) inputAmount = Math.abs(inputAmount);
 
-				const finalAmount = txType === 'deposit' ? -inputAmount : inputAmount;
+                const finalAmount = txType === 'deposit' ? -inputAmount : inputAmount;
 
 				getActiveAcc().transactions.push({
 					date: new Date(dateStr),
@@ -1842,9 +1755,7 @@
 			window.clearAllData = async () => {
 				if (
 					await customConfirm(
-						'⚠️ 警告：此操作将清空本地所有的【用户档案】及其下属记录，且不可恢复！\n\n确定要继续清空吗？',
-						'清空数据',
-						true
+						'⚠️ 警告：此操作将清空本地所有的【用户档案】及其下属记录，且不可恢复！\n\n确定要继续清空吗？', '清空数据', true
 					)
 				) {
 					localStorage.removeItem(STORAGE_KEY_V3);
