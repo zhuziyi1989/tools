@@ -1497,13 +1497,33 @@
 			};
 
 			window.exportJSON = () => {
-				const blob = new Blob([JSON.stringify(state, null, 2)], {
+				const now = new Date();
+
+				// 1. 组装精确到秒的时间字符串 (格式: YYYY-MM-DD_HH-mm-ss)
+				const year = now.getFullYear();
+				const month = String(now.getMonth() + 1).padStart(2, '0');
+				const day = String(now.getDate()).padStart(2, '0');
+				const hours = String(now.getHours()).padStart(2, '0');
+				const minutes = String(now.getMinutes()).padStart(2, '0');
+				const seconds = String(now.getSeconds()).padStart(2, '0');
+				const timeString = `${year}-${month}-${day}_${hours}-${minutes}-${seconds}`;
+
+				// 2. 在导出的数据对象中增加时间戳字段
+				const exportData = {
+					...state,
+					exportTime: now.toLocaleString('zh-CN', { hour12: false }),
+				};
+
+				const blob = new Blob([JSON.stringify(exportData, null, 2)], {
 					type: 'application/json',
 				});
 				const url = URL.createObjectURL(blob);
 				const a = document.createElement('a');
 				a.href = url;
-				a.download = `asset_tracker_${new Date().toISOString().split('T')[0]}.json`;
+
+				// 3. 应用新的文件名
+				a.download = `asset_tracker_${timeString}.json`;
+
 				document.body.appendChild(a);
 				a.click();
 				document.body.removeChild(a);
