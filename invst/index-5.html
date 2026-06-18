@@ -90,7 +90,7 @@
 
 			input,
 			select {
-				height: 34px; 
+				height: 34px; /* 强制声明统一高度，解决 iOS Safari 渲染差异 */
 				padding: 8px 10px;
 				border: 1px solid var(--border);
 				border-radius: 6px;
@@ -120,7 +120,7 @@
 				padding-right: 28px;
 				cursor: pointer;
 			}
-			
+			/* 针对日期控件的特殊防挤压补丁 */
 			input[type='date'] {
 				display: block;
 				-webkit-appearance: none;
@@ -656,6 +656,7 @@
 				.modal-content h2 {
 					font-size: 18px;
 				}
+				/* --- 衍生明细表格卡片化重构 --- */
 				.table-responsive {
 					box-shadow: none !important;
 					border: none !important;
@@ -974,7 +975,7 @@
 							min="0"
 							placeholder="仅需填写正数" />
 					</div>
-					<button onclick="addTransaction(this)" style="min-width: max-content">
+					<button onclick="addTransaction()" style="min-width: max-content">
 						记一笔流水
 					</button>
 				</div>
@@ -987,7 +988,7 @@
 						<label>当前总市值</label>
 						<input type="number" id="snap-balance" step="0.01" />
 					</div>
-					<button onclick="addSnapshot(this)" style="min-width: max-content">
+					<button onclick="addSnapshot()" style="min-width: max-content">
 						打一个快照
 					</button>
 				</div>
@@ -1800,26 +1801,7 @@
 				render();
 			};
 
-            const showButtonFeedback = (btn, successText) => {
-                if (!btn) return;
-                const originalText = btn.innerText;
-                const originalBg = btn.style.background;
-                const originalColor = btn.style.color;
-
-                btn.innerText = successText;
-                btn.style.background = 'var(--success)';
-                btn.style.color = '#fff';
-                btn.style.pointerEvents = 'none';
-
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.style.background = originalBg;
-                    btn.style.color = originalColor;
-                    btn.style.pointerEvents = 'auto';
-                }, 1500);
-            };
-
-			window.addTransaction = async (btn) => {
+			window.addTransaction = async () => {
 				const dateStr = document.getElementById('tx-date').value;
 				const amountStr = document.getElementById('tx-amount').value;
 				const txType = document.getElementById('tx-type').value;
@@ -1837,11 +1819,8 @@
 				});
 				saveData();
 				render();
-
-                document.getElementById('tx-amount').value = '';
-                if (btn) showButtonFeedback(btn, '✅ 已记录');
 			};
-			window.addSnapshot = async (btn) => {
+			window.addSnapshot = async () => {
 				const dateStr = document.getElementById('snap-date').value;
 				const balanceStr = document.getElementById('snap-balance').value;
 				if (!dateStr || !balanceStr) return await customAlert('请完整填写快照信息');
@@ -1851,9 +1830,6 @@
 				});
 				saveData();
 				render();
-
-                document.getElementById('snap-balance').value = '';
-                if (btn) showButtonFeedback(btn, '✅ 已保存');
 			};
 
 			window.deleteTx = async (idx) => {
