@@ -90,7 +90,6 @@
 
 			input,
 			select {
-				height: 34px; /* 强制声明统一高度，解决 iOS Safari 渲染差异 */
 				padding: 8px 10px;
 				border: 1px solid var(--border);
 				border-radius: 6px;
@@ -103,7 +102,6 @@
 					box-shadow 0.2s;
 				background-color: #fff;
 				color: var(--text-main);
-				font-family: inherit;
 			}
 			input:focus,
 			select:focus {
@@ -119,12 +117,6 @@
 				background-size: 1.2em 1.2em;
 				padding-right: 28px;
 				cursor: pointer;
-			}
-			/* 针对日期控件的特殊防挤压补丁 */
-			input[type="date"] {
-				display: block;
-				-webkit-appearance: none;
-				line-height: 16px;
 			}
 			optgroup {
 				font-weight: 600;
@@ -930,11 +922,11 @@
 
 			<div class="actions">
 				<div class="form-group">
-					<div class="input-item" style="flex: 1.5;">
+					<div class="input-item" style="flex: 1.2;">
 						<label>流水日期</label>
 						<input type="date" id="tx-date" />
 					</div>
-					<div class="input-item" style="flex: 0 0 75px;">
+					<div class="input-item" style="flex: 0 0 90px;">
 						<label>类型</label>
 						<select id="tx-type">
 							<option value="deposit">入金</option>
@@ -943,7 +935,7 @@
 					</div>
 					<div class="input-item" style="flex: 1.5;">
 						<label>金额</label>
-						<input type="number" id="tx-amount" step="0.01" min="0" placeholder="需填写正数" />
+						<input type="number" id="tx-amount" step="0.01" min="0" placeholder="仅需填写正数" />
 					</div>
 					<button onclick="addTransaction()" style="min-width: max-content;">记一笔流水</button>
 				</div>
@@ -954,7 +946,7 @@
 					</div>
 					<div class="input-item" style="flex: 2;">
 						<label>当前总市值</label>
-						<input type="number" id="snap-balance" step="0.01" placeholder="需填写正数" />
+						<input type="number" id="snap-balance" step="0.01" />
 					</div>
 					<button onclick="addSnapshot()" style="min-width: max-content;">打一个快照</button>
 				</div>
@@ -1532,7 +1524,9 @@
                 let snapRenderList = isAscending ? [...activeAcc.snapshots] : [...activeAcc.snapshots].reverse();
 
                 // 核心修复：流水不参与日期筛选，仅快照列表联动过滤
-                if (targetDateFilter) {
+                if (currentHistoryFilter === 'latest') {
+                    snapRenderList = snapRenderList.slice(0, 1);
+                } else if (targetDateFilter) {
                     snapRenderList = snapRenderList.filter(snap => fmtDate(snap.date) === targetDateFilter);
                 }
 
