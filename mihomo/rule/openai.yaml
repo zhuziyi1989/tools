@@ -32,5 +32,6 @@ payload:
     - 'openaicomproductionae4b.blob.core.windows.net'
     - 'production-openaicom-storage.azureedge.net'
     - 'sdmntprjapaneast.oaiusercontent.com' # 文件上传服务
+    - 'sdmntprnznorth.oaiusercontent.com' # 文件上传服务
     - 'turn.livekit.cloud'
     - 'workos.imgix.net'
