@@ -23,6 +23,7 @@ payload:
     - '+.openai.com'
     - '+.crixet.com'
     - '+.ct.sendgrid.net'
+    - '+.oaiusercontent.com' # 文件上传服务
     - 'cdn.oaistatic.com'
     - 'persistent.oaistatic.com' #  是 OpenAI 的一个内容分发网络（CDN）域名，专门用于提供那些需要持久化存储的静态资源，以确保你获得更快速、更稳定的服务体验
     ## >> CDN & API
@@ -31,7 +32,5 @@ payload:
     - 'openaicom-api-bdcpf8c6d2e9atf6.z01.azurefd.net'
     - 'openaicomproductionae4b.blob.core.windows.net'
     - 'production-openaicom-storage.azureedge.net'
-    - 'sdmntprjapaneast.oaiusercontent.com' # 文件上传服务
-    - 'sdmntprnznorth.oaiusercontent.com' # 文件上传服务
     - 'turn.livekit.cloud'
     - 'workos.imgix.net'
