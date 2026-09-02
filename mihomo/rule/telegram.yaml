@@ -1,4 +1,12 @@
 payload:
+    # 关键词和进程匹配
+    # - DOMAIN-KEYWORD,nicegram
+    # - PROCESS-NAME,Telegram.exe
+    # - PROCESS-NAME,nekox.messenger
+    # - PROCESS-NAME,org.telegram.messenger
+    # - PROCESS-NAME,telegram-desktop
+
+    # 域名匹配
     - DOMAIN-SUFFIX,comments.app
     - DOMAIN-SUFFIX,contest.com
     - DOMAIN-SUFFIX,graph.org
@@ -19,23 +27,17 @@ payload:
     - DOMAIN-SUFFIX,tg.dev
     - DOMAIN-SUFFIX,tx.me
     - DOMAIN-SUFFIX,usercontent.dev
-    # - DOMAIN-KEYWORD,nicegram
-    # - PROCESS-NAME,Telegram.exe
-    # - PROCESS-NAME,nekox.messenger
-    # - PROCESS-NAME,org.telegram.messenger
-    # - PROCESS-NAME,telegram-desktop
-    # Telegram IPv4 网段
-    - IP-CIDR,5.28.192.0/18,no-resolve # Telegram 新 IP 段
-    - IP-CIDR,5.28.195.163/32,no-resolve
-    - IP-CIDR,5.28.195.205/32,no-resolve
-    - IP-CIDR,5.28.195.37/32,no-resolve
-    - IP-CIDR,5.28.195.80/32,no-resolve
-    - IP-CIDR,91.105.192.0/23,no-resolve
-    - IP-CIDR,91.108.0.0/16,no-resolve # 涵盖了 4.0/22, 8.0/21, 12.0/22, 16.0/22, 56.0/22 等
+
+    # Telegram IPv4 网段 (完整覆盖官方 ASN)
+    - IP-CIDR,5.28.192.0/18,no-resolve
+    - IP-CIDR,91.105.192.0/21,no-resolve
+    - IP-CIDR,91.108.0.0/16,no-resolve
     - IP-CIDR,95.161.64.0/20,no-resolve
     - IP-CIDR,109.239.140.0/24,no-resolve
-    - IP-CIDR,149.154.160.0/20,no-resolve # 涵盖了 160.0/22, 164.0/22, 168.0/22, 172.0/22 等
+    - IP-CIDR,149.154.160.0/20,no-resolve
     - IP-CIDR,185.76.151.0/24,no-resolve
+    - IP-CIDR,194.221.248.0/21,no-resolve # 关键补充：包含 194.221.250.50
+
     # Telegram IPv6 网段
     - IP-CIDR6,2001:67c:4e8::/48,no-resolve
     - IP-CIDR6,2001:b28:f23c::/47,no-resolve
