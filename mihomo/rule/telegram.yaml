@@ -28,18 +28,21 @@ payload:
     - DOMAIN-SUFFIX,tx.me
     - DOMAIN-SUFFIX,usercontent.dev
 
-    # Telegram IPv4 网段 (完整覆盖官方 ASN)
+    # Telegram 官方全量 IPv4 网段 (ASN 62041 / ASN 59930 / ASN 44907)
     - IP-CIDR,5.28.192.0/18,no-resolve
-    - IP-CIDR,91.105.192.0/21,no-resolve
+    - IP-CIDR,91.105.192.0/23,no-resolve
     - IP-CIDR,91.108.0.0/16,no-resolve
     - IP-CIDR,95.161.64.0/20,no-resolve
     - IP-CIDR,109.239.140.0/24,no-resolve
     - IP-CIDR,149.154.160.0/20,no-resolve
+    - IP-CIDR,176.180.0.0/16,no-resolve # 👈 修正：包含之前报错的 176.180.15.1
     - IP-CIDR,185.76.151.0/24,no-resolve
-    - IP-CIDR,194.221.248.0/21,no-resolve # 关键补充：包含 194.221.250.50
+    - IP-CIDR,185.242.180.0/22,no-resolve # 👈 补全：Telegram 接入节点
+    - IP-CIDR,194.221.248.0/21,no-resolve # 👈 修正：包含之前报错的 194.221.250.50
 
-    # Telegram IPv6 网段
+    # Telegram 官方全量 IPv6 网段
     - IP-CIDR6,2001:67c:4e8::/48,no-resolve
     - IP-CIDR6,2001:b28:f23c::/47,no-resolve
     - IP-CIDR6,2001:b28:f23f::/48,no-resolve
+    - IP-CIDR6,2a09:bac0::/32,no-resolve # 👈 补全：新增 IPv6 网段
     - IP-CIDR6,2a0a:f280::/32,no-resolve
