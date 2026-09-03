@@ -95,7 +95,7 @@ iftop -n -N -P -B -i eth1
 
 * [Wireshark 抓包工具的过滤器写法](https://www.cnblogs.com/myworld7/p/10252323.html)
 
-* via: [iftop网络流量(ip+port)分析工具](https://huataihuang.gitbooks.io/cloud-atlas/network/packet_analysis/utilities/iftop.html)
+* [iftop网络流量(ip+port)分析工具](https://huataihuang.gitbooks.io/cloud-atlas/network/packet_analysis/utilities/iftop.html)
 
   
 
