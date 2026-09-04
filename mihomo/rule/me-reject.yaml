@@ -1,0 +1,15 @@
+payload:
+    # + 拼多多-屏蔽模块
+    - DOMAIN,meta.pinduoduo.com
+    - DOMAIN,xg.pinduoduo.com
+    - DOMAIN,cdl-1.pddpic.com
+    - DOMAIN,titan.pinduoduo.com
+    - DOMAIN,cdl-p2.pddpic.com
+    - DOMAIN,cd-1.pddpic.com
+    - DOMAIN,apm.pinduoduo.com
+    - DOMAIN,th-b.pinduoduo.com
+    - DOMAIN,ta.pinduoduo.com
+    - DOMAIN,ta-a.pinduoduo.com
+    - DOMAIN,th.pinduoduo.com
+    - DOMAIN,th-a.pinduoduo.com
+    - DOMAIN,apm-a.pinduoduo.com
